@@ -1,7 +1,7 @@
 import { StyleDiv } from './style';
 
 import LOGO from './assets/logo.png';
-import { Clicker } from './Clicker';
+import Products from './components/Products';
 
 export const App = () => {
   return (
@@ -9,7 +9,8 @@ export const App = () => {
       <StyleDiv />
       <h1>React start </h1>
       <img src={LOGO} alt="logo" width="200" height="200" />
-      <Clicker />
+
+      <Products />
     </>
   );
 };
