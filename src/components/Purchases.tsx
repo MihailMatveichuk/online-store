@@ -1,3 +1,4 @@
+
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { Purchase, IPurchase } from './Purchase';
@@ -27,12 +28,12 @@ const Purchases = () => {
   }, []);
   return (
     <div className="cards_container">
-      {loading && <p className="text-center">Loading...</p>}
-      {error && <p className="text-center text-red-600">404</p>}
-      {products.map((product) => (
-        <Purchase product={product} key={product.id} />
-      ))}
-    </div>
+          {loading && <p className="text-center">Loading...</p>}
+          {error && <p className="text-center text-red-600">404</p>}
+          {products.map((product) => (
+            <Purchase product={product} key={product.id} />
+          ))}
+        </div>
   );
 };
 

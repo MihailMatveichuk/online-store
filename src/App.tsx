@@ -6,6 +6,7 @@ import './style.css';
 import { Basket } from './components/Basket';
 import Purchases from './components/Purchases';
 
+
 export const App = () => {
   return (
     <div className="main-page">
