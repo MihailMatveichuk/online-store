@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-
 import '../style.css';
 
 const Header = () => {
+
   return (
     <div className="header-container">
       <div className="header-h1">
@@ -11,12 +11,6 @@ const Header = () => {
         </a>
       </div>
       <div className="right-part-header">
-        <div className="d7">
-          <form>
-            <input type="text" placeholder="Search" />
-          </form>
-        </div>
-
         <div className="button-basket">
           <Link to="/basket">
             <svg

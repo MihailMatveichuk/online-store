@@ -16,7 +16,6 @@ export interface IPurchase{
       rate: number,
       count: number
   }
-
 }
 
 export function Purchase({ product }: IProductProps){ 
@@ -31,7 +30,6 @@ export function Purchase({ product }: IProductProps){
             <img src={product.image} className='card-image' alt={product.title}/>
             <p>{product.title}</p>
             <span className="font-bold">{product.price}</span>
-            <Clicker />
             <button 
             className= {btnClasses.join(' ')} 
             onClick = {() => setDetails(prev => !prev)}
