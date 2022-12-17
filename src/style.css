@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+a{
+  text-decoration:none;
+}
+
+h1 {
+  position: relative;
+  left: 20px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  text-align: center;
+  background-image: linear-gradient(to left, #150409, #a4a2a2);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+h1:hover{
+  background-image: linear-gradient(to left, #960b35, #d3aaaa);
+}
+
+.main-page{
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border:rgb(129, 49, 49) solid;
+}
+
+.header-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 90%;
+  margin-top: 20px;
+  border-bottom: rgba(128, 128, 128, 0.304) solid 0.5px
+}
+
+.button-basket{
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.button-basket svg{
+  fill:black;
+  transition: all 0.5s;
+}
+
+.button-basket svg:hover{
+  fill:rgb(129, 49, 49);
+}
+.basket-name{
+  border: black solid;
+}
+
+.right-part-header{
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+}
+
+.search-form{
+  display: flex;
+}
+
+.d7:after {content:""; clear:both; display:table}
+.d7 form {
+  position: relative;
+  width: auto;
+  float: right;
+  margin-right: 30px;
+}
+.d7 input {
+  width: 100%;
+  height: 30px;
+  padding-left: 15px;
+  border-radius: 42px;
+  border: 2px solid #324b4e3f;
+  background: #fffefd;
+  outline: none;
+  position: relative;
+  transition: .3s linear;
+}
+
+.d7 input:focus {
+  width: 120%;
+}
+
+.cards_container{
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 10px;
+}
+
+/* container mx-auto max-w-2xl pt-5' */
+ .add-yellow{
+  background: rgb(188, 188, 82);
+ }
+
+ .add-blue{
+  background: rgba(189, 192, 200, 0.962);
+ }
+
+ .card{
+  width: 30%;
+  height: 270px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items:center;
+  text-align: center;
+  margin-bottom: 15px;
+  border:rgba(128, 128, 128, 0.304) solid 0.5px;
+  border-radius: 5px;
+ }
+
+ .btn-class{
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  padding: 5px;
+  margin-bottom: 10px;
+ }
+
+ .card-image{
+  width: 110px;
+  height: 150px;
+ }
+
+ .font-bold{
+  font-weight: bold;
+ }
+
+
+ .clicker{
+  display:flex;
+  font-size: medium;
+  font-weight: 300;
+  column-gap: 5px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+ }
+
+ .clicker button{
+  border: none;
+  outline: none;
+  font-size: large;
+  background: white;
+ }
+
+
+
+
