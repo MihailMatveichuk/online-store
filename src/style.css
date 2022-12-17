@@ -88,6 +88,7 @@ h1:hover{
 }
 
 .cards_container{
+  width: 95%;
   margin-top: 30px;
   display: flex;
   align-items: center;
@@ -106,7 +107,7 @@ h1:hover{
  }
 
  .card{
-  width: 30%;
+  width: 300px;
   height: 270px;
   display: flex;
   justify-content: space-around;
@@ -127,8 +128,8 @@ h1:hover{
  }
 
  .card-image{
-  width: 110px;
-  height: 150px;
+  width: 100px;
+  height: 130px;
  }
 
  .font-bold{
