@@ -16,7 +16,6 @@ export interface IPurchase{
       rate: number,
       count: number
   }
-
 }
 
 export function Purchase({ product }: IProductProps){ 

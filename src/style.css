@@ -31,7 +31,6 @@ h1:hover{
   display: flex;
   flex-direction: column;
   align-items: center;
-  border:rgb(129, 49, 49) solid;
 }
 
 .header-container{
@@ -45,8 +44,8 @@ h1:hover{
 }
 
 .button-basket{
-  margin-right: 20px;
   cursor: pointer;
+
 }
 
 .button-basket svg{
@@ -59,12 +58,6 @@ h1:hover{
 }
 .basket-name{
   border: black solid;
-}
-
-.right-part-header{
-  display: flex;
-  width: 40%;
-  justify-content: space-between;
 }
 
 .search-form{

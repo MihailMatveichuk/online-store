@@ -1,31 +1,15 @@
-// <<<<<<< HEAD
-// import { StyleDiv } from './style';
-
-// import LOGO from './assets/logo.png';
-// import Products from './components/Products';
-
-// export const App = () => {
-//   return (
-//     <>
-//       <StyleDiv />
-//       <h1>React start </h1>
-//       <img src={LOGO} alt="logo" width="200" height="200" />
-
-//       <Products />
-//     </>
-//   );
-// };
-
 import Header from './components/Header'
 import axios, {AxiosError}from 'axios';
 import React, {useEffect, useState} from 'react';
 import { Purchase, IPurchase } from './components/Purchase';
 import './style.css'
+import { SearchElement } from './components/Search';
 
 export const App = () => {
   const [products, setProducts] = useState<IPurchase[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [inputValue, setInputValue] = useState("");
 
   async function fetchProducts() {
     try{
@@ -46,15 +30,24 @@ export const App = () => {
     fetchProducts()
   }, [])
 
+  function search (){
+    return products.filter((el) => {
+      return el.title.toLowerCase().includes(inputValue.toLowerCase());
+    });
+  }
+
+
   return (
     <div className="main-page">
       <Header />
-      <div className='cards_container'>
-        {loading && <p className='text-center'>Loading...</p>}
-        {error && <p className='text-center text-red-600'>404</p>}
-        {products.map(product => <Purchase product={product} key = {product.id}/>)}
-      </div>
-      {/* <Clicker /> */}
+      <SearchElement onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setInputValue(e.target.value);
+        }} />
+        <div className='cards_container'>
+          {loading && <p className='text-center'>Loading...</p>}
+          {error && <p className='text-center text-red-600'>404</p>}
+          {search().map(product => <Purchase product={product} key = {product.id}/>)}   
+        </div>
       </div>
     )
   }
