@@ -8,7 +8,7 @@ export const SearchElement = ({
     onChange: React.ChangeEventHandler;
   }) => {
  return (
-    <div className="d7">
+    <div className="search">
         <form>
         <input 
             type="text" 
