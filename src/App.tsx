@@ -32,7 +32,10 @@ export const App = () => {
 
   function search (){
     return products.filter((el) => {
-      return el.title.toLowerCase().includes(inputValue.toLowerCase());
+      return el.title.toLowerCase().includes(inputValue.toLowerCase()) || 
+      el.description.toLowerCase().includes(inputValue.toLowerCase()) || 
+      el.price == +inputValue || el.category.toLowerCase().includes(inputValue.toLowerCase()) || 
+      el.rating.rate == +inputValue || el.rating.count == +inputValue;
     });
   }
 

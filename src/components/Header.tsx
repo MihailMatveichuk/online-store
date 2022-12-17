@@ -1,11 +1,7 @@
 import React from 'react';
-import { useState } from "react";
 import '../style.css';
-// import {Purchase, IPurchase} from './Purchase'
-import {SearchElement} from './Search';
 
 const Header = () => {
-  const [inputValue, setInputValue] = useState("");
 
   return (
     <div className="header-container">
