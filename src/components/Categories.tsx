@@ -7,37 +7,51 @@ const StyledUlCategories = styled.ul`
 `;
 const StyledLiCategory = styled.li`
   flex-direction: row;
-
-  background-color: #f9f9f9;
+  list-style-type: none;
+  background-color: #f9f9f98d;
   padding: 13px 30px;
   border-radius: 30px;
   color: #230e70;
   margin-right: 10px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.1s ease-in-out;
-  &:hover {
-    background-color: darken(#f9f9f9, 2%);
+  :hover {
+    background-color: bisque;
   }
 
-  &:active {
+  :active {
     background-color: darken(#f9f9f9, 5%);
   }
 
-  &.active {
+  .active {
     background-color: #282828;
     color: #fff;
   }
 `;
 
-const Categories = () => {
-  const categories = ['mens', 'electronics', 'womens'];
+const Categories= () => {
+  const categories = [
+    'all',
+    "men's clothing",
+    'jewelery',
+    'electronics',
+    "women's clothing",
+  ];
+
+
+  // const [filtered, setFiltered] = useState(product.cagegory);
+
+  // function filterCategory(category) {
+
+  // }
 
   return (
     <StyledUlCategories>
-      {categories.map((categoryName, i) => (
-        <StyledLiCategory key={i}>{categoryName}</StyledLiCategory>
-      ))}
+      {/* {categories.map((categoryName, i) => (
+        <StyledLiCategory onClick={() => filterCategory(categoryName)} key={i}>
+          {categoryName}
+        </StyledLiCategory>
+      ))} */}
     </StyledUlCategories>
   );
 };
