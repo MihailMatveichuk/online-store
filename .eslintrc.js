@@ -1,10 +1,8 @@
-
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
-    project: "./tsconfig.json"
   },
   settings: {
     react: {
@@ -32,4 +30,10 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
+  'prettier/prettier': [
+    'error',
+    {
+      'endOfLine': 'auto',
+    }
+  ]
 }
