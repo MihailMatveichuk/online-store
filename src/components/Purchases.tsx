@@ -61,7 +61,6 @@ const Purchases = () => {
     fetchProducts();
   }, []);
 
-
   const categories = [
     'all',
     "men's clothing",

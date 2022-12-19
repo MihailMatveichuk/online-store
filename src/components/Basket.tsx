@@ -2,7 +2,7 @@
 
 export const Basket = () => {
   return (
-    <div>Basket</div>
+    <div>Cart is Empty</div>
   )
 }
 
