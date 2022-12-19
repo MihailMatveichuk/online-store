@@ -1,8 +1,10 @@
 import {useState} from 'react';
+import styled from 'styled-components';
 
 import '../style.css';
 interface IProductProps {
     product: IPurchase;
+    // styleValue: {}
 }
 
 export interface IPurchase{
@@ -17,6 +19,7 @@ export interface IPurchase{
       count: number
   }
 }
+
 
 export function Purchase({ product }: IProductProps){
     const [details, setDetails] = useState(false)
@@ -42,6 +45,5 @@ export function Purchase({ product }: IProductProps){
             </div>}
         </div>
     )
-
 }
 
