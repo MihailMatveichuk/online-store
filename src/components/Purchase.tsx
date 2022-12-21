@@ -1,38 +1,30 @@
 import {useState} from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import {IProductProps} from '../types'
 import '../style.css';
-interface IProductProps {
-    product: IPurchase;
-    // styleValue: {}
-}
 
-export interface IPurchase{
-  id: number,
-  title: string,
-  price: number,
-  description: string,
-  category: string,
-  image: string,
-  rating: {
-      rate: number,
-      count: number
-  }
-}
 
 
 export function Purchase({ product }: IProductProps){
+
     const [details, setDetails] = useState(false)
+    const [value, setValue] = useState({});
+    // const onClick = () =>{
+    //     setValue(product);
+    // }
 
     const btnClassName = details ? "add-yellow": "add-blue"
     const btnClasses = ["btn-class", btnClassName]
     return (
         <div
         className="card"
-        >
-            <img src={product.image} className='card-image' alt={product.title}/>
+        >   
+        <Link to={'/modal/' + product.id} >
+            <img src={product.image}  className='card-image'  alt={product.title}/>
+        </Link>
             <p>{product.title}</p>
-            <span className="font-bold">{product.price}</span>
+            <span className="font-bold">{product.price + " $"}</span>
             <button
             className= {btnClasses.join(' ')}
             onClick = {() => setDetails(prev => !prev)}
