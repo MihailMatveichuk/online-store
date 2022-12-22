@@ -1,15 +1,10 @@
-
 import { useState } from 'react';
 import { IAppProps } from '../types';
-
-import { SearchElement } from './Search';
 import styled from 'styled-components';
 import '../style.css';
 
-
+import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
-
-
 
 const StyledUlCategories = styled.ul`
   width: 60%;
@@ -49,11 +44,9 @@ const SearchAndGridRow = styled.div`
   justify-content: space-between;
 `;
 
-const Purchases = ({products,onAdd , loading, error}: IAppProps) => {
+const Purchases = ({ products, onAdd, loading, error }: IAppProps) => {
   const [inputValue, setInputValue] = useState('');
-  const [widthValue, setWidthValue] = useState({width: '420px'});
-
-
+  const [widthValue, setWidthValue] = useState({ width: '420px' });
 
   const categories = [
     'all',
@@ -138,17 +131,12 @@ const Purchases = ({products,onAdd , loading, error}: IAppProps) => {
           </StyledLiCategory>
         ))}
       </StyledUlCategories>
-
       <div className="cards_container">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
-
         {search().map((product) => (
           <StyleCard>
-
-
             <Purchase onAdd={onAdd} product={product} key={product.id} />
-
           </StyleCard>
         ))}
       </div>

@@ -1,14 +1,3 @@
-export interface IAppProps {
-    products: IPurchase[],
-    error: string,
-    loading: boolean,
-    onAdd: (item: IPurchase) => void;
-  }
-
-export interface IProductProps {
-    product: IPurchase;
-}
-
 export interface IPurchase{
   id: number,
   title: string,
@@ -21,7 +10,15 @@ export interface IPurchase{
       count: number
   }
 }
-
+export interface IAppProps {
+    products: IPurchase[],
+    error: string,
+    loading: boolean,
+    onAdd: (item: IPurchase) => void;
+  }
+export interface IProductProps {
+    product: IPurchase;
+}
 export interface IModal {
   products: IPurchase[]
 }

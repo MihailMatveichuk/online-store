@@ -28,7 +28,6 @@ const CartsStyledDiv = styled.div`
  flex-direction:column;
 
 `
-
 export const Basket = ({ orders }: IOrdersProps) => {
   return (
     <BasketStyled>
@@ -39,8 +38,6 @@ export const Basket = ({ orders }: IOrdersProps) => {
       ) : (
         orders.map((product) => <CartsProduct product={product} />)
       )}
-
-
            </CartsStyledDiv>
        <CartSummary/>
     </BasketStyled>
