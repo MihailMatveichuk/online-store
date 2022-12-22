@@ -1,14 +1,18 @@
+
+import { useState } from 'react';
+import { IAppProps } from '../types';
+
+import { SearchElement } from './Search';
+import styled from 'styled-components';
+import '../style.css';
+
 import axios, { AxiosError } from 'axios';
 
 import { useEffect, useState } from 'react';
 
 import { Purchase, IPurchase } from './Purchase';
 
-import '../style.css';
 
-import { SearchElement } from './Search';
-
-import styled from 'styled-components';
 
 const StyledUlCategories = styled.ul`
   width: 60%;
@@ -48,36 +52,11 @@ const SearchAndGridRow = styled.div`
   justify-content: space-between;
 `;
 
-interface IProductProps {
-  onAdd: (item: IPurchase) => void;
-}
-
-const Purchases = ({ onAdd }: IProductProps) => {
-  const [products, setProducts] = useState<IPurchase[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+const Purchases = ({products,onAdd , loading, error}: IAppProps) => {
   const [inputValue, setInputValue] = useState('');
-  const [widthValue, setWidthValue] = useState({ width: '420px' });
+  const [widthValue, setWidthValue] = useState({width: '420px'});
 
-  async function fetchProducts() {
-    try {
-      setError('');
-      setLoading(true);
-      const response = await axios.get<IPurchase[]>(
-        'https://fakestoreapi.com/products?limit=20'
-      );
-      setProducts(response.data);
-      setLoading(false);
-    } catch (e: unknown) {
-      const error = e as AxiosError;
-      setLoading(false);
-      setError(error.message);
-    }
-  }
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   const categories = [
     'all',
@@ -169,7 +148,10 @@ const Purchases = ({ onAdd }: IProductProps) => {
 
         {search().map((product) => (
           <StyleCard>
+
+          
             <Purchase onAdd={onAdd} product={product} key={product.id} />
+
           </StyleCard>
         ))}
       </div>

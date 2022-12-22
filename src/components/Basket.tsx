@@ -1,3 +1,4 @@
+
 import CartsProduct from './CartsProduct';
 import CartSummary from './CartSummary';
 import styled from 'styled-components';
@@ -38,6 +39,7 @@ export const Basket = ({ orders }: IOrdersProps) => {
       ) : (
         orders.map((product) => <CartsProduct product={product} />)
       )}
+
 
            </CartsStyledDiv>
        <CartSummary/>

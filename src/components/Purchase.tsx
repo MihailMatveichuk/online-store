@@ -1,6 +1,11 @@
-import { Children, useState } from 'react';
+
+import {useState} from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import {IProductProps} from '../types'
 import '../style.css';
+
+
 interface IProductProps {
   product: IPurchase;
   onAdd: (item: IPurchase) => void | undefined;
@@ -18,6 +23,7 @@ export interface IPurchase {
   };
 }
 
+
 const AddButton = styled.button`
   position: absolute;
   right: 0;
@@ -30,6 +36,7 @@ const AddButton = styled.button`
   border-radius: 3px;
 `;
 
+
 export function Purchase({ product, onAdd }: IProductProps) {
   const [details, setDetails] = useState(false);
   const btnClassName = details ? 'add-yellow' : 'add-blue';
@@ -37,7 +44,9 @@ export function Purchase({ product, onAdd }: IProductProps) {
 
   return (
     <div className="card">
-      <img src={product.image} className="card-image" alt={product.title} />
+      <Link to={'/modal/' + product.id} >
+            <img src={product.image}  className='card-image'  alt={product.title}/>
+        </Link>
       <p>{product.title}</p>
       <span className="font-bold">{product.price}</span>
       <button
@@ -54,6 +63,7 @@ export function Purchase({ product, onAdd }: IProductProps) {
             Rate:{' '}
             <span style={{ fontWeight: 'bold' }}>{product.rating.rate}</span>
           </p>
+
         </div>
       )}
     </div>
