@@ -17,12 +17,18 @@ export interface IAppProps {
     onAdd: (item: IPurchase) => void;
   }
 export interface IProductProps {
-    product: IPurchase;
+  product: IPurchase;
+  onAdd: (item: IPurchase) => void | undefined;
 }
-export interface IModal {
+export interface IModalProps {
   products: IPurchase[]
 }
-
+export interface IOrdersProps {
+  orders: IPurchase[];
+}
+export interface ICartProps{
+ product: IPurchase;
+}
 export interface ICategoryProps{
   onFilter: (category:string) => void;
 }

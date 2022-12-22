@@ -9,8 +9,6 @@ const SummaryStyledDiv = styled.div`
   color: gold;
   border-radius: 8px;
   font-size: 20px;
-  
-
 `;
 const BuyButtonStyled = styled.button`
   color: palevioletred;
