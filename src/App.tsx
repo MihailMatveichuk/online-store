@@ -6,6 +6,7 @@ import {IPurchase} from './types'
 import './style.css';
 import Basket from './components/Basket';
 import Purchases from './components/Purchases';
+
 import Modal from './components/Modal';
 import {  } from './components/Purchase';
 
@@ -35,13 +36,26 @@ export const App = () => {
   }, []);
 
 
+export const App = () => {
+
+  const [orders, setOrders] = useState<IPurchase[]>([]);
+
+  function addToOrder(item: IPurchase) {
+    setOrders([...orders, item]);
+  }
+
+
   return (
     <div className="main-page">
-      <Header />
+      <Header orders ={orders}/>
       <Routes>
-        <Route path="/basket" element={<Basket />} />
+
+      
         <Route path="/modal/:id" element={<Modal products={products} />} />
-        <Route path="/" element={<Purchases products={products} loading = {loading} error ={error}/>} />
+        <Route path="/" element={<Purchases onAdd={addToOrder} products={products} loading = {loading} error ={error}/>} />
+
+        <Route path="/basket" element={<Basket orders ={orders} />} />
+       
       </Routes>
     </div>
   );
