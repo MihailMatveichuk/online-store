@@ -9,11 +9,6 @@ import '../style.css';
 export function Purchase({ product }: IProductProps){
 
     const [details, setDetails] = useState(false)
-    const [value, setValue] = useState({});
-    // const onClick = () =>{
-    //     setValue(product);
-    // }
-
     const btnClassName = details ? "add-yellow": "add-blue"
     const btnClasses = ["btn-class", btnClassName]
     return (
