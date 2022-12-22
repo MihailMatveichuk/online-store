@@ -16,7 +16,7 @@ export const Basket = ({ orders }: IOrdersProps) => {
     <BasketStyled>
       <CartsStyledDiv>
       {orders.length === 0 ? (
-        <div>Cart is Empty</div>
+        <h2>Cart is Empty</h2>
       ) : (
         orders.map((product) => <CartsProduct product={product} />)
       )}

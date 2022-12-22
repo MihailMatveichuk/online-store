@@ -22,6 +22,7 @@ export interface IProductProps {
 }
 export interface IModalProps {
   products: IPurchase[]
+  onAdd: (item: IPurchase) => void | undefined;
 }
 export interface IOrdersProps {
   orders: IPurchase[];

@@ -13,10 +13,10 @@ const SearchAndGridRow = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-  const GridIcon = styled.div`
-    display: flex;
-    column-gap: 20px;
-  `;
+const GridIcon = styled.div`
+  display: flex;
+  column-gap: 20px;
+`;
 const Purchases = ({ products, onAdd, loading, error }: IAppProps) => {
   const [inputValue, setInputValue] = useState('');
   const [widthValue, setWidthValue] = useState({ width: '420px' });
@@ -77,15 +77,19 @@ const Purchases = ({ products, onAdd, loading, error }: IAppProps) => {
           </svg>
         </GridIcon>
       </SearchAndGridRow>
-    <Categories onFilter = {filterCategory} />
+      <Categories onFilter={filterCategory} />
       <div className="cards_container">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
-        {search().map((product) => (
-          <StyleCard>
-            <Purchase onAdd={onAdd} product={product} key={product.id} />
-          </StyleCard>
-        ))}
+        {loading === false && filtered.length === 0 ? (
+          <h2> Welcome to our store ! <br /> Choose category!</h2>
+        ) : (
+          search().map((product) => (
+            <StyleCard>
+              <Purchase onAdd={onAdd} product={product} key={product.id} />
+            </StyleCard>
+          ))
+        )}
       </div>
     </div>
   );

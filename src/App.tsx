@@ -42,7 +42,7 @@ export const App = () => {
     <div className="main-page">
       <Header orders={orders} />
       <Routes>
-        <Route path="/modal/:id" element={<Modal products={products} />} />
+        <Route path="/modal/:id" element={<Modal onAdd={addToOrder}  products={products} />} />
         <Route
           path="/"
           element={

@@ -2,6 +2,7 @@ import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { IModalProps } from '../types';
+import { Link } from 'react-router-dom';
 
 const PurchaseContainer = styled.div`
   width: 50%;
@@ -43,7 +44,7 @@ const DescriptionContent = styled.p`
   color: rgb(129, 49, 49);
 `;
 
-const Modal = ({ products }: IModalProps) => {
+const Modal = ({ products, onAdd }: IModalProps) => {
   const params = useParams();
   const id: string = params.id!;
   return (
@@ -56,14 +57,17 @@ const Modal = ({ products }: IModalProps) => {
           src={products[+id - 1].image}
           alt="Product"
         />
-        <Button
-          variant="outline-dark"
-          style={{
-            marginTop: 30,
-          }}
-        >
-          Move to Basket
-        </Button>
+        <Link to={'/basket'}>
+          <Button
+            variant="outline-dark"
+            style={{
+              marginTop: 30,
+            }}
+            onClick={() => onAdd(products[+id - 1])}
+          >
+            Move to Basket
+          </Button>
+        </Link>
       </ImageValue>
       <MainColumn>
         <Category>
