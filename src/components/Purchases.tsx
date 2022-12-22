@@ -6,11 +6,8 @@ import { SearchElement } from './Search';
 import styled from 'styled-components';
 import '../style.css';
 
-import axios, { AxiosError } from 'axios';
 
-import { useEffect, useState } from 'react';
-
-import { Purchase, IPurchase } from './Purchase';
+import { Purchase } from './Purchase';
 
 
 
@@ -149,7 +146,7 @@ const Purchases = ({products,onAdd , loading, error}: IAppProps) => {
         {search().map((product) => (
           <StyleCard>
 
-          
+
             <Purchase onAdd={onAdd} product={product} key={product.id} />
 
           </StyleCard>

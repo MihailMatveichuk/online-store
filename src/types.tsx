@@ -1,7 +1,8 @@
 export interface IAppProps {
     products: IPurchase[],
     error: string,
-    loading: boolean
+    loading: boolean,
+    onAdd: (item: IPurchase) => void;
   }
 
 export interface IProductProps {

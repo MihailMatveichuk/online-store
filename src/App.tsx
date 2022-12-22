@@ -4,7 +4,7 @@ import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import {IPurchase} from './types'
 import './style.css';
-import Basket from './components/Basket';
+import {Basket} from './components/Basket';
 import Purchases from './components/Purchases';
 
 import Modal from './components/Modal';
@@ -14,6 +14,11 @@ export const App = () => {
   const [products, setProducts] = useState<IPurchase[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [orders, setOrders] = useState<IPurchase[]>([]);
+
+  function addToOrder(item: IPurchase) {
+    setOrders([...orders, item]);
+  }
 
   async function fetchProducts() {
     try {
@@ -36,26 +41,16 @@ export const App = () => {
   }, []);
 
 
-export const App = () => {
-
-  const [orders, setOrders] = useState<IPurchase[]>([]);
-
-  function addToOrder(item: IPurchase) {
-    setOrders([...orders, item]);
-  }
-
-
   return (
     <div className="main-page">
       <Header orders ={orders}/>
       <Routes>
 
-      
         <Route path="/modal/:id" element={<Modal products={products} />} />
         <Route path="/" element={<Purchases onAdd={addToOrder} products={products} loading = {loading} error ={error}/>} />
 
         <Route path="/basket" element={<Basket orders ={orders} />} />
-       
+
       </Routes>
     </div>
   );
