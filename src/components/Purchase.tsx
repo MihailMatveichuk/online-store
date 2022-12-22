@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import '../style.css';
 interface IProductProps {
   product: IPurchase;
-  onAdd: (item: IPurchase) => void;
+  onAdd: (item: IPurchase) => void | undefined;
 }
 export interface IPurchase {
   id: number;

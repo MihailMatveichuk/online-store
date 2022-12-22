@@ -14,14 +14,13 @@ export const App = () => {
 
   function addToOrder(item: IPurchase) {
     setOrders([...orders, item]);
-
   }
 
   return (
     <div className="main-page">
       <Header orders ={orders}/>
       <Routes>
-        <Route path="/basket" element={<Basket />} />
+        <Route path="/basket" element={<Basket orders ={orders} />} />
         <Route path="/" element={<Purchases onAdd={addToOrder} />} />
       </Routes>
     </div>
