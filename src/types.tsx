@@ -22,3 +22,7 @@ export interface IProductProps {
 export interface IModal {
   products: IPurchase[]
 }
+
+export interface ICategoryProps{
+  onFilter: (category:string) => void;
+}
