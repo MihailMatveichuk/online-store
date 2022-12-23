@@ -51,7 +51,9 @@ const ButtonDiv = styled.div`
 
 const Modal = ({ products, onAdd }: IModalProps) => {
   const params = useParams().title;
-  const id: number = products.find(param => param.title === params)?.id!;
+  console.log(params);
+  console.log(products)
+  const id: number = products.find(param => param.title.trim() == params?.trim())?.id!;
   return (
     <PurchaseContainer>
       <ImageValue>
@@ -59,7 +61,7 @@ const Modal = ({ products, onAdd }: IModalProps) => {
           style={{
             width: '300px',
           }}
-          src={products[+id - 1].image}
+          src={products[id - 1].image}
           alt="Product"
         />
         
@@ -69,7 +71,7 @@ const Modal = ({ products, onAdd }: IModalProps) => {
             style={{
               marginTop: 30,
             }}
-            onClick={() => onAdd(products[+id - 1])}
+            onClick={() => onAdd(products[id - 1])}
           >
           Add to Basket
           </Button>
@@ -87,15 +89,15 @@ const Modal = ({ products, onAdd }: IModalProps) => {
       </ImageValue>
       <MainColumn>
         <Category>
-          Category: {products[+id - 1].category.toUpperCase()}
+          Category: {products[id - 1].category.toUpperCase()}
         </Category>
-        <h2>{products[+id - 1].title}</h2>
-        <Rating>Rating: {products[+id - 1].rating.rate}</Rating>
-        <Price>Price: {products[+id - 1].price + ' $'}</Price>
+        <h2>{products[id - 1].title}</h2>
+        <Rating>Rating: {products[id - 1].rating.rate}</Rating>
+        <Price>Price: {products[id - 1].price + ' $'}</Price>
         <Description>
           <DescriptionTitle>Description:</DescriptionTitle>
           <DescriptionContent>
-            {products[+id - 1].description}
+            {products[id - 1].description}
           </DescriptionContent>
         </Description>
       </MainColumn>
