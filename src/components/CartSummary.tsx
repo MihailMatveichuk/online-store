@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {IPurchase} from '../types'
 
 const SummaryStyledDiv = styled.div`
   display: flex;
@@ -9,8 +10,10 @@ const SummaryStyledDiv = styled.div`
   color: black;
   border-radius: 8px;
   font-size: 20px;
+  max-height: 500px;
 `;
 const BuyButtonStyled = styled.button`
+
   color: palevioletred;
   font-size: 1em;
   margin: 1em;
@@ -32,13 +35,13 @@ const InputStyled = styled.input.attrs((props) => ({
 `;
 
 const CartSummary = () => {
-  const ordersStorage =JSON.parse(localStorage.getItem('orders'))
-  console.log('ordersStorage: ', ordersStorage.length);
+  const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
+  const totalPrice:number = ordersStorage.reduce((sum:number,el:IPurchase) => sum +=el.price,0)
 
   return (
     <SummaryStyledDiv>
-      <div>Products:</div>
-      <div>Total:</div>
+      <div>Products: {ordersStorage.length}</div>
+      <div>Total: $ {totalPrice} </div>
       <InputStyled placeholder="Enter promo-code" />
       <BuyButtonStyled> BUY NOW </BuyButtonStyled>
     </SummaryStyledDiv>

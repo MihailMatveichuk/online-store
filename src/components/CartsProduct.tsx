@@ -18,7 +18,7 @@ const InfoStyled = styled.div`
 `;
 
 const CartStyledDiv = styled.div`
-  border: 2px solid black;
+  border: 2px solid bisque;
   border-radius: 7px;
   margin: 1em;
   padding: 1em;
@@ -46,7 +46,7 @@ const CartsProduct = ({ product }: ICartProps) => {
         >
           +
         </Button>
-        <p>{product.id}</p>
+        <p>1</p>
         <Button
           variant="outline-dark"
           style={{
