@@ -1,6 +1,7 @@
 import { ICartProps } from '../types';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
+import { useState } from 'react';
 
 const ButtonDiv = styled.div`
   display: flex;
@@ -26,6 +27,10 @@ const CartStyledDiv = styled.div`
   justify-content: space-between;
 `;
 const CartsProduct = ({ product }: ICartProps) => {
+  const [count, setCount] = useState(1);
+
+  const incCount = () => setCount((c,) => c + 1);
+  const decCount = () => setCount((c) => (c <= 0 ? 0 : c - 1));
   return (
     <CartStyledDiv>
       <div>
@@ -39,6 +44,7 @@ const CartsProduct = ({ product }: ICartProps) => {
       </InfoStyled>
       <ButtonDiv>
         <Button
+          onClick={incCount}
           variant="outline-dark"
           style={{
             marginTop: 30,
@@ -46,8 +52,9 @@ const CartsProduct = ({ product }: ICartProps) => {
         >
           +
         </Button>
-        <p>1</p>
+        <p>{count}</p>
         <Button
+          onClick={decCount}
           variant="outline-dark"
           style={{
             marginTop: 30,

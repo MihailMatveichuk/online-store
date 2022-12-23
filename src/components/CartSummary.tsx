@@ -37,7 +37,7 @@ const InputStyled = styled.input.attrs((props) => ({
 const CartSummary = () => {
   const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
   const totalPrice:number = ordersStorage.reduce((sum:number,el:IPurchase) => sum +=el.price,0)
-
+  
   return (
     <SummaryStyledDiv>
       <div>Products: {ordersStorage.length}</div>
