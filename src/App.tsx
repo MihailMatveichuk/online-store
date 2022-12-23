@@ -7,6 +7,7 @@ import Header from './components/Header';
 import { Basket } from './components/Basket';
 import Purchases from './components/Purchases';
 import Modal from './components/Modal';
+import {data} from './data'
 
 
 export const App = () => {
@@ -23,10 +24,10 @@ export const App = () => {
     try {
       setError('');
       setLoading(true);
-      const response = await axios.get<IPurchase[]>(
-        'https://fakestoreapi.com/products?limit=20'
-      );
-      setProducts(response.data);
+      // const response = await axios.get<IPurchase[]>(
+      //   'https://fakestoreapi.com/products?limit=20'
+      // );
+      setProducts(data);
       setLoading(false);
     } catch (e: unknown) {
       const error = e as AxiosError;
