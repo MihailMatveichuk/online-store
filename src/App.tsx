@@ -20,6 +20,10 @@ export const App = () => {
     setOrders([...orders, item]);
   }
 
+  function deleteToOrder(item: IPurchase) {
+    setOrders(() => orders.filter(el => el.id !== item.id))
+  }
+
   async function fetchProducts() {
     try {
       setError('');
@@ -43,12 +47,13 @@ export const App = () => {
     <div className="main-page">
       <Header orders={orders} />
       <Routes>
-        <Route path="/modal/:title" element={<Modal onAdd={addToOrder}  products={products} />} />
+        <Route path="/modal/:title" element={<Modal onAdd={addToOrder} onDelete = {deleteToOrder} products={products} />} />
         <Route
           path="/"
           element={
             <Purchases
               onAdd={addToOrder}
+              onDelete = {deleteToOrder}
               products={products}
               loading={loading}
               error={error}

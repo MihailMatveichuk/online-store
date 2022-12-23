@@ -112,6 +112,31 @@ h1:hover{
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5); 
   border-radius: 5px;
  }
+ .btn{
+  border-radius: 10px;
+  color: black;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.btn-primary{
+  background-color: white;
+}
+
+.btn-secondary{
+  background-color: rgb(129, 49, 49);
+}
+
+.btn-small{
+  font-size: 14px;
+}
+
+.btn-medium{
+  font-size: 18px;
+}
+
+
 
  .btn-class{
   border: none;

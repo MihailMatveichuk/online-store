@@ -1,8 +1,8 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import '../style.css';
-import { IProductProps } from '../types';
+import { IProductProps, IPurchase } from '../types';
 
 const AddButton = styled.button`
   position: absolute;
@@ -15,10 +15,17 @@ const AddButton = styled.button`
   border: 2px solid palevioletred;
   border-radius: 3px;
 `;
-export function Purchase({ product, onAdd }: IProductProps) {
+export function Purchase({ product, onAdd, onDelete }: IProductProps) {
   const [details, setDetails] = useState(false);
+  const [item, setItem] = useState(true);
   const btnClassName = details ? 'add-yellow' : 'add-blue';
   const btnClasses = ['btn-class', btnClassName];
+
+  function addingItem(prod: IPurchase){
+    item ? onAdd(prod): onDelete(prod);
+    return setItem((prev) => !prev)
+  }
+
 
   return (
     <div className="card">
@@ -32,8 +39,11 @@ export function Purchase({ product, onAdd }: IProductProps) {
         onClick={() => setDetails((prev) => !prev)}
       >
         {details ? 'Hide details' : 'Show details'}
-      </button>
-      <AddButton onClick={() => onAdd(product)}> add </AddButton>
+      </button >
+      <AddButton 
+        onClick={() => addingItem(product)}
+            > {item ? 'add' : 'delete'}
+      </AddButton>
       {details && (
         <div>
           <p>{product.description}</p>
@@ -46,3 +56,4 @@ export function Purchase({ product, onAdd }: IProductProps) {
     </div>
   );
 }
+
