@@ -44,9 +44,14 @@ const DescriptionContent = styled.p`
   color: rgb(129, 49, 49);
 `;
 
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
 const Modal = ({ products, onAdd }: IModalProps) => {
-  const params = useParams();
-  const id: string = params.id!;
+  const params = useParams().title;
+  const id: number = products.find(param => param.title === params)?.id!;
   return (
     <PurchaseContainer>
       <ImageValue>
@@ -57,7 +62,8 @@ const Modal = ({ products, onAdd }: IModalProps) => {
           src={products[+id - 1].image}
           alt="Product"
         />
-        <Link to={'/basket'}>
+        
+        <ButtonDiv>
           <Button
             variant="outline-dark"
             style={{
@@ -65,9 +71,19 @@ const Modal = ({ products, onAdd }: IModalProps) => {
             }}
             onClick={() => onAdd(products[+id - 1])}
           >
-            Move to Basket
+          Add to Basket
           </Button>
-        </Link>
+          <Link to={'/basket'}>
+              <Button
+                variant="outline-dark"
+                style={{
+                  marginTop: 30,
+                }}
+              >
+                Move to Basket
+              </Button>
+          </Link>
+        </ButtonDiv> 
       </ImageValue>
       <MainColumn>
         <Category>
