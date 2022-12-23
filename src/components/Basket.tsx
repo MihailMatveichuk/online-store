@@ -11,7 +11,12 @@ const CartsStyledDiv = styled.div`
  display: flex;
  flex-direction:column;
 `
+
+
 export const Basket = ({ orders }: IOrdersProps) => {
+
+ localStorage.setItem('orders',JSON.stringify(orders));
+
   return (
     <BasketStyled>
       <CartsStyledDiv>

@@ -8,7 +8,6 @@ import { Basket } from './components/Basket';
 import Purchases from './components/Purchases';
 import Modal from './components/Modal';
 
-
 export const App = () => {
   const [products, setProducts] = useState<IPurchase[]>([]);
   const [loading, setLoading] = useState(false);

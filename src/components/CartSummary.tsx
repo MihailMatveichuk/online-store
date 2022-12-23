@@ -5,8 +5,8 @@ const SummaryStyledDiv = styled.div`
   flex-direction: column;
   margin: 50px;
   padding: 5em;
-  background: darkcyan;
-  color: gold;
+  background: bisque;
+  color: black;
   border-radius: 8px;
   font-size: 20px;
 `;
@@ -32,6 +32,9 @@ const InputStyled = styled.input.attrs((props) => ({
 `;
 
 const CartSummary = () => {
+  const ordersStorage =JSON.parse(localStorage.getItem('orders'))
+  console.log('ordersStorage: ', ordersStorage.length);
+
   return (
     <SummaryStyledDiv>
       <div>Products:</div>
