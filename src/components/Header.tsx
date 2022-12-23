@@ -1,21 +1,6 @@
 import { Link } from 'react-router-dom';
 import '../style.css';
-
-export interface IPurchase {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
-interface IOrdersProps {
-  orders: IPurchase[];
-}
+import {  IOrdersProps } from '../types';
 
 const Header = ({ orders }: IOrdersProps) => {
   return (

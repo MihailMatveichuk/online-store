@@ -1,27 +1,8 @@
-
 import {useState} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import '../style.css';
-
-
-interface IProductProps {
-  product: IPurchase;
-  onAdd: (item: IPurchase) => void | undefined;
-}
-export interface IPurchase {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
-
+import { IProductProps } from '../types';
 
 const AddButton = styled.button`
   position: absolute;
@@ -34,8 +15,6 @@ const AddButton = styled.button`
   border: 2px solid palevioletred;
   border-radius: 3px;
 `;
-
-
 export function Purchase({ product, onAdd }: IProductProps) {
   const [details, setDetails] = useState(false);
   const btnClassName = details ? 'add-yellow' : 'add-blue';
@@ -62,7 +41,6 @@ export function Purchase({ product, onAdd }: IProductProps) {
             Rate:{' '}
             <span style={{ fontWeight: 'bold' }}>{product.rating.rate}</span>
           </p>
-
         </div>
       )}
     </div>

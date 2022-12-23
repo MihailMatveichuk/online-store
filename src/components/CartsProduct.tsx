@@ -1,10 +1,5 @@
-import { IPurchase } from './Header';
-
+import { ICartProps } from '../types';
 import styled from 'styled-components';
-
-interface IBasketProps {
-  product: IPurchase;
-}
 
 const CartStyledDiv = styled.div`
   border: 2px solid palevioletred;
@@ -13,8 +8,7 @@ const CartStyledDiv = styled.div`
   padding: 1em;
   display: flex;
 `;
-
-const CartsProduct = ({ product }: IBasketProps) => {
+const CartsProduct = ({ product }: ICartProps) => {
   return (
     <CartStyledDiv>
       <div>

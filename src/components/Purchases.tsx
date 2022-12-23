@@ -1,45 +1,10 @@
-
 import { useState } from 'react';
 import { IAppProps } from '../types';
-
-import { SearchElement } from './Search';
 import styled from 'styled-components';
 import '../style.css';
-
-
+import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
-
-
-
-const StyledUlCategories = styled.ul`
-  width: 60%;
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-const StyledLiCategory = styled.li`
-  flex-direction: row;
-  list-style-type: none;
-  background-color: #f9f9f98d;
-  padding: 13px 30px;
-  border-radius: 30px;
-  color: #230e70;
-  margin-right: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  :hover {
-    background-color: bisque;
-  }
-  :active {
-    background-color: darken(#f9f9f9, 5%);
-  }
-  .active {
-    background-color: #282828;
-    color: #fff;
-  }
-`;
+import Categories from './Categories';
 
 const SearchAndGridRow = styled.div`
   width: 90%;
@@ -48,32 +13,17 @@ const SearchAndGridRow = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
-const Purchases = ({products,onAdd , loading, error}: IAppProps) => {
+const GridIcon = styled.div`
+  display: flex;
+  column-gap: 20px;
+`;
+const Purchases = ({ products, onAdd, loading, error }: IAppProps) => {
   const [inputValue, setInputValue] = useState('');
-  const [widthValue, setWidthValue] = useState({width: '420px'});
-
-
-
-  const categories = [
-    'all',
-    "men's clothing",
-    'jewelery',
-    'electronics',
-    "women's clothing",
-  ];
-
-  const GridIcon = styled.div`
-    display: flex;
-    column-gap: 20px;
-  `;
-
+  const [widthValue, setWidthValue] = useState({ width: '420px' });
   const StyleCard = styled.div`
     ${widthValue}
   `;
-
   const [filtered, setFiltered] = useState(products);
-
   function filterCategory(category: string = 'all') {
     if (category === 'all') {
       setFiltered(products);
@@ -94,7 +44,6 @@ const Purchases = ({products,onAdd , loading, error}: IAppProps) => {
       );
     });
   }
-
   return (
     <div className="main-page">
       <SearchAndGridRow>
@@ -128,29 +77,19 @@ const Purchases = ({products,onAdd , loading, error}: IAppProps) => {
           </svg>
         </GridIcon>
       </SearchAndGridRow>
-      <StyledUlCategories>
-        {categories.map((categoryName, i) => (
-          <StyledLiCategory
-            onClick={() => filterCategory(categoryName)}
-            key={i}
-          >
-            {categoryName}
-          </StyledLiCategory>
-        ))}
-      </StyledUlCategories>
-
+      <Categories onFilter={filterCategory} />
       <div className="cards_container">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
-
-        {search().map((product) => (
-          <StyleCard>
-
-
-            <Purchase onAdd={onAdd} product={product} key={product.id} />
-
-          </StyleCard>
-        ))}
+        {loading === false && filtered.length === 0 ? (
+          <h2> Welcome to our store ! <br /> Choose category!</h2>
+        ) : (
+          search().map((product) => (
+            <StyleCard>
+              <Purchase onAdd={onAdd} product={product} key={product.id} />
+            </StyleCard>
+          ))
+        )}
       </div>
     </div>
   );

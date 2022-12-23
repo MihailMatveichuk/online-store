@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ICategoryProps } from '../types';
 
 const StyledUlCategories = styled.ul`
   width: 60%;
@@ -18,18 +19,16 @@ const StyledLiCategory = styled.li`
   :hover {
     background-color: bisque;
   }
-
   :active {
     background-color: darken(#f9f9f9, 5%);
   }
-
   .active {
     background-color: #282828;
     color: #fff;
   }
 `;
 
-const Categories= () => {
+const Categories= ({onFilter}:ICategoryProps) => {
   const categories = [
     'all',
     "men's clothing",
@@ -38,21 +37,17 @@ const Categories= () => {
     "women's clothing",
   ];
 
-
-  // const [filtered, setFiltered] = useState(product.cagegory);
-
-  // function filterCategory(category) {
-
-  // }
-
   return (
-    <StyledUlCategories>
-      {/* {categories.map((categoryName, i) => (
-        <StyledLiCategory onClick={() => filterCategory(categoryName)} key={i}>
-          {categoryName}
-        </StyledLiCategory>
-      ))} */}
-    </StyledUlCategories>
+      <StyledUlCategories>
+        {categories.map((categoryName, i) => (
+          <StyledLiCategory
+            onClick={() => onFilter(categoryName)}
+            key={i}
+          >
+            {categoryName}
+          </StyledLiCategory>
+        ))}
+      </StyledUlCategories>
   );
 };
 
