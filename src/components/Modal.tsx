@@ -45,8 +45,8 @@ const DescriptionContent = styled.p`
 `;
 
 const Modal = ({ products, onAdd }: IModalProps) => {
-  const params = useParams();
-  const id: string = params.id!;
+  const params = useParams().title;
+  const id: number = products.find(param => param.title === params)?.id!;
   return (
     <PurchaseContainer>
       <ImageValue>

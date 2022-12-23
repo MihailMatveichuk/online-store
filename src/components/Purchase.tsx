@@ -22,7 +22,7 @@ export function Purchase({ product, onAdd }: IProductProps) {
 
   return (
     <div className="card">
-      <Link to={'/modal/' + product.id} >
+      <Link to={'/modal/' + product.title} >
             <img src={product.image}  className='card-image'  alt={product.title}/>
         </Link>
       <p>{product.title}</p>
