@@ -15,14 +15,17 @@ export interface IAppProps {
     error: string,
     loading: boolean,
     onAdd: (item: IPurchase) => void;
+    onDelete: (item: IPurchase) => void
   }
 export interface IProductProps {
   product: IPurchase;
   onAdd: (item: IPurchase) => void | undefined;
+  onDelete: (item: IPurchase) => void | undefined;
 }
 export interface IModalProps {
   products: IPurchase[]
   onAdd: (item: IPurchase) => void | undefined;
+  onDelete: (item: IPurchase) => void | undefined;
 }
 export interface IOrdersProps {
   orders: IPurchase[];

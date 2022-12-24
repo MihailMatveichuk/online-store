@@ -45,19 +45,29 @@ const DescriptionContent = styled.p`
   color: rgb(129, 49, 49);
 `;
 
-const ButtonDiv = styled.div`
+export const ButtonDiv = styled.div`
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
 `
 
 const Modal = ({ products, onAdd }: IModalProps) => {
   const params = useParams().title;
-  console.log(params);
-  console.log(products)
   const id: number = products.find(param => param.title.trim() == params?.trim())?.id!;
   return (
     <PurchaseContainer>
       <ImageValue>
+
+        <Link to={'/modal/' + products[id - 1].title} >
+          <img
+            style={{
+              width: '300px',
+            }}
+            src={products[id - 1].image}
+            alt="Product"
+          />
+        </Link>
+
         <img
           style={{
             width: '300px',
@@ -66,9 +76,10 @@ const Modal = ({ products, onAdd }: IModalProps) => {
           alt="Product"
         />
 
+
         <ButtonDiv>
           <Button
-            variant="outline-dark"
+          variant="primary"
             style={{
               marginTop: 30,
             }}
@@ -78,7 +89,7 @@ const Modal = ({ products, onAdd }: IModalProps) => {
           </Button>
           <Link to={'/basket'}>
               <Button
-                variant="outline-dark"
+                variant="primary"
                 style={{
                   marginTop: 30,
                 }}

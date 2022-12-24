@@ -1,5 +1,8 @@
 import { ICartProps } from '../types';
 import styled from 'styled-components';
+
+import { Link } from 'react-router-dom';
+
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 
@@ -18,6 +21,7 @@ const InfoStyled = styled.div`
   margin: 20px;
 `;
 
+
 const CartStyledDiv = styled.div`
   border: 2px solid bisque;
   border-radius: 7px;
@@ -33,6 +37,17 @@ const CartsProduct = ({ product }: ICartProps) => {
   const decCount = () => setCount((c) => (c <= 0 ? 0 : c - 1));
   return (
     <CartStyledDiv>
+
+      <Link to={'/modal/' + product.title} >
+        <div>
+          <img src={product.image} className="card-image" alt={product.title} />
+        </div>
+      </Link>
+      <div>
+        <h5>{product.title}</h5>
+      </div>
+      <p className="font-bold">{product.price}</p>
+
       <div>
         <img src={product.image} className="card-image" alt={product.title} />
       </div>
@@ -63,6 +78,7 @@ const CartsProduct = ({ product }: ICartProps) => {
           -
         </Button>
       </ButtonDiv>
+
     </CartStyledDiv>
   );
 };
