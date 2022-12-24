@@ -5,7 +5,8 @@ export const Clicker = () => {
   const [count, setCount] = useState(0);
 
     const incCount = () => setCount((c) => c + 1);
-    const decCount = () => setCount((c) => c - 1)
+    const decCount = () => setCount((c) => (c <= 0 ? 0 : c - 1));
+
 
   return (
     <div className='clicker'>

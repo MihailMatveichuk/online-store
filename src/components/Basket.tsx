@@ -1,4 +1,4 @@
-import { IOrdersProps } from '../types';
+import { IBasketProps } from '../types';
 import CartsProduct from './CartsProduct';
 import CartSummary from './CartSummary';
 import styled from 'styled-components';
@@ -13,7 +13,7 @@ const CartsStyledDiv = styled.div`
 `
 
 
-export const Basket = ({ orders }: IOrdersProps) => {
+export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
 
  localStorage.setItem('orders',JSON.stringify(orders));
 
@@ -23,7 +23,7 @@ export const Basket = ({ orders }: IOrdersProps) => {
       {orders.length === 0 ? (
         <h2>Cart is Empty</h2>
       ) : (
-        orders.map((product) => <CartsProduct product={product} />)
+        orders.filter((el, ind) => ind === orders.indexOf(el)).map((product) => <CartsProduct onAdd={onAdd} onDelete={onDelete} product={product} />)
       )}
            </CartsStyledDiv>
        <CartSummary/>

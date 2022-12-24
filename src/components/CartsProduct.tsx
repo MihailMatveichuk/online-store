@@ -1,10 +1,11 @@
 import { ICartProps } from '../types';
 import styled from 'styled-components';
+import { IPurchase } from '../types';
 
 import { Link } from 'react-router-dom';
 
 import { Button } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ButtonDiv = styled.div`
   display: flex;
@@ -30,11 +31,11 @@ const CartStyledDiv = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const CartsProduct = ({ product }: ICartProps) => {
-  const [count, setCount] = useState(1);
+const CartsProduct = ({ onAdd, onDelete,  product }: ICartProps) => {
+  const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
+  const currProduct:IPurchase[] = ordersStorage.filter((el:IPurchase)=> el.id === product.id)
+  const countOfProduct:number = currProduct.length
 
-  const incCount = () => setCount((c,) => c + 1);
-  const decCount = () => setCount((c) => (c <= 0 ? 0 : c - 1));
   return (
     <CartStyledDiv>
 
@@ -51,7 +52,8 @@ const CartsProduct = ({ product }: ICartProps) => {
       </InfoStyled>
       <ButtonDiv>
         <Button
-          onClick={incCount}
+
+          onClick = {() => onAdd(product)}
           variant="outline-dark"
           style={{
             marginTop: 30,
@@ -59,9 +61,9 @@ const CartsProduct = ({ product }: ICartProps) => {
         >
           +
         </Button>
-        <p>{count}</p>
+        <p>{countOfProduct}</p>
         <Button
-          onClick={decCount}
+          onClick={() => onDelete(product)}
           variant="outline-dark"
           style={{
             marginTop: 30,
