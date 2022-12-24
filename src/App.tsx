@@ -7,6 +7,7 @@ import Header from './components/Header';
 import { Basket } from './components/Basket';
 import Purchases from './components/Purchases';
 import Modal from './components/Modal';
+import {data} from './data'
 
 export const App = () => {
   const [products, setProducts] = useState<IPurchase[]>([]);
@@ -18,14 +19,18 @@ export const App = () => {
     setOrders([...orders, item]);
   }
 
+  function deleteToOrder(item: IPurchase) {
+    setOrders(() => orders.filter(el => el.id !== item.id))
+  }
+
   async function fetchProducts() {
     try {
       setError('');
       setLoading(true);
-      const response = await axios.get<IPurchase[]>(
-        'https://fakestoreapi.com/products?limit=20'
-      );
-      setProducts(response.data);
+      // const response = await axios.get<IPurchase[]>(
+      //   'https://fakestoreapi.com/products?limit=20'
+      // );
+      setProducts(data);
       setLoading(false);
     } catch (e: unknown) {
       const error = e as AxiosError;
@@ -41,12 +46,13 @@ export const App = () => {
     <div className="main-page">
       <Header orders={orders} />
       <Routes>
-        <Route path="/modal/:title" element={<Modal onAdd={addToOrder}  products={products} />} />
+        <Route path="/modal/:title" element={<Modal onAdd={addToOrder} onDelete = {deleteToOrder} products={products} />} />
         <Route
           path="/"
           element={
             <Purchases
               onAdd={addToOrder}
+              onDelete = {deleteToOrder}
               products={products}
               loading={loading}
               error={error}

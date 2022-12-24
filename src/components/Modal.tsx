@@ -45,38 +45,41 @@ const DescriptionContent = styled.p`
   color: rgb(129, 49, 49);
 `;
 
-const ButtonDiv = styled.div`
+export const ButtonDiv = styled.div`
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
 `
 
 const Modal = ({ products, onAdd }: IModalProps) => {
   const params = useParams().title;
-  const id: number = products.find(param => param.title === params)?.id!;
+  const id: number = products.find(param => param.title.trim() == params?.trim())?.id!;
   return (
     <PurchaseContainer>
       <ImageValue>
-        <img
-          style={{
-            width: '300px',
-          }}
-          src={products[+id - 1].image}
-          alt="Product"
-        />
 
+        <Link to={'/modal/' + products[id - 1].title} >
+          <img
+            style={{
+              width: '300px',
+            }}
+            src={products[id - 1].image}
+            alt="Product"
+          />
+        </Link>
         <ButtonDiv>
           <Button
-            variant="outline-dark"
+          variant="primary"
             style={{
               marginTop: 30,
             }}
-            onClick={() => onAdd(products[+id - 1])}
+            onClick={() => onAdd(products[id - 1])}
           >
           Add to Basket
           </Button>
           <Link to={'/basket'}>
               <Button
-                variant="outline-dark"
+                variant="primary"
                 style={{
                   marginTop: 30,
                 }}
@@ -88,15 +91,15 @@ const Modal = ({ products, onAdd }: IModalProps) => {
       </ImageValue>
       <MainColumn>
         <Category>
-          Category: {products[+id - 1].category.toUpperCase()}
+          Category: {products[id - 1].category.toUpperCase()}
         </Category>
-        <h2>{products[+id - 1].title}</h2>
-        <Rating>Rating: {products[+id - 1].rating.rate}</Rating>
-        <Price>Price: {products[+id - 1].price + ' $'}</Price>
+        <h2>{products[id - 1].title}</h2>
+        <Rating>Rating: {products[id - 1].rating.rate}</Rating>
+        <Price>Price: {products[id - 1].price + ' $'}</Price>
         <Description>
           <DescriptionTitle>Description:</DescriptionTitle>
           <DescriptionContent>
-            {products[+id - 1].description}
+            {products[id - 1].description}
           </DescriptionContent>
         </Description>
       </MainColumn>
