@@ -1,7 +1,7 @@
 import { ICartProps } from '../types';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ButtonDiv = styled.div`
   display: flex;
@@ -29,8 +29,17 @@ const CartStyledDiv = styled.div`
 const CartsProduct = ({ product }: ICartProps) => {
   const [count, setCount] = useState(1);
 
-  const incCount = () => setCount((c,) => c + 1);
+  const incCount = () => setCount((c) => c + 1);
   const decCount = () => setCount((c) => (c <= 0 ? 0 : c - 1));
+
+  //   counter ++
+  //   func add{...}
+  //   func{...orders.filter...}
+  // useEffect in use stor
+  // props count for sammary in useeff
+  // reduce
+  
+
   return (
     <CartStyledDiv>
       <div>
