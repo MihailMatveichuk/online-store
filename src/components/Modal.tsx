@@ -44,8 +44,9 @@ const DescriptionContent = styled.p`
   color: rgb(129, 49, 49);
 `;
 
-const ButtonDiv = styled.div`
+export const ButtonDiv = styled.div`
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
 `
 

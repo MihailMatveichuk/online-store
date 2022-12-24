@@ -92,12 +92,13 @@ h1:hover{
 }
 
 /* container mx-auto max-w-2xl pt-5' */
- .add-yellow{
-  background: rgb(188, 188, 82);
+ .add-red{
+  background: rgb(129, 49, 49);
+  color: white;
  }
 
- .add-blue{
-  background: rgba(189, 192, 200, 0.962);
+ .add-white{
+  background: rgba(170, 154, 154, 0.264);
  }
 
  .card{
@@ -144,10 +145,15 @@ h1:hover{
 
  .btn-class{
   border: none;
-  border-radius: 2px;
+  border-radius: 10px;
   outline: none;
   padding: 5px;
   margin-bottom: 10px;
+ }
+
+ .btn-class:hover{
+  background: rgb(129, 49, 49);
+  color: white;
  }
 
  .card-image{
