@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import '../style.css';
-import {  IOrdersProps } from '../types';
+import {  IOrdersProps, IPurchase } from '../types';
 
 const Header = ({ orders }: IOrdersProps) => {
+  const totalPrice:number = orders.reduce((sum:number,el:IPurchase) => sum +=el.price,0)
   return (
     <div className="header-container">
       <div className="header-h1">
@@ -10,6 +11,7 @@ const Header = ({ orders }: IOrdersProps) => {
           <h1>Online store</h1>
         </a>
       </div>
+            $ {totalPrice}
       <div className="right-part-header">
         <div className="button-basket">
           <Link to="/basket">
