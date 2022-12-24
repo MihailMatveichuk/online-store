@@ -67,16 +67,6 @@ const Modal = ({ products, onAdd }: IModalProps) => {
             alt="Product"
           />
         </Link>
-
-        <img
-          style={{
-            width: '300px',
-          }}
-          src={products[id - 1].image}
-          alt="Product"
-        />
-
-
         <ButtonDiv>
           <Button
           variant="primary"

@@ -43,14 +43,6 @@ const CartsProduct = ({ product }: ICartProps) => {
           <img src={product.image} className="card-image" alt={product.title} />
         </div>
       </Link>
-      <div>
-        <h5>{product.title}</h5>
-      </div>
-      <p className="font-bold">{product.price}</p>
-
-      <div>
-        <img src={product.image} className="card-image" alt={product.title} />
-      </div>
       <InfoStyled>
         <div>
           <h5>{product.title}</h5>
