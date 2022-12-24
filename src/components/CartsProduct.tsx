@@ -30,19 +30,11 @@ const CartStyledDiv = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const CartsProduct = ({ product }: ICartProps) => {
+const CartsProduct = ({ onAdd, onDelete,  product }: ICartProps) => {
   const [count, setCount] = useState(1);
 
   const incCount = () => setCount((c) => c + 1);
   const decCount = () => setCount((c) => (c <= 0 ? 0 : c - 1));
-
-  //   counter ++
-  //   func add{...}
-  //   func{...orders.filter...}
-  // useEffect in use stor
-  // props count for sammary in useeff
-  // reduce
-  
 
   return (
     <CartStyledDiv>
@@ -60,7 +52,8 @@ const CartsProduct = ({ product }: ICartProps) => {
       </InfoStyled>
       <ButtonDiv>
         <Button
-          onClick={incCount}
+
+          onClick = {() => onAdd(product)}
           variant="outline-dark"
           style={{
             marginTop: 30,
@@ -70,7 +63,7 @@ const CartsProduct = ({ product }: ICartProps) => {
         </Button>
         <p>{count}</p>
         <Button
-          onClick={decCount}
+          onClick={() => onDelete(product)}
           variant="outline-dark"
           style={{
             marginTop: 30,

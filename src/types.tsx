@@ -30,8 +30,16 @@ export interface IModalProps {
 export interface IOrdersProps {
   orders: IPurchase[];
 }
+
+export interface IBasketProps {
+  orders: IPurchase[];
+  onAdd: (item: IPurchase) => void | undefined;
+  onDelete: (item: IPurchase) => void | undefined;
+}
 export interface ICartProps{
  product: IPurchase;
+ onAdd: (item: IPurchase) => void | undefined;
+ onDelete: (item: IPurchase) => void | undefined;
 }
 export interface ICategoryProps{
   onFilter: (category:string) => void;
