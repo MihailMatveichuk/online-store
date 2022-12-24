@@ -1,5 +1,6 @@
 import { ICartProps } from '../types';
 import styled from 'styled-components';
+import { IPurchase } from '../types';
 
 import { Link } from 'react-router-dom';
 
@@ -31,10 +32,9 @@ const CartStyledDiv = styled.div`
   justify-content: space-between;
 `;
 const CartsProduct = ({ onAdd, onDelete,  product }: ICartProps) => {
-  const [count, setCount] = useState(1);
-
-  const incCount = () => setCount((c) => c + 1);
-  const decCount = () => setCount((c) => (c <= 0 ? 0 : c - 1));
+  const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
+  const currProduct:IPurchase[] = ordersStorage.filter((el:IPurchase)=> el.id === product.id)
+  const countOfProduct:number = currProduct.length
 
   return (
     <CartStyledDiv>
@@ -61,7 +61,7 @@ const CartsProduct = ({ onAdd, onDelete,  product }: ICartProps) => {
         >
           +
         </Button>
-        <p>{count}</p>
+        <p>{countOfProduct}</p>
         <Button
           onClick={() => onDelete(product)}
           variant="outline-dark"
