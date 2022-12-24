@@ -1,5 +1,6 @@
 import { ICartProps } from '../types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const CartStyledDiv = styled.div`
   border: 2px solid palevioletred;
@@ -11,9 +12,11 @@ const CartStyledDiv = styled.div`
 const CartsProduct = ({ product }: ICartProps) => {
   return (
     <CartStyledDiv>
-      <div>
-        <img src={product.image} className="card-image" alt={product.title} />
-      </div>
+      <Link to={'/modal/' + product.title} >
+        <div>
+          <img src={product.image} className="card-image" alt={product.title} />
+        </div>
+      </Link>
       <div>
         <h5>{product.title}</h5>
       </div>

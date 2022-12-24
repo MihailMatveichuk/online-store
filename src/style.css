@@ -121,8 +121,12 @@ h1:hover{
 }
 
 .btn-primary{
-  background-color: white;
+  background-color: rgba(170, 154, 154, 0.264);
 }
+.btn-primary:hover{
+  background-color: rgb(129, 49, 49);
+}
+
 
 .btn-secondary{
   background-color: rgb(129, 49, 49);

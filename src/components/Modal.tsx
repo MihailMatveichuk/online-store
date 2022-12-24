@@ -51,23 +51,22 @@ const ButtonDiv = styled.div`
 
 const Modal = ({ products, onAdd }: IModalProps) => {
   const params = useParams().title;
-  console.log(params);
-  console.log(products)
   const id: number = products.find(param => param.title.trim() == params?.trim())?.id!;
   return (
     <PurchaseContainer>
       <ImageValue>
-        <img
-          style={{
-            width: '300px',
-          }}
-          src={products[id - 1].image}
-          alt="Product"
-        />
-        
+        <Link to={'/modal/' + products[id - 1].title} >
+          <img
+            style={{
+              width: '300px',
+            }}
+            src={products[id - 1].image}
+            alt="Product"
+          />
+        </Link>
         <ButtonDiv>
           <Button
-            variant="outline-dark"
+          variant="primary"
             style={{
               marginTop: 30,
             }}
@@ -77,7 +76,7 @@ const Modal = ({ products, onAdd }: IModalProps) => {
           </Button>
           <Link to={'/basket'}>
               <Button
-                variant="outline-dark"
+                variant="primary"
                 style={{
                   marginTop: 30,
                 }}
