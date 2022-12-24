@@ -23,7 +23,7 @@ export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
       {orders.length === 0 ? (
         <h2>Cart is Empty</h2>
       ) : (
-        orders.filter((el, ind) => ind === orders.indexOf(el)).map((product) => <CartsProduct onAdd={onAdd} onDelete={onDelete} product={product} />)
+        orders.filter((el, ind) => ind === orders.indexOf(el)).map((product) => <CartsProduct onAdd={onAdd} onDelete={onDelete} product={product} orders ={orders} />)
       )}
            </CartsStyledDiv>
        <CartSummary/>
