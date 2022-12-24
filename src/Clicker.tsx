@@ -10,7 +10,7 @@ export const Clicker = () => {
   return (
     <div className='clicker'>
         <button onClick={decCount}> - </button>
-        <p>{count}</p>
+          <p>{count}</p>
         <button onClick={incCount}> + </button>
     </div>
   )

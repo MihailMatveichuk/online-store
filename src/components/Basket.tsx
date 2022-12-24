@@ -20,7 +20,7 @@ export const Basket = ({ orders }: IOrdersProps) => {
       ) : (
         orders.map((product) => <CartsProduct product={product} />)
       )}
-           </CartsStyledDiv>
+      </CartsStyledDiv>
        <CartSummary/>
     </BasketStyled>
   );

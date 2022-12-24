@@ -168,12 +168,9 @@ h1:hover{
 
  .clicker{
   display:flex;
-  font-size: medium;
   font-weight: 300;
   column-gap: 5px;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
+  align-items: flex-start;
  }
 
  .clicker button{
