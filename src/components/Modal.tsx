@@ -39,6 +39,7 @@ const Description = styled.div`
 const DescriptionTitle = styled.p`
   font-size: 24px;
 `;
+
 const DescriptionContent = styled.p`
   font-size: 20px;
   color: rgb(129, 49, 49);
@@ -56,6 +57,7 @@ const Modal = ({ products, onAdd }: IModalProps) => {
   return (
     <PurchaseContainer>
       <ImageValue>
+
         <Link to={'/modal/' + products[id - 1].title} >
           <img
             style={{
@@ -85,7 +87,7 @@ const Modal = ({ products, onAdd }: IModalProps) => {
                 Move to Basket
               </Button>
           </Link>
-        </ButtonDiv> 
+        </ButtonDiv>
       </ImageValue>
       <MainColumn>
         <Category>
