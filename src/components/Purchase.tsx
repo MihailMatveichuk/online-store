@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import {ButtonDiv} from './Modal'
 import { Link } from 'react-router-dom';
@@ -18,17 +18,15 @@ const AddButton = styled.button`
   border-radius: 3px;
 `;
 
-export function Purchase({ product, onAdd, onDelete }: IProductProps) {
+export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
   const [details, setDetails] = useState(false);
-  const [item, setItem] = useState(true);
   const btnClassName = details ? 'add-red' : 'add-white';
   const btnClasses = ['btn-class', btnClassName];
-
+  let isItemInBasket = orders.some(order => order.id === product.id);
+  
   function addingItem(prod: IPurchase){
-    item ? onAdd(prod): onDelete(prod);
-    return setItem((prev) => !prev)
+    isItemInBasket ? onDelete(prod): onAdd(prod)
   }
-
 
   return (
     <div className="card">
@@ -49,9 +47,9 @@ export function Purchase({ product, onAdd, onDelete }: IProductProps) {
         </button >
         <Button 
         style={{padding: "5px 15px 5px 15px"}}
-          variant = {item ? "primary": "secondary"} 
+          variant = {isItemInBasket ? "secondary": "primary"} 
           onClick={() => addingItem(product)}
-              > {item ? 'add' : 'delete'}
+              > {isItemInBasket ? 'delete' : 'add'}
         </Button>
       </ButtonDiv>
       

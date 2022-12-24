@@ -17,7 +17,7 @@ const GridIcon = styled.div`
   display: flex;
   column-gap: 20px;
 `;
-const Purchases = ({ products, onAdd, onDelete, loading, error }: IAppProps) => {
+const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppProps) => {
   const [inputValue, setInputValue] = useState('');
   const [widthValue, setWidthValue] = useState({ width: '420px' });
   const StyleCard = styled.div`
@@ -86,7 +86,7 @@ const Purchases = ({ products, onAdd, onDelete, loading, error }: IAppProps) => 
         ) : (
           search().map((product) => (
             <StyleCard>
-              <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} key={product.id} />
+              <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
             </StyleCard>
           ))
         )}

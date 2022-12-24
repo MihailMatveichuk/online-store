@@ -14,16 +14,19 @@ export interface IAppProps {
     products: IPurchase[],
     error: string,
     loading: boolean,
+    orders: IPurchase[];
     onAdd: (item: IPurchase) => void;
     onDelete: (item: IPurchase) => void
   }
 export interface IProductProps {
+  orders: IPurchase[];
   product: IPurchase;
   onAdd: (item: IPurchase) => void | undefined;
   onDelete: (item: IPurchase) => void | undefined;
 }
 export interface IModalProps {
-  products: IPurchase[]
+  products: IPurchase[];
+  orders: IPurchase[];
   onAdd: (item: IPurchase) => void | undefined;
   onDelete: (item: IPurchase) => void | undefined;
 }
@@ -38,6 +41,7 @@ export interface IBasketProps {
 }
 export interface ICartProps{
  product: IPurchase;
+ orders: IPurchase[];
  onAdd: (item: IPurchase) => void | undefined;
  onDelete: (item: IPurchase) => void | undefined;
 }

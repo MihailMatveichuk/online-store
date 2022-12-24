@@ -55,6 +55,7 @@ export const App = () => {
               onAdd={addToOrder}
               onDelete={deleteToOrder}
               products={products}
+              orders={orders}
             />
           }
         />
@@ -64,6 +65,7 @@ export const App = () => {
             <Purchases
               onAdd={addToOrder}
               onDelete={deleteToOrder}
+              orders={orders}
               products={products}
               loading={loading}
               error={error}

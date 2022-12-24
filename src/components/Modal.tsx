@@ -1,7 +1,7 @@
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import { IModalProps } from '../types';
+import { IModalProps, IPurchase } from '../types';
 import { Link } from 'react-router-dom';
 
 const PurchaseContainer = styled.div`
@@ -51,13 +51,18 @@ export const ButtonDiv = styled.div`
   justify-content: space-between;
 `
 
-const Modal = ({ products, onAdd }: IModalProps) => {
+const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
   const params = useParams().title;
   const id: number = products.find(param => param.title.trim() == params?.trim())?.id!;
+  let isItemInBasket = orders.some(order => order.id === products[id - 1].id);
+
+  function addingItem(prod: IPurchase){
+    isItemInBasket ? onDelete(prod): onAdd(prod)
+  }
+  
   return (
     <PurchaseContainer>
       <ImageValue>
-
         <Link to={'/modal/' + products[id - 1].title} >
           <img
             style={{
@@ -69,13 +74,13 @@ const Modal = ({ products, onAdd }: IModalProps) => {
         </Link>
         <ButtonDiv>
           <Button
-          variant="primary"
+          variant={isItemInBasket ? "secondary": "primary"}
             style={{
               marginTop: 30,
             }}
-            onClick={() => onAdd(products[id - 1])}
+            onClick={() => addingItem(products[id - 1])}
           >
-          Add to Basket
+          {isItemInBasket ? 'Delete from basket' : 'Add to Basket'}
           </Button>
           <Link to={'/basket'}>
               <Button
@@ -108,3 +113,7 @@ const Modal = ({ products, onAdd }: IModalProps) => {
 };
 
 export default Modal;
+function onDelete(prod: IPurchase) {
+  throw new Error('Function not implemented.');
+}
+

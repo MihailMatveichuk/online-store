@@ -45,7 +45,6 @@ h1:hover{
 
 .button-basket{
   cursor: pointer;
-
 }
 
 .button-basket svg{
@@ -131,6 +130,7 @@ h1:hover{
 
 .btn-secondary{
   background-color: rgb(129, 49, 49);
+  color: white;
 }
 
 .btn-small{
