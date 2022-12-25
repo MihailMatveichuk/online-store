@@ -59,7 +59,7 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
   function addingItem(prod: IPurchase){
     isItemInBasket ? onDelete(prod): onAdd(prod)
   }
-  
+
   return (
     <PurchaseContainer>
       <ImageValue>
