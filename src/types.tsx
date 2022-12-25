@@ -50,6 +50,7 @@ export interface ICategoryProps {
 }
 
 export interface IPaginationProps {
-   ordersPerPage:number
+  ordersPerPage: number;
+  uniqePurchases: IPurchase[];
   paginate: (num: number) => void;
 }
