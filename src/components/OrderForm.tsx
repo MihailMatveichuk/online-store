@@ -68,7 +68,7 @@ const OrderForm = ({toggle}:IToggle) => {
               .matches(/^([+]{1}[0-9]{9,20})?$/, "Invalid number")
               .required('A phone number is required'),
       address: Yup.string()
-              .matches(/(\w{5,}\W\w{5,}\W\w{5,})$/gm, "Invalid address" )
+              .matches(/([A-Za-zА-Яа-яЁё]{5,}\W[A-Za-zА-Яа-яЁё]{5,}\W[A-Za-zА-Яа-яЁё]{5,})$/gm, "Invalid address" )
               .required('An address is required'),
       numberOfCard: Yup.string()
               .matches(/^([0-9]{16})?$/, "Invalid number of card")
