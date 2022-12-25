@@ -48,3 +48,17 @@ export interface ICartProps{
 export interface ICategoryProps{
   onFilter: (category:string) => void;
 }
+
+export interface ICartSummary{
+  orders: IPurchase[];
+}
+
+export interface ErrorForm{
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export interface IToggle{
+  toggle: (category:boolean) => void;
+}
