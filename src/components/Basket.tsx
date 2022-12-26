@@ -20,7 +20,7 @@ const CartsStyledDiv = styled.div`
 export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
   localStorage.setItem('orders', JSON.stringify(orders));
   const [currentPage, setCurrentPage] = useState(1);
-  const [ordersPerPage] = useState(3);
+  const [ordersPerPage, setOrdersPerPage] = useState(3);
   const lastOrderIndex = currentPage * ordersPerPage;
   const firstOrderIndex = lastOrderIndex - ordersPerPage;
 
@@ -46,6 +46,7 @@ export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
             <Pagination
               paginate={paginate}
               ordersPerPage={ordersPerPage}
+              setOrdersPerPage = {setOrdersPerPage}
               uniqePurchases={uniqePurchases}
             />
             <button className="btn btn-primary" onClick={prevPage}>

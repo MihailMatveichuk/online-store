@@ -51,6 +51,7 @@ export interface ICategoryProps {
 
 export interface IPaginationProps {
   ordersPerPage: number;
+  setOrdersPerPage: React.Dispatch<React.SetStateAction<number>>
   uniqePurchases: IPurchase[];
   paginate: (num: number) => void;
 }

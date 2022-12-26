@@ -22,7 +22,7 @@ export const App = () => {
 
   function deleteToOrder(item: IPurchase) {
     setOrders(() =>  orders.filter((_, i) => i !== orders.indexOf(item)));
-    
+
   }
 
   async function fetchProducts() {
@@ -85,7 +85,7 @@ export const App = () => {
         <Route
           path="/orderForm"
           element={
-            <OrderForm/>
+            <OrderForm toggle={() => void {}} />
           }
         />
       </Routes>

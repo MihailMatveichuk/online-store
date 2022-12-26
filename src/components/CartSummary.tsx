@@ -51,7 +51,7 @@ const DiscountValue = styled.div`
   align-items: center;
 `
 
-const CartSummary = ({orders}: ICartSummary) => {
+const CartSummary = () => {
   const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
   const totalPrice:number = ordersStorage.reduce((sum:number,el:IPurchase) => sum +=el.price,0)
   const [modal, setModal] = useState(false);
@@ -62,7 +62,7 @@ const CartSummary = ({orders}: ICartSummary) => {
   //   let { value } = e.target;
   //   setUnmountOnClose(JSON.parse(value));
   // };
-  
+
   return (
     <SummaryStyledDiv>
 
@@ -70,7 +70,7 @@ const CartSummary = ({orders}: ICartSummary) => {
       <div>Total: $ {totalPrice.toFixed(2)} </div>
       <DiscountValue>
         <InputStyled placeholder="Enter promo-code" />
-        <Button 
+        <Button
         style={{
           width: "18em",
         }}color="secondary" onClick={toggle}>
