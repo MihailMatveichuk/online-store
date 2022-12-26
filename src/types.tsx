@@ -54,3 +54,17 @@ export interface IPaginationProps {
   uniqePurchases: IPurchase[];
   paginate: (num: number) => void;
 }
+
+export interface ICartSummary{
+  orders: IPurchase[];
+}
+
+export interface ErrorForm{
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export interface IToggle{
+  toggle: (category:boolean) => void;
+}

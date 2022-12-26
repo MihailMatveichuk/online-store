@@ -78,12 +78,16 @@
     "bootstrap-icons": "^1.10.2",
     "classnames": "^2.3.2",
     "D": "^1.0.0",
+    "formik": "^2.2.9",
     "framer-motion": "^7.10.2",
     "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.5.0",
-    "styled-components": "^5.3.6"
+    "reactstrap": "^9.1.5",
+    "styled-components": "^5.3.6",
+    "yup": "^0.32.11",
+    "yup-phone": "^1.3.2"
   }
 }

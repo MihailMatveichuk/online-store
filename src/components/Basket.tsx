@@ -2,12 +2,15 @@ import { IBasketProps } from '../types';
 import CartsProduct from './CartsProduct';
 import CartSummary from './CartSummary';
 import styled from 'styled-components';
+
+import Breadcrumbs from './Breadcrumbs';
+
 import Pagination from './Pagination';
 import { useState } from 'react';
 
+
 const BasketStyled = styled.div`
   display: flex;
-  justify-content: space-between;
 `;
 const CartsStyledDiv = styled.div`
   display: flex;
@@ -33,8 +36,11 @@ export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
     setCurrentPage((prev) => (prev === 1 ? prev : prev - 1));
   const paginate = (pageNum: number) => setCurrentPage(pageNum);
   return (
+    <>
+    <Breadcrumbs />
     <BasketStyled>
       <CartsStyledDiv>
+
         {orders && (
           <>
             <Pagination
@@ -64,6 +70,8 @@ export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
         )}
       </CartsStyledDiv>
       <CartSummary />
+
     </BasketStyled>
+    </>
   );
 };

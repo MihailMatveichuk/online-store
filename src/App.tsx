@@ -5,6 +5,7 @@ import { IPurchase } from './types';
 import './style.css';
 import Header from './components/Header';
 import { Basket } from './components/Basket';
+import OrderForm  from './components/OrderForm';
 import Purchases from './components/Purchases';
 import Modal from './components/Modal';
 import { data } from './data';
@@ -20,7 +21,6 @@ export const App = () => {
   }
 
   function deleteToOrder(item: IPurchase) {
-    // setOrders(() => orders.filter(el => el.id !== item.id))
     setOrders(() =>  orders.filter((_, i) => i !== orders.indexOf(item)));
     
   }
@@ -80,6 +80,12 @@ export const App = () => {
               onDelete={deleteToOrder}
               orders={orders}
             />
+          }
+        />
+        <Route
+          path="/orderForm"
+          element={
+            <OrderForm/>
           }
         />
       </Routes>

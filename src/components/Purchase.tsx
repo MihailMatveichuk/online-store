@@ -2,21 +2,8 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import {ButtonDiv} from './Modal'
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import '../style.css';
 import { IProductProps, IPurchase } from '../types';
-
-const AddButton = styled.button`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  color: palevioletred;
-  font-size: 1em;
-  margin: 0.75em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-`;
 
 export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
   const [details, setDetails] = useState(false);
@@ -49,7 +36,7 @@ export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
         style={{padding: "5px 15px 5px 15px"}}
           variant = {isItemInBasket ? "secondary": "primary"} 
           onClick={() => addingItem(product)}
-              > {isItemInBasket ? 'delete' : 'add'}
+              > {isItemInBasket ? 'Delete' : 'Add'}
         </Button>
       </ButtonDiv>
       

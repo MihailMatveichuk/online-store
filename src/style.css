@@ -187,8 +187,31 @@ h1:hover{
   fill: #000;
   transition: all 0.5s;
 }
+
  .grid:hover {
   fill:rgb(183, 35, 35);
+}
+
+.error {
+  color: rgb(183, 35, 35);
+  margin-top: 8px;
+}
+
+.card-form{
+  display: flex;
+  margin-top: 20px;;
+  flex-direction: column;
+  border: 1px solid rgba(129, 49, 49, 0.264);
+  border-radius: 10px;
+  padding: 5px 15px;
+  width: 100%;
+}
+
+.card-data{
+  display: flex;
+  column-gap: 5px;
+  justify-content: space-between;
+  padding-bottom: 10px;
 }
 
 
