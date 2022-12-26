@@ -4,6 +4,11 @@ import { IPurchase } from '../types';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
+
+import { useState } from 'react';
+import Pagination from './Pagination';
+
+
 const ButtonDiv = styled.div`
   display: flex;
   align-items: center;
@@ -19,7 +24,6 @@ const InfoStyled = styled.div`
   margin: 20px;
 `;
 
-
 const CartStyledDiv = styled.div`
   border: 2px solid bisque;
   border-radius: 7px;
@@ -31,7 +35,7 @@ const CartStyledDiv = styled.div`
 const CartsProduct = ({ onAdd, onDelete,  product, orders }: ICartProps) => {
   const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
   const currProduct:IPurchase[] = ordersStorage.filter((el:IPurchase)=> el.id === product.id)
-  const countOfProduct:number = currProduct.length
+  const countOfProduct:number = currProduct.length;
 
   return (
     <CartStyledDiv>
