@@ -3,6 +3,7 @@ import '../style.css';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import { IToggle } from '../types';
+import { useNavigate  } from 'react-router-dom';
 
 const FormStyle = styled.form`
 margin: 0 auto;
@@ -45,7 +46,10 @@ button {
   }
 }
 `
+
 const OrderForm = ({toggle}:IToggle) => {
+
+    const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -84,6 +88,9 @@ const OrderForm = ({toggle}:IToggle) => {
     onSubmit: () =>{
         alert('Your order was accepted')
         toggle(true);
+        setTimeout(()=>{
+            navigate('/');
+        },3000)
     }
   })
 
@@ -164,7 +171,7 @@ const OrderForm = ({toggle}:IToggle) => {
                     <input
                     id="cardCvv"
                     name="cardCvv"
-                    type="password"
+                    type="string"
                     value={formik.values.cardCvv}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
