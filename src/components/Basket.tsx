@@ -17,6 +17,11 @@ const CartsStyledDiv = styled.div`
   flex-direction: column;
 `;
 
+// interface IOrdersPerPage {
+//   ordersPerPage?: number | void
+
+// }
+
 export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
   localStorage.setItem('orders', JSON.stringify(orders));
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +29,7 @@ export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
   const lastOrderIndex = currentPage * ordersPerPage;
   const firstOrderIndex = lastOrderIndex - ordersPerPage;
 
-  const uniqePurchases = orders.filter((el, ind) => ind === orders.indexOf(el));
+  const uniqePurchases = orders?.filter((el, ind) => ind === orders.indexOf(el));
   const currentOrders = uniqePurchases.slice(firstOrderIndex, lastOrderIndex);
   const nextPage = () =>
     setCurrentPage((prev) =>
@@ -60,7 +65,7 @@ export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
         {orders.length === 0 ? (
           <h2>Cart is Empty</h2>
         ) : (
-          currentOrders.map((product) => (
+          currentOrders?.map((product) => (
             <CartsProduct
               onAdd={onAdd}
               onDelete={onDelete}

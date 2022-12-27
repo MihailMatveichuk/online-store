@@ -12,20 +12,21 @@ const Pagination = ({
   for (let i = 1; i <= ordersCount; i++) {
     numOfPages.push(i);
   }
-  function changeOrdersPerPage(event: React.EventHandler) {
-    const target = event.target as HTMLInputElement;
-    if (target.value == '' || target.value == '0') {
-      setOrdersPerPage(() => changeOrdersPerPage);
+  function changeOrdersPerPage(e: React.KeyboardEvent<HTMLInputElement>) {
+    const target = e.key;
+    if (target == '' || target == '0' || isNaN(+target)) {
+      //setOrdersPerPage(() => changeOrdersPerPage);
+      setOrdersPerPage(1);
     } else {
-      setOrdersPerPage(+target.value);
-      event.preventDefault();
+      setOrdersPerPage(+target);
+      e.preventDefault();
     }
   }
 
   return (
     <div>
-      <h3>Enter products per page in cart</h3>
-      <input value={ordersPerPage} onChange={changeOrdersPerPage} />
+      <h3>Enter number of products per page in cart</h3>
+      <input value={ordersPerPage} onKeyDown={changeOrdersPerPage} />
       <ul className="pagination">
         {numOfPages.map((num) => (
           <li className="page-item" key={num} onClick={() => paginate(num)}>
