@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IAppProps } from '../types';
 import styled from 'styled-components';
 import '../style.css';
 import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
 import Categories from './Categories';
+import qs from 'qs';
+import { useNavigate } from 'react-router-dom';
 
 const SearchAndGridRow = styled.div`
   width: 90%;
@@ -17,13 +19,30 @@ const GridIcon = styled.div`
   display: flex;
   column-gap: 20px;
 `;
-const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppProps) => {
+const Purchases = ({
+  products,
+  onAdd,
+  onDelete,
+  loading,
+  error,
+  orders,
+}: IAppProps) => {
+  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState('');
   const [widthValue, setWidthValue] = useState({ width: '420px' });
   const StyleCard = styled.div`
     ${widthValue}
   `;
   const [filtered, setFiltered] = useState(products);
+
+
+  useEffect(() => {
+    if(window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      console.log('params: ', params);
+    }
+  },[])
+
   function filterCategory(category: string = 'all') {
     if (category === 'all') {
       setFiltered(products);
@@ -44,6 +63,15 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
       );
     });
   }
+
+  useEffect(() => {
+    const queryString = qs.stringify({
+      category: filtered[0]?.category,
+    });
+    console.log(queryString);
+    navigate(`?${queryString}`);
+  }, [filtered]);
+
   return (
     <div className="main-page">
       <SearchAndGridRow>
@@ -82,11 +110,20 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
         {loading === false && filtered.length === 0 ? (
-          <h2> Welcome to our store ! <br /> Choose category!</h2>
+          <h2>
+            {' '}
+            Welcome to our store ! <br /> Choose category!
+          </h2>
         ) : (
           search().map((product) => (
             <StyleCard>
-              <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
+              <Purchase
+                onAdd={onAdd}
+                onDelete={onDelete}
+                product={product}
+                orders={orders}
+                key={product.id}
+              />
             </StyleCard>
           ))
         )}

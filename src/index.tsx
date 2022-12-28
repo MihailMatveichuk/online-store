@@ -1,6 +1,6 @@
 import { App } from './App';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 
 const rootElement = document.getElementById('root');
 

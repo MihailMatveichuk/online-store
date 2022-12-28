@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { IPurchase } from './types';
