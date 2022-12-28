@@ -17,11 +17,6 @@ const CartsStyledDiv = styled.div`
   flex-direction: column;
 `;
 
-// interface IOrdersPerPage {
-//   ordersPerPage?: number | void
-
-// }
-
 export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
   localStorage.setItem('orders', JSON.stringify(orders));
   const [currentPage, setCurrentPage] = useState(1);

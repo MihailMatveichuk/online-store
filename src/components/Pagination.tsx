@@ -15,7 +15,6 @@ const Pagination = ({
   function changeOrdersPerPage(e: React.KeyboardEvent<HTMLInputElement>) {
     const target = e.key;
     if (target == '' || target == '0' || isNaN(+target)) {
-      //setOrdersPerPage(() => changeOrdersPerPage);
       setOrdersPerPage(1);
     } else {
       setOrdersPerPage(+target);
