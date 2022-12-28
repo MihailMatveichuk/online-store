@@ -19,6 +19,13 @@ const Rating = styled.div`
   font-size: 20px;
   color: rgba(189, 192, 200, 0.962);
 `;
+
+const Count = styled.div`
+  font-weight: 300;
+  font-size: 20px;
+  color: black;
+`;
+
 const MainColumn = styled.div`
   display: flex;
   flex-direction: column;
@@ -100,6 +107,7 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
         </Category>
         <h2>{products[id - 1].title}</h2>
         <Rating>Rating: {products[id - 1].rating.rate}</Rating>
+        <Count>Count: {products[id - 1].rating.count}</Count>
         <Price>Price: {products[id - 1].price + ' $'}</Price>
         <Description>
           <DescriptionTitle>Description:</DescriptionTitle>

@@ -1,4 +1,5 @@
 import { Breadcrumb, BreadcrumbItem } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import '../style.css'
 
@@ -16,9 +17,9 @@ export const Breadcrumbs = () => {
         </Breadcrumb>
         <Breadcrumb>
           <BreadcrumbItem>
-          <a href="/" title="Logo">
+          <Link to={'/'}>
                 Home
-            </a>
+            </Link>
           </BreadcrumbItem>
           <BreadcrumbItem active>
           </BreadcrumbItem>
