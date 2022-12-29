@@ -92,7 +92,7 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
               </StyleCard>
             ))
         ) : (
-           search().map((product) => (
+            search().map((product) => (
               <StyleCard>
                 <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
               </StyleCard>
