@@ -13,7 +13,7 @@ const DropdownSortRating = ({onSortUp, onSortDown, filtered}:ISortProductsRating
         </DropdownToggle>
         <DropdownMenu white>
           <DropdownItem header>
-            <b>Sort by Rating</b>
+            <b>Sort by:</b>
           </DropdownItem>
           <DropdownItem onClick={() => onSortUp(filtered)}>
             To high level rating
