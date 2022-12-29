@@ -34,6 +34,10 @@ export interface IOrdersProps {
   orders: IPurchase[];
 }
 
+export interface INumberCard {
+  filtered: IPurchase[];
+}
+
 export interface IBasketProps {
   orders: IPurchase[];
   onAdd: (item: IPurchase) => void | undefined;

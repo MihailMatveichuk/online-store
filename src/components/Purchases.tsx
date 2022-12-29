@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { IAppProps } from '../types';
+import { IAppProps, IPurchase } from '../types';
 import styled from 'styled-components';
 import '../style.css';
 import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
 import Categories from './Categories';
+import BoxNumberCards from './BoxNumberCards';
+
 
 const SearchAndGridRow = styled.div`
   width: 90%;
@@ -19,6 +21,7 @@ const GridIcon = styled.div`
 `;
 const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppProps) => {
   const [inputValue, setInputValue] = useState('');
+  console.log(inputValue.length)
   const [widthValue, setWidthValue] = useState({ width: '420px' });
   const StyleCard = styled.div`
     ${widthValue}
@@ -52,6 +55,7 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
             setInputValue(e.target.value);
           }}
         />
+        <BoxNumberCards filtered = {filtered}/>
         <GridIcon>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -82,12 +86,16 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
         {loading === false && filtered.length === 0 ? (
-          <h2> Welcome to our store ! <br /> Choose category!</h2>
+            products.map((product) => (
+              <StyleCard>
+                <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
+              </StyleCard>
+            ))
         ) : (
-          search().map((product) => (
-            <StyleCard>
-              <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
-            </StyleCard>
+           search().map((product) => (
+              <StyleCard>
+                <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
+              </StyleCard>
           ))
         )}
       </div>
