@@ -11,12 +11,19 @@ export interface IPurchase {
   };
 }
 
-export interface ISortProducts{
+export interface ISortProductsPrice{
   filtered: IPurchase[];
   onSortUp: (item: IPurchase[]) => void;
   onSortDown: (item: IPurchase[]) => void;
   onFilter: (category: string) => void;
 }
+export interface ISortProductsRating{
+  filtered: IPurchase[];
+  onSortUp: (item: IPurchase[]) => void;
+  onSortDown: (item: IPurchase[]) => void;
+}
+
+
 
 export interface ISort{
   filtered: IPurchase;

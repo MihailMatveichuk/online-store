@@ -5,7 +5,8 @@ import '../style.css';
 import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
 import Categories from './Categories';
-import Dropdown from './Dropdown';
+import DropdownSortPrice from './DropdownPrice';
+import DropdownSortRating from './DropdownRating';
 
 const SearchAndGridRow = styled.div`
   width: 90%;
@@ -36,16 +37,36 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
   }
 
 
-  function sortPurchaseUP(item: IPurchase[]){
+  function sortPriceUp(item: IPurchase[]){
     const tempUp = JSON.parse(JSON.stringify(filtered))
     const newTempUp = tempUp.sort((a: { price: number; }, b: { price: number; }) => a.price - b.price) 
     setFiltered(newTempUp);
   }
 
-  function sortPurchaseDown(item: IPurchase[]){
+  function sortPriceDown(item: IPurchase[]){
     const tempDown = JSON.parse(JSON.stringify(filtered))
     const newTempDown = tempDown.sort((a: { price: number; }, b: { price: number; }) => b.price - a.price) 
     setFiltered(newTempDown);
+  }
+
+  function sortRatingUp(item: IPurchase[]){
+    const tempDown = JSON.parse(JSON.stringify(filtered))
+    const newTempDown = tempDown.sort((a: {
+      rating: any; rate: number; 
+      }, b: {
+            rating: any; rate: number; 
+      }) => a.rating.rate - b.rating.rate) 
+          setFiltered(newTempDown);
+  }
+
+  function sortRatingDown(item: IPurchase[]){
+    const tempDown = JSON.parse(JSON.stringify(filtered))
+    const newTempDown = tempDown.sort((a: {
+      rating: any; rate: number; 
+      }, b: {
+            rating: any; rate: number; 
+      }) => b.rating.rate - a.rating.rate) 
+          setFiltered(newTempDown);
   }
 
 
@@ -69,7 +90,15 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
             setInputValue(e.target.value);
           }}
         />
-        <Dropdown filtered = {filtered} onSortUp = {sortPurchaseUP} onSortDown ={sortPurchaseDown} onFilter={filterCategory}/>
+        <DropdownSortPrice 
+          filtered = {filtered} 
+          onSortUp = {sortPriceUp} 
+          onSortDown ={sortPriceDown} 
+          onFilter={filterCategory}/>
+        <DropdownSortRating 
+          filtered = {filtered} 
+          onSortUp = {sortRatingUp} 
+          onSortDown ={sortRatingDown} />
         <GridIcon>
           <svg
             xmlns="http://www.w3.org/2000/svg"

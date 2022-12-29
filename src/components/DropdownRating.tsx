@@ -1,32 +1,29 @@
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
-import { ISortProducts } from '../types';
+import { ISortProductsRating } from '../types';
 
 
-const DropdownSort = ({onSortUp, onSortDown, onFilter, filtered}:ISortProducts) => {
+const DropdownSortRating = ({onSortUp, onSortDown, filtered}:ISortProductsRating) => {
     return (
         <UncontrolledDropdown>
         <DropdownToggle
           caret
           color="white"
         >
-           <b>Sort by:</b>
+           <b>Sort by Rating</b>
         </DropdownToggle>
         <DropdownMenu white>
           <DropdownItem header>
-            <b>Sort by:</b>
-          </DropdownItem>
-          <DropdownItem onClick={() => onFilter('all')}>
-            Popularity:
+            <b>Sort by Rating</b>
           </DropdownItem>
           <DropdownItem onClick={() => onSortUp(filtered)}>
-            Ascending price
+            To high level rating
           </DropdownItem>
           <DropdownItem onClick={() => onSortDown(filtered)}>
-            Descending price
+            To low level rating
           </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
     );
 };
 
-export default DropdownSort;
+export default DropdownSortRating;
