@@ -10,6 +10,18 @@ export interface IPurchase {
     count: number;
   };
 }
+
+export interface ISortProducts{
+  filtered: IPurchase[];
+  onSortUp: (item: IPurchase[]) => void;
+  onSortDown: (item: IPurchase[]) => void;
+  onFilter: (category: string) => void;
+}
+
+export interface ISort{
+  filtered: IPurchase;
+}
+
 export interface IAppProps {
   products: IPurchase[];
   error: string;
@@ -17,6 +29,7 @@ export interface IAppProps {
   orders: IPurchase[];
   onAdd: (item: IPurchase) => void;
   onDelete: (item: IPurchase) => void;
+  
 }
 export interface IProductProps {
   orders: IPurchase[];
