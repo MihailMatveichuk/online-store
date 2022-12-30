@@ -7,7 +7,7 @@ import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
 import Categories from './Categories';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useSearchParams } from 'react-router-dom';
 
 import BoxNumberCards from './BoxNumberCards';
 
@@ -43,17 +43,24 @@ const Purchases = ({
     ${widthValue}
   `;
   const [filtered, setFiltered] = useState(products);
+  const [params,setParams] = useSearchParams()
+  const categoryQuery = params.get('category') || 'all';
 
-  useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-      console.log('params: ', params);
-    }
-  }, []);
+
+  console.log('filtered: ', filtered);
+
+  // useEffect(() => {
+  //   if (window.location.search) {
+  //     const params = qs.parse(window.location.search.substring(1));
+  //     console.log('params: ', params);
+  //     //setParams(params.category);
+  //   }
+  // }, []);
 
 
   function filterCategory(category: string = 'all') {
-    if (category === 'all') {
+    // console.log('aaaaaaaaaaaaaa',params);
+   if (category === 'all') {
       setFiltered(products);
     } else {
       let newProducts = [...products].filter((el) => el.category === category);
@@ -107,16 +114,26 @@ const Purchases = ({
       );
     });
   }
+// const tets = products.filter((el) => el.category === filtered[0]?.category)
+//   useEffect(() => {
+//     const queryString = qs.stringify({
+//       category: filtered[0]?.category,
+//     });
+//     console.log(queryString);
+//     navigate(`?${queryString}`);
+//   }, []);
 
-  useEffect(() => {
-    const queryString = qs.stringify({
-      category: filtered[0]?.category,
-    });
-    console.log(queryString);
-    navigate(`?${queryString}`);
-  }, [filtered]);
+  // useEffect(() => {
+  //   const queryString = qs.stringify({
+  //     category: 'cat',
+  //   });
+  //   console.log(queryString);
+  //   navigate(`?${queryString}`);
+  // }, []);
 
-  console.log('hello, I am PURcahese ');
+  setParams({category:filtered[0]?.category})
+console.log('paraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaams', params);
+
 
   return (
     <div className="main-page">
@@ -170,7 +187,7 @@ const Purchases = ({
         {error && <p className="text-center text-red-600">404</p>}
         {loading === false && filtered.length === 0 ? (
 
-            products.map((product) => (
+            products.filter(product => product.category === categoryQuery).map((product) => (
               <StyleCard>
                 <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
               </StyleCard>

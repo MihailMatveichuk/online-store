@@ -10,6 +10,7 @@ import Purchases from './components/Purchases';
 import Modal from './components/Modal';
 import { data } from './data';
 import Error from './components/Error';
+import { Clicker } from './Clicker';
 
 export const App = () => {
   const [products, setProducts] = useState<IPurchase[]>([]);
@@ -41,7 +42,6 @@ export const App = () => {
     }
   }
 
-
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -51,18 +51,7 @@ export const App = () => {
       <Header orders={orders} />
       <Routes>
         <Route
-          path="/modal/:title"
-          element={
-            <Modal
-              onAdd={addToOrder}
-              onDelete={deleteToOrder}
-              products={products}
-              orders={orders}
-            />
-          }
-        />
-        <Route
-          path="/"
+         path='/'
           element={
             <Purchases
               onAdd={addToOrder}
@@ -74,8 +63,21 @@ export const App = () => {
             />
           }
         />
+
         <Route
-          path="/basket"
+          path="modal/:title"
+          element={
+            <Modal
+              onAdd={addToOrder}
+              onDelete={deleteToOrder}
+              products={products}
+              orders={orders}
+            />
+          }
+        />
+
+        <Route
+          path="basket"
           element={
             <Basket
               onAdd={addToOrder}
@@ -85,7 +87,7 @@ export const App = () => {
           }
         />
         <Route
-          path="/orderForm"
+          path="orderForm"
           element={<OrderForm toggle={() => void {}} />}
         />
         <Route path="*" element={<Error />} />
