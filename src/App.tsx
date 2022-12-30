@@ -1,14 +1,15 @@
-import { Routes, Route, HashRouter } from 'react-router-dom';
+import { Routes, Route, HashRouter, useNavigate } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { IPurchase } from './types';
 import './style.css';
 import Header from './components/Header';
 import { Basket } from './components/Basket';
-import OrderForm  from './components/OrderForm';
+import OrderForm from './components/OrderForm';
 import Purchases from './components/Purchases';
 import Modal from './components/Modal';
 import { data } from './data';
+import Error from './components/Error';
 
 export const App = () => {
   const [products, setProducts] = useState<IPurchase[]>([]);
@@ -21,8 +22,7 @@ export const App = () => {
   }
 
   function deleteToOrder(item: IPurchase) {
-    setOrders(() =>  orders.filter((_, i) => i !== orders.indexOf(item)));
-
+    setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
   }
 
   async function fetchProducts() {
@@ -40,6 +40,8 @@ export const App = () => {
       setError(error.message);
     }
   }
+
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -84,10 +86,9 @@ export const App = () => {
         />
         <Route
           path="/orderForm"
-          element={
-            <OrderForm toggle={() => void {}} />
-          }
+          element={<OrderForm toggle={() => void {}} />}
         />
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );

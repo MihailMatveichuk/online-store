@@ -67,6 +67,7 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
     isItemInBasket ? onDelete(prod): onAdd(prod)
   }
 
+  
   return (
     <PurchaseContainer>
       <ImageValue>

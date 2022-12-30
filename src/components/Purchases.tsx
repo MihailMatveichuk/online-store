@@ -35,13 +35,12 @@ const Purchases = ({
   `;
   const [filtered, setFiltered] = useState(products);
 
-
   useEffect(() => {
-    if(window.location.search) {
+    if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
       console.log('params: ', params);
     }
-  },[])
+  }, []);
 
   function filterCategory(category: string = 'all') {
     if (category === 'all') {
@@ -71,6 +70,8 @@ const Purchases = ({
     console.log(queryString);
     navigate(`?${queryString}`);
   }, [filtered]);
+
+  console.log('hello, I am PURcahese ');
 
   return (
     <div className="main-page">
