@@ -1,5 +1,6 @@
+
 import { useEffect, useState } from 'react';
-import { IAppProps } from '../types';
+import { IAppProps, IPurchase } from '../types';
 import styled from 'styled-components';
 import '../style.css';
 import { SearchElement } from './Search';
@@ -7,6 +8,13 @@ import { Purchase } from './Purchase';
 import Categories from './Categories';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
+
+import BoxNumberCards from './BoxNumberCards';
+
+
+import DropdownSortPrice from './DropdownPrice';
+import DropdownSortRating from './DropdownRating';
+
 
 const SearchAndGridRow = styled.div`
   width: 90%;
@@ -29,6 +37,7 @@ const Purchases = ({
 }: IAppProps) => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState('');
+  console.log(inputValue.length)
   const [widthValue, setWidthValue] = useState({ width: '420px' });
   const StyleCard = styled.div`
     ${widthValue}
@@ -42,6 +51,7 @@ const Purchases = ({
     }
   }, []);
 
+
   function filterCategory(category: string = 'all') {
     if (category === 'all') {
       setFiltered(products);
@@ -50,6 +60,41 @@ const Purchases = ({
       setFiltered(newProducts);
     }
   }
+
+
+  function sortPriceUp(item: IPurchase[]){
+    const tempUp = JSON.parse(JSON.stringify(filtered))
+    const newTempUp = tempUp.sort((a: { price: number; }, b: { price: number; }) => a.price - b.price)
+    setFiltered(newTempUp);
+  }
+
+  function sortPriceDown(item: IPurchase[]){
+    const tempDown = JSON.parse(JSON.stringify(filtered))
+    const newTempDown = tempDown.sort((a: { price: number; }, b: { price: number; }) => b.price - a.price)
+    setFiltered(newTempDown);
+  }
+
+  function sortRatingUp(item: IPurchase[]){
+    const tempDown = JSON.parse(JSON.stringify(filtered))
+    const newTempDown = tempDown.sort((a: {
+      rating: any; rate: number;
+      }, b: {
+            rating: any; rate: number;
+      }) => a.rating.rate - b.rating.rate)
+          setFiltered(newTempDown);
+  }
+
+  function sortRatingDown(item: IPurchase[]){
+    const tempDown = JSON.parse(JSON.stringify(filtered))
+    const newTempDown = tempDown.sort((a: {
+      rating: any; rate: number;
+      }, b: {
+            rating: any; rate: number;
+      }) => b.rating.rate - a.rating.rate)
+          setFiltered(newTempDown);
+  }
+
+
   function search() {
     return filtered.filter((el) => {
       return (
@@ -81,6 +126,19 @@ const Purchases = ({
             setInputValue(e.target.value);
           }}
         />
+
+        <BoxNumberCards filtered = {filtered}/>
+
+        <DropdownSortPrice
+          filtered = {filtered}
+          onSortUp = {sortPriceUp}
+          onSortDown ={sortPriceDown}
+          onFilter={filterCategory}/>
+        <DropdownSortRating
+          filtered = {filtered}
+          onSortUp = {sortRatingUp}
+          onSortDown ={sortRatingDown} />
+
         <GridIcon>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -111,21 +169,18 @@ const Purchases = ({
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
         {loading === false && filtered.length === 0 ? (
-          <h2>
-            {' '}
-            Welcome to our store ! <br /> Choose category!
-          </h2>
+
+            products.map((product) => (
+              <StyleCard>
+                <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
+              </StyleCard>
+            ))
         ) : (
-          search().map((product) => (
-            <StyleCard>
-              <Purchase
-                onAdd={onAdd}
-                onDelete={onDelete}
-                product={product}
-                orders={orders}
-                key={product.id}
-              />
-            </StyleCard>
+            search().map((product) => (
+              <StyleCard>
+                <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
+              </StyleCard>
+
           ))
         )}
       </div>
