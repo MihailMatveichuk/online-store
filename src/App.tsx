@@ -72,6 +72,7 @@ export const App = () => {
               onDelete={deleteToOrder}
               products={products}
               orders={orders}
+              setProducts={setProducts}
             />
           }
         />

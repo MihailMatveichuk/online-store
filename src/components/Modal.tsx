@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { IModalProps, IPurchase } from '../types';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const PurchaseContainer = styled.div`
   width: 50%;
@@ -56,22 +57,39 @@ export const ButtonDiv = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-`
+`;
 
-const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
+const Modal = ({
+  products,
+  onAdd,
+  onDelete,
+  orders,
+  setProducts,
+}: IModalProps) => {
+  console.log('products: ', products);
   const params = useParams().title;
-  const id: number = products.find(param => param.title.trim() == params?.trim())?.id!;
-  let isItemInBasket = orders.some(order => order.id === products[id - 1].id);
+  if (products.length === 0) {
+    useEffect(() => {
+      setProducts();
+    }, [products]);
+  }
+  setProducts(products);
+  console.log('params: ', params);
+  const id: number = products?.find(
+    (param) => param.title.trim() == params?.trim()
+  )?.id!;
+  console.log('id: ', id);
 
-  function addingItem(prod: IPurchase){
-    isItemInBasket ? onDelete(prod): onAdd(prod)
+  let isItemInBasket = orders.some((order) => order.id === products[id - 1].id);
+
+  function addingItem(prod: IPurchase) {
+    isItemInBasket ? onDelete(prod) : onAdd(prod);
   }
 
-  
   return (
     <PurchaseContainer>
       <ImageValue>
-        <Link to={'/modal/' + products[id - 1].title} >
+        <Link to={'/modal/' + products[id - 1].title}>
           <img
             style={{
               width: '300px',
@@ -82,30 +100,28 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
         </Link>
         <ButtonDiv>
           <Button
-          variant={isItemInBasket ? "secondary": "primary"}
+            variant={isItemInBasket ? 'secondary' : 'primary'}
             style={{
               marginTop: 30,
             }}
             onClick={() => addingItem(products[id - 1])}
           >
-          {isItemInBasket ? 'Delete from basket' : 'Add to Basket'}
+            {isItemInBasket ? 'Delete from basket' : 'Add to Basket'}
           </Button>
           <Link to={'/basket'}>
-              <Button
-                variant="primary"
-                style={{
-                  marginTop: 30,
-                }}
-              >
-                Move to Basket
-              </Button>
+            <Button
+              variant="primary"
+              style={{
+                marginTop: 30,
+              }}
+            >
+              Move to Basket
+            </Button>
           </Link>
         </ButtonDiv>
       </ImageValue>
       <MainColumn>
-        <Category>
-          Category: {products[id - 1].category.toUpperCase()}
-        </Category>
+        <Category>Category: {products[id - 1].category.toUpperCase()}</Category>
         <h2>{products[id - 1].title}</h2>
         <Rating>Rating: {products[id - 1].rating.rate}</Rating>
         <Count>Count: {products[id - 1].rating.count}</Count>
@@ -125,4 +141,3 @@ export default Modal;
 function onDelete(prod: IPurchase) {
   throw new Error('Function not implemented.');
 }
-

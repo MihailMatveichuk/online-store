@@ -39,14 +39,14 @@ export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
   const paginate = (pageNum: number) => setCurrentPage(pageNum);
 
 
-  const navigate = useNavigate();
-  useEffect(() => {
-    const queryString = qs.stringify({
-      category: 'cat',
-    });
-    console.log(queryString);
-    navigate(`?${queryString}`);
-  }, [currentPage]);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   const queryString = qs.stringify({
+  //     category: 'cat',
+  //   });
+  //   console.log(queryString);
+  //   navigate(`?${queryString}`);
+  // }, [currentPage]);
 
 
   return (

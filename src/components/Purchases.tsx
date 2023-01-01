@@ -44,39 +44,48 @@ const Purchases = ({
   `;
   const [filtered, setFiltered] = useState(products);
   const [params,setParams] = useSearchParams()
-  const categoryQuery = params.get('category') || 'all';
+  const categoryQuery = params.get('category') || '';
 
 
   console.log('filtered: ', filtered);
 
   // useEffect(() => {
-  //   if (window.location.search) {
-  //     const params = qs.parse(window.location.search.substring(1));
-  //     console.log('params: ', params);
-  //     //setParams(params.category);
+  //   if (categoryQuery.length > 0 ) {
+  //     // const params = qs.parse(window.location.search.substring(1));
+  //     // console.log('params: ', params);
+  //     let newProducts = [...products].filter((el) => el.category === categoryQuery);
+  //     setFiltered(newProducts);
   //   }
   // }, []);
 
 
-  function filterCategory(category: string = 'all') {
-    // console.log('aaaaaaaaaaaaaa',params);
-   if (category === 'all') {
-      setFiltered(products);
-    } else {
+  function filterCategory(category: string ) {
+      setParams({category:category})
+    //   let newProducts = [...products].filter((el) => el.category === categoryQuery);
+    //   setFiltered(newProducts);
+    //  console.log('aaaaaaaaaaaaaa',params);
+    if(category === 'all'){
+      // let newProducts = [...products].filter((el) => el.category === categoryQuery);
+      // setFiltered(newProducts);
+      // params.delete('category')
+      // console.log('categoryQuery))))))))))))))))))): ', categoryQuery);
+      //setProducts
+    }
+   else {
       let newProducts = [...products].filter((el) => el.category === category);
       setFiltered(newProducts);
     }
   }
 
 
-  function sortPriceUp(item: IPurchase[]){
-    const tempUp = JSON.parse(JSON.stringify(filtered))
+  function sortPriceUp(){
+    const tempUp = JSON.parse(JSON.stringify(products))
     const newTempUp = tempUp.sort((a: { price: number; }, b: { price: number; }) => a.price - b.price)
     setFiltered(newTempUp);
   }
 
   function sortPriceDown(item: IPurchase[]){
-    const tempDown = JSON.parse(JSON.stringify(filtered))
+    const tempDown = JSON.parse(JSON.stringify(products))
     const newTempDown = tempDown.sort((a: { price: number; }, b: { price: number; }) => b.price - a.price)
     setFiltered(newTempDown);
   }
@@ -103,7 +112,8 @@ const Purchases = ({
 
 
   function search() {
-    return filtered.filter((el) => {
+    // if (categoryQuery.length > 0) { setFiltered([...products].filter((el) => el.category === categoryQuery))}
+    return products.filter((el) => {
       return (
         el.title.toLowerCase().includes(inputValue.toLowerCase()) ||
         el.description.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -131,8 +141,9 @@ const Purchases = ({
   //   navigate(`?${queryString}`);
   // }, []);
 
-  setParams({category:filtered[0]?.category})
-console.log('paraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaams', params);
+console.log('paraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaams', params)
+console.log('queryCATEGoooory',categoryQuery.length);
+;
 
 
   return (
@@ -185,15 +196,15 @@ console.log('paraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaams', params);
       <div className="cards_container">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
-        {loading === false && filtered.length === 0 ? (
+        {loading === false && categoryQuery.length < 4  ? (
 
-            products.filter(product => product.category === categoryQuery).map((product) => (
+            search().map((product) => (
               <StyleCard>
                 <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
               </StyleCard>
             ))
         ) : (
-            search().map((product) => (
+          search().filter((el) => el.category === categoryQuery).map((product) => (
               <StyleCard>
                 <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
               </StyleCard>
