@@ -16,13 +16,12 @@ import { Link } from 'react-router-dom';
 const SummaryStyledDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 50px;
-  padding: 5em;
+  padding: 1em;
   background: bisque;
   color: black;
   border-radius: 8px;
   font-size: 20px;
-  max-height: 500px;
+  max-height: 300px;
 `;
 const BuyButtonStyled = styled.button`
   color: palevioletred;

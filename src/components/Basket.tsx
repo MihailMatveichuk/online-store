@@ -11,11 +11,21 @@ import { useState } from 'react';
 
 const BasketStyled = styled.div`
   display: flex;
+  width: 90%;
+  justify-content: space-between;
 `;
+
 const CartsStyledDiv = styled.div`
   display: flex;
   flex-direction: column;
+  row-gap: 10px;
 `;
+
+const PaginationButton = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+`
 
 export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
   localStorage.setItem('orders', JSON.stringify(orders));
@@ -40,23 +50,6 @@ export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
     <Breadcrumbs />
     <BasketStyled>
       <CartsStyledDiv>
-
-        {orders && (
-          <>
-            <Pagination
-              paginate={paginate}
-              ordersPerPage={ordersPerPage}
-              setOrdersPerPage = {setOrdersPerPage}
-              uniqePurchases={uniqePurchases}
-            />
-            <button className="btn btn-primary" onClick={prevPage}>
-              Prev Page
-            </button>
-            <button className="btn btn-primary mt-3" onClick={nextPage}>
-              Next Page
-            </button>
-          </>
-        )}
         {orders.length === 0 ? (
           <h2>Cart is Empty</h2>
         ) : (
@@ -69,9 +62,28 @@ export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
             />
           ))
         )}
+
+        {orders && (
+          <>
+            <Pagination
+              paginate={paginate}
+              ordersPerPage={ordersPerPage}
+              setOrdersPerPage = {setOrdersPerPage}
+              uniqePurchases={uniqePurchases}
+            />
+            <PaginationButton>
+              <button className="btn btn-primary mt-3" onClick={prevPage}>
+                Prev Page
+              </button>
+              <button className="btn btn-primary mt-3" onClick={nextPage}>
+                Next Page
+              </button>
+            </PaginationButton>
+            
+          </>
+        )}
       </CartsStyledDiv>
       <CartSummary />
-
     </BasketStyled>
     </>
   );
