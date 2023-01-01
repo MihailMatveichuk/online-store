@@ -5,9 +5,13 @@ import '../style.css';
 import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
 import Categories from './Categories';
+import DropdownSortPrice from './DropdownPrice';
+import DropdownSortRating from './DropdownRating';
 import BoxNumberCards from './BoxNumberCards';
 
 let value: IPurchase[];
+
+
 const SearchAndGridRow = styled.div`
   width: 90%;
   margin-top: 10px;
@@ -27,6 +31,7 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
     ${widthValue}
   `;
   const [filtered, setFiltered] = useState(products);
+
   function filterCategory(category: string = 'all') {
     if (category === 'all') {
       setFiltered(products);
@@ -35,6 +40,41 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
       setFiltered(newProducts);
     }
   }
+
+
+  function sortPriceUp(item: IPurchase[]){
+    const tempUp = JSON.parse(JSON.stringify(filtered))
+    const newTempUp = tempUp.sort((a: { price: number; }, b: { price: number; }) => a.price - b.price) 
+    setFiltered(newTempUp);
+  }
+
+  function sortPriceDown(item: IPurchase[]){
+    const tempDown = JSON.parse(JSON.stringify(filtered))
+    const newTempDown = tempDown.sort((a: { price: number; }, b: { price: number; }) => b.price - a.price) 
+    setFiltered(newTempDown);
+  }
+
+  function sortRatingUp(item: IPurchase[]){
+    const tempDown = JSON.parse(JSON.stringify(filtered))
+    const newTempDown = tempDown.sort((a: {
+      rating: any; rate: number; 
+      }, b: {
+            rating: any; rate: number; 
+      }) => a.rating.rate - b.rating.rate) 
+          setFiltered(newTempDown);
+  }
+
+  function sortRatingDown(item: IPurchase[]){
+    const tempDown = JSON.parse(JSON.stringify(filtered))
+    const newTempDown = tempDown.sort((a: {
+      rating: any; rate: number; 
+      }, b: {
+            rating: any; rate: number; 
+      }) => b.rating.rate - a.rating.rate) 
+          setFiltered(newTempDown);
+  }
+
+
   function search() {
     value =  filtered.filter((el) => {
       return (
@@ -58,6 +98,16 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
           }}
         />
         <BoxNumberCards filtered = {filtered} value= {value}/>
+
+        <DropdownSortPrice 
+          filtered = {filtered} 
+          onSortUp = {sortPriceUp} 
+          onSortDown ={sortPriceDown} 
+          onFilter={filterCategory}/>
+        <DropdownSortRating 
+          filtered = {filtered} 
+          onSortUp = {sortRatingUp} 
+          onSortDown ={sortRatingDown} />
         <GridIcon>
           <svg
             xmlns="http://www.w3.org/2000/svg"

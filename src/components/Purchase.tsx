@@ -25,6 +25,7 @@ export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
         fontWeight: "bold",
         color: "rgb(129, 49, 49)"
       }}>{"Price: " + product.price + "$"}</span>
+      <span ><b>{"Rating: " + product.rating.rate}</b></span>
       <ButtonDiv style={{width: "50%"}}>
         <button
           className={btnClasses.join(' ')}
