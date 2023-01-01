@@ -36,6 +36,7 @@ export interface IOrdersProps {
 
 export interface INumberCard {
   filtered: IPurchase[];
+  value: IPurchase[];
 }
 
 export interface IBasketProps {

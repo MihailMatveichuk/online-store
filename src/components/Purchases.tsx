@@ -7,7 +7,7 @@ import { Purchase } from './Purchase';
 import Categories from './Categories';
 import BoxNumberCards from './BoxNumberCards';
 
-
+let value: IPurchase[];
 const SearchAndGridRow = styled.div`
   width: 90%;
   margin-top: 10px;
@@ -20,8 +20,8 @@ const GridIcon = styled.div`
   column-gap: 20px;
 `;
 const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppProps) => {
+
   const [inputValue, setInputValue] = useState('');
-  console.log(inputValue.length)
   const [widthValue, setWidthValue] = useState({ width: '420px' });
   const StyleCard = styled.div`
     ${widthValue}
@@ -36,7 +36,7 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
     }
   }
   function search() {
-    return filtered.filter((el) => {
+    value =  filtered.filter((el) => {
       return (
         el.title.toLowerCase().includes(inputValue.toLowerCase()) ||
         el.description.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -46,7 +46,9 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
         el.rating.count == +inputValue
       );
     });
+    return value;
   }
+
   return (
     <div className="main-page">
       <SearchAndGridRow>
@@ -55,7 +57,7 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
             setInputValue(e.target.value);
           }}
         />
-        <BoxNumberCards filtered = {filtered}/>
+        <BoxNumberCards filtered = {filtered} value= {value}/>
         <GridIcon>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -96,8 +98,8 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
               <StyleCard>
                 <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
               </StyleCard>
-          ))
-        )}
+            ))
+          )}
       </div>
     </div>
   );
