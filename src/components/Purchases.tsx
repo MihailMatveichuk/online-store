@@ -5,14 +5,16 @@ import '../style.css';
 import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
 import Categories from './Categories';
-
-import BoxNumberCards from './BoxNumberCards';
-
-
 import DropdownSortPrice from './DropdownPrice';
 import DropdownSortRating from './DropdownRating';
+import BoxNumberCards from './BoxNumberCards';
 
+let value: IPurchase[];
 
+const Greeting = styled.p`
+  color: rgb(129, 49, 49);
+  font-size: 26px;
+`
 const SearchAndGridRow = styled.div`
   width: 90%;
   margin-top: 10px;
@@ -25,8 +27,8 @@ const GridIcon = styled.div`
   column-gap: 20px;
 `;
 const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppProps) => {
+
   const [inputValue, setInputValue] = useState('');
-  console.log(inputValue.length)
   const [widthValue, setWidthValue] = useState({ width: '420px' });
   const StyleCard = styled.div`
     ${widthValue}
@@ -77,7 +79,7 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
 
 
   function search() {
-    return filtered.filter((el) => {
+    value =  filtered.filter((el) => {
       return (
         el.title.toLowerCase().includes(inputValue.toLowerCase()) ||
         el.description.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -87,7 +89,9 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
         el.rating.count == +inputValue
       );
     });
+    return value;
   }
+
   return (
     <div className="main-page">
       <SearchAndGridRow>
@@ -96,8 +100,7 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
             setInputValue(e.target.value);
           }}
         />
-
-        <BoxNumberCards filtered = {filtered}/>
+        <BoxNumberCards filtered = {filtered} value= {value}/>
 
         <DropdownSortPrice 
           filtered = {filtered} 
@@ -108,7 +111,6 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
           filtered = {filtered} 
           onSortUp = {sortRatingUp} 
           onSortDown ={sortRatingDown} />
-
         <GridIcon>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -139,18 +141,14 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
         {loading === false && filtered.length === 0 ? (
-            products.map((product) => (
-              <StyleCard>
-                <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
-              </StyleCard>
-            ))
+            <Greeting>Hello in our page!!! Choose category!!</Greeting>
         ) : (
             search().map((product) => (
               <StyleCard>
                 <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
               </StyleCard>
-          ))
-        )}
+            ))
+          )}
       </div>
     </div>
   );
