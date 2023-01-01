@@ -11,7 +11,10 @@ import BoxNumberCards from './BoxNumberCards';
 
 let value: IPurchase[];
 
-
+const Greeting = styled.p`
+  color: rgb(129, 49, 49);
+  font-size: 26px;
+`
 const SearchAndGridRow = styled.div`
   width: 90%;
   margin-top: 10px;
@@ -138,11 +141,7 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
         {loading === false && filtered.length === 0 ? (
-            products.map((product) => (
-              <StyleCard>
-                <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
-              </StyleCard>
-            ))
+            <Greeting>Hello in our page!!! Choose category!!</Greeting>
         ) : (
             search().map((product) => (
               <StyleCard>
