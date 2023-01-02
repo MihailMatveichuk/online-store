@@ -61,36 +61,16 @@ export const ButtonDiv = styled.div`
 
 const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
   const params = useParams().title;
-  const [detailedProduct, setdetailedProduct] = useState();
-  // const categoryQuery = params.get('category') || '';
-  console.log('params: ', params);
+  const [detailedProduct, setdetailedProduct] = useState(products);
 
-  // useEffect(() => {
-  //   let newProducts = [...products].filter((el) => +el.id == +params);
-  //   console.log('newProducts:!!!!!!!!!!!!!!! ', newProducts);
-  //   setdetailedProduct(newProducts)
-  // }, [products]);
+  useEffect(() => {
+    let newProducts = [...products].filter((el) => +el.id == +params!);
+    setdetailedProduct(newProducts)
+  }, [products]);
 
-  console.log('detailedProduct: ', detailedProduct);
-  // useEffect(() => {
-  //   if (categoryQuery.length > 2 ) {
-  //     let newProducts = [...products].filter((el) => el.category === categoryQuery);
-  //     setFiltered(newProducts);
-  //   }else {
-  //     setFiltered(products)
-  //   }
-  // }, [products]);
-
-  // const id: number = products?.find(
-  //   (param) => param.title.trim() == params?.trim()
-  // )?.id!;
-  const id: number = params;
-  console.log('id: ', id);
+  const id: number = +params!;
 
   let isItemInBasket = orders.some((order) => order.id === products[id - 1].id);
-  console.log('isItemInBasket: ', isItemInBasket);
-
-  console.log('products[id - 1]', products[id - 1]);
 
   function addingItem(prod: IPurchase) {
     isItemInBasket ? onDelete(prod) : onAdd(prod);
@@ -98,12 +78,12 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
   return (
     <PurchaseContainer>
       <ImageValue>
-        <Link to={'/modal/' + products[id - 1].title}>
+        <Link to={'/modal/' + detailedProduct[0]?.id}>
           <img
             style={{
               width: '300px',
             }}
-            src={products[id - 1].image}
+            src={detailedProduct[0]?.image}
             alt="Product"
           />
         </Link>
@@ -113,7 +93,7 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
             style={{
               marginTop: 30,
             }}
-            onClick={() => addingItem(products[id - 1])}
+            onClick={() => addingItem(detailedProduct[0])}
           >
             {isItemInBasket ? 'Delete from basket' : 'Add to Basket'}
           </Button>
@@ -130,15 +110,15 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
         </ButtonDiv>
       </ImageValue>
       <MainColumn>
-        <Category>Category: {products[id - 1].category.toUpperCase()}</Category>
-        <h2>{products[id - 1].title}</h2>
-        <Rating>Rating: {products[id - 1].rating.rate}</Rating>
-        <Count>Count: {products[id - 1].rating.count}</Count>
-        <Price>Price: {products[id - 1].price + ' $'}</Price>
+        <Category>Category: {detailedProduct[0]?.category.toUpperCase()}</Category>
+        <h2>{detailedProduct[0]?.title}</h2>
+        <Rating>Rating: {detailedProduct[0]?.rating.rate}</Rating>
+        <Count>Count: {detailedProduct[0]?.rating.count}</Count>
+        <Price>Price: {detailedProduct[0]?.price + ' $'}</Price>
         <Description>
           <DescriptionTitle>Description:</DescriptionTitle>
           <DescriptionContent>
-            {products[id - 1].description}
+            {detailedProduct[0]?.description}
           </DescriptionContent>
         </Description>
       </MainColumn>

@@ -28,9 +28,6 @@ export const App = () => {
     try {
       setError('');
       setLoading(true);
-      // const response = await axios.get<IPurchase[]>(
-      //   'https://fakestoreapi.com/products?limit=20'
-      // );
       setProducts(data);
       setLoading(false);
     } catch (e: unknown) {
