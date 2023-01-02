@@ -15,6 +15,7 @@ export const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [orders, setOrders] = useState<IPurchase[]>([]);
+  const [prop, setProp] = useState(false)
 
   function addToOrder(item: IPurchase) {
     setOrders([...orders, item]);
@@ -22,16 +23,16 @@ export const App = () => {
 
   function deleteToOrder(item: IPurchase) {
     setOrders(() =>  orders.filter((_, i) => i !== orders.indexOf(item)));
+  }
 
+   const openOrderForm = (item: boolean = false) => {
+      setProp(item)
   }
 
   async function fetchProducts() {
     try {
       setError('');
       setLoading(true);
-      // const response = await axios.get<IPurchase[]>(
-      //   'https://fakestoreapi.com/products?limit=20'
-      // );
       setProducts(data);
       setLoading(false);
     } catch (e: unknown) {
@@ -55,8 +56,8 @@ export const App = () => {
               onAdd={addToOrder}
               onDelete={deleteToOrder}
               products={products}
-              orders={orders}
-            />
+              orders={orders} 
+              openOrderForm = {openOrderForm}/>
           }
         />
         <Route
@@ -79,7 +80,8 @@ export const App = () => {
               onAdd={addToOrder}
               onDelete={deleteToOrder}
               orders={orders}
-            />
+              openOrderForm = {openOrderForm}
+              prop={prop}/>
           }
         />
         <Route

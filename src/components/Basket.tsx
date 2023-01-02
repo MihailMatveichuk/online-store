@@ -27,7 +27,7 @@ const PaginationButton = styled.div`
   padding: 5px;
 `
 
-export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
+export const Basket = ({ onAdd, onDelete, orders, prop, openOrderForm }: IBasketProps) => {
   localStorage.setItem('orders', JSON.stringify(orders));
   const [currentPage, setCurrentPage] = useState(1);
   const [ordersPerPage, setOrdersPerPage] = useState(3);
@@ -79,11 +79,10 @@ export const Basket = ({ onAdd, onDelete, orders }: IBasketProps) => {
                 Next Page
               </button>
             </PaginationButton>
-            
           </>
         )}
       </CartsStyledDiv>
-      <CartSummary />
+      <CartSummary prop = {prop} openOrderForm ={openOrderForm}/>
     </BasketStyled>
     </>
   );

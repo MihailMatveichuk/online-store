@@ -57,8 +57,7 @@ export const ButtonDiv = styled.div`
   align-items: flex-start;
   justify-content: space-between;
 `
-
-const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
+const Modal = ({ products, onAdd, onDelete, orders, openOrderForm}: IModalProps) => {
   const params = useParams().title;
   const id: number = products.find(param => param.title.trim() == params?.trim())?.id!;
   let isItemInBasket = orders.some(order => order.id === products[id - 1].id);
@@ -66,7 +65,15 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
   function addingItem(prod: IPurchase){
     isItemInBasket ? onDelete(prod): onAdd(prod)
   }
-
+  
+  function openOrder(prod: IPurchase, item: boolean){
+      if(isItemInBasket) openOrderForm(item);
+      else {
+        onAdd(prod) 
+        openOrderForm(item);
+      } 
+    }
+  
   return (
     <PurchaseContainer>
       <ImageValue>
@@ -95,8 +102,8 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
                 style={{
                   marginTop: 30,
                 }}
-              >
-                Move to Basket
+                onClick={()=> openOrder(products[id - 1], true)}>
+                Buy rapidly
               </Button>
           </Link>
         </ButtonDiv>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {IPurchase, ICartSummary} from '../types'
+import { IPurchase, IOnToggle } from '../types'
 import OrderForm  from './OrderForm';
 import {
   Button,
@@ -9,7 +9,6 @@ import {
   ModalFooter,
 } from 'reactstrap';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 
 
@@ -22,14 +21,6 @@ const SummaryStyledDiv = styled.div`
   border-radius: 8px;
   font-size: 20px;
   max-height: 300px;
-`;
-const BuyButtonStyled = styled.button`
-  color: palevioletred;
-  font-size: 1em;
-  margin: 1em;
-  padding: 1.2em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
 `;
 
 export const InputStyled = styled.input.attrs((props) => ({
@@ -50,21 +41,17 @@ const DiscountValue = styled.div`
   align-items: center;
 `
 
-const CartSummary = () => {
+const CartSummary = ({prop, openOrderForm}: IOnToggle ) => {
   const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
   const totalPrice:number = ordersStorage.reduce((sum:number,el:IPurchase) => sum +=el.price,0)
-  const [modal, setModal] = useState(false);
-  const [unmountOnClose, setUnmountOnClose] = useState(true);
-
-  const toggle = () => setModal(!modal);
-  // const changeUnmountOnClose = (e: { target: { value: string; };}) => {
-  //   let { value } = e.target;
-  //   setUnmountOnClose(JSON.parse(value));
-  // };
-
+  const [modal, setModal] = useState(prop);
+  const [unmountOnClose, setUnmountOnClose] = useState(false);
+  const toggle = () => {
+    openOrderForm(false);
+    setModal(!modal);
+  }
   return (
     <SummaryStyledDiv>
-
       <div>Products: {ordersStorage.length}</div>
       <div>Total: $ {totalPrice.toFixed(2)} </div>
       <DiscountValue>
@@ -75,14 +62,15 @@ const CartSummary = () => {
         }}color="secondary" onClick={toggle}>
           BUY NOW
         </Button>
-        </DiscountValue>
-        <Modal isOpen={modal} toggle={toggle} unmountOnClose={unmountOnClose}>
-          <ModalHeader toggle={toggle}></ModalHeader>
+      </DiscountValue>
+      <Modal isOpen={(modal)} toggle={toggle} unmountOnClose={unmountOnClose} >
+          <ModalHeader toggle={toggle}>
+          </ModalHeader>
           <ModalBody>
             <OrderForm toggle={toggle}/>
           </ModalBody>
-        <ModalFooter>
-        </ModalFooter>
+          <ModalFooter>
+          </ModalFooter>
       </Modal>
     </SummaryStyledDiv>
   );
