@@ -10,8 +10,7 @@ const CardBox = styled.div`
 `
 
 
-const BoxNumberCards = ({filtered}: INumberCard) => {
-
+const BoxNumberCards = ({filtered, value}: INumberCard) => {
     return (
         <CardBox>
             Purchase: <b>{filtered.length}</b>

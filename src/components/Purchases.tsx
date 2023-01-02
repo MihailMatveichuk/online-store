@@ -5,6 +5,7 @@ import '../style.css';
 import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
 import Categories from './Categories';
+
 import qs from 'qs';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -12,6 +13,15 @@ import BoxNumberCards from './BoxNumberCards';
 
 import DropdownSortPrice from './DropdownPrice';
 import DropdownSortRating from './DropdownRating';
+import BoxNumberCards from './BoxNumberCards';
+
+
+let value: IPurchase[];
+
+const Greeting = styled.p`
+  color: rgb(129, 49, 49);
+  font-size: 26px;
+`
 
 const SearchAndGridRow = styled.div`
   width: 90%;
@@ -24,15 +34,9 @@ const GridIcon = styled.div`
   display: flex;
   column-gap: 20px;
 `;
-const Purchases = ({
-  products,
-  onAdd,
-  onDelete,
-  loading,
-  error,
-  orders,
-}: IAppProps) => {
-  const navigate = useNavigate();
+
+const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppProps) => {
+
   const [inputValue, setInputValue] = useState('');
 
   const [widthValue, setWidthValue] = useState({ width: '420px' });
@@ -111,7 +115,7 @@ const Purchases = ({
     setFiltered(newTempDown);
   }
   function search() {
-    return filtered.filter((el) => {
+    value =  filtered.filter((el) => {
       return (
         el.title.toLowerCase().includes(inputValue.toLowerCase()) ||
         el.description.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -121,8 +125,9 @@ const Purchases = ({
         el.rating.count == +inputValue
       );
     });
+    return value;
   }
- 
+
   return (
     <div className="main-page">
       <SearchAndGridRow>
@@ -131,6 +136,7 @@ const Purchases = ({
             setInputValue(e.target.value);
           }}
         />
+
         <BoxNumberCards filtered={filtered} />
         <DropdownSortPrice
           filtered={filtered}
@@ -143,6 +149,7 @@ const Purchases = ({
           onSortUp={sortRatingUp}
           onSortDown={sortRatingDown}
         />
+
         <GridIcon>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -172,6 +179,7 @@ const Purchases = ({
       <div className="cards_container">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
+
         {loading === false
           ? search().map((product) => (
               <StyleCard>
@@ -187,6 +195,10 @@ const Purchases = ({
           : <h1>GG Internal Error</h1>}
         {/* {loading === false && filtered.length === 0 ? (
             <>Hello in our page!!! Choose category!!</>
+
+        {loading === false && filtered.length === 0 ? (
+            <Greeting>Hello in our page!!! Choose category!!</Greeting>
+
         ) : (
             search().map((product) => (
               <StyleCard>
@@ -194,6 +206,7 @@ const Purchases = ({
               </StyleCard>
             ))
           )} */}
+
       </div>
     </div>
   );
