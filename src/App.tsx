@@ -1,4 +1,4 @@
-import { Routes, Route, HashRouter, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { IPurchase } from './types';
@@ -10,7 +10,6 @@ import Purchases from './components/Purchases';
 import Modal from './components/Modal';
 import { data } from './data';
 import Error from './components/Error';
-import { Clicker } from './Clicker';
 
 export const App = () => {
   const [products, setProducts] = useState<IPurchase[]>([]);
@@ -25,7 +24,6 @@ export const App = () => {
   function deleteToOrder(item: IPurchase) {
     setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
   }
-
   async function fetchProducts() {
     try {
       setError('');
@@ -41,17 +39,17 @@ export const App = () => {
       setError(error.message);
     }
   }
-
   useEffect(() => {
     fetchProducts();
   }, []);
 
+  console.log('pRODUCTS! IN APP ', products);
   return (
     <div className="main-page">
       <Header orders={orders} />
       <Routes>
         <Route
-         path='/'
+          path="/"
           element={
             <Purchases
               onAdd={addToOrder}
@@ -63,7 +61,6 @@ export const App = () => {
             />
           }
         />
-
         <Route
           path="modal/:title"
           element={
@@ -72,11 +69,9 @@ export const App = () => {
               onDelete={deleteToOrder}
               products={products}
               orders={orders}
-              setProducts={setProducts}
             />
           }
         />
-
         <Route
           path="basket"
           element={

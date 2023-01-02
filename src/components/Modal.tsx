@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { IModalProps, IPurchase } from '../types';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const PurchaseContainer = styled.div`
   width: 50%;
@@ -59,33 +59,42 @@ export const ButtonDiv = styled.div`
   justify-content: space-between;
 `;
 
-const Modal = ({
-  products,
-  onAdd,
-  onDelete,
-  orders,
-  setProducts,
-}: IModalProps) => {
-  console.log('products: ', products);
+const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
   const params = useParams().title;
-  if (products.length === 0) {
-    useEffect(() => {
-      setProducts();
-    }, [products]);
-  }
-  setProducts(products);
+  const [detailedProduct, setdetailedProduct] = useState();
+  // const categoryQuery = params.get('category') || '';
   console.log('params: ', params);
-  const id: number = products?.find(
-    (param) => param.title.trim() == params?.trim()
-  )?.id!;
+
+  // useEffect(() => {
+  //   let newProducts = [...products].filter((el) => +el.id == +params);
+  //   console.log('newProducts:!!!!!!!!!!!!!!! ', newProducts);
+  //   setdetailedProduct(newProducts)
+  // }, [products]);
+
+  console.log('detailedProduct: ', detailedProduct);
+  // useEffect(() => {
+  //   if (categoryQuery.length > 2 ) {
+  //     let newProducts = [...products].filter((el) => el.category === categoryQuery);
+  //     setFiltered(newProducts);
+  //   }else {
+  //     setFiltered(products)
+  //   }
+  // }, [products]);
+
+  // const id: number = products?.find(
+  //   (param) => param.title.trim() == params?.trim()
+  // )?.id!;
+  const id: number = params;
   console.log('id: ', id);
 
   let isItemInBasket = orders.some((order) => order.id === products[id - 1].id);
+  console.log('isItemInBasket: ', isItemInBasket);
+
+  console.log('products[id - 1]', products[id - 1]);
 
   function addingItem(prod: IPurchase) {
     isItemInBasket ? onDelete(prod) : onAdd(prod);
   }
-
   return (
     <PurchaseContainer>
       <ImageValue>
@@ -136,8 +145,4 @@ const Modal = ({
     </PurchaseContainer>
   );
 };
-
 export default Modal;
-function onDelete(prod: IPurchase) {
-  throw new Error('Function not implemented.');
-}
