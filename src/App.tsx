@@ -16,19 +16,27 @@ export const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [orders, setOrders] = useState<IPurchase[]>([]);
-  const [prop, setProp] = useState(false)
+  const [prop, setProp] = useState(false);
 
   function addToOrder(item: IPurchase) {
     setOrders([...orders, item]);
+    let allRows = [];
+    if (localStorage.getItem('orders'))
+      allRows = JSON.parse(localStorage.getItem('orders') || '{}');
+    allRows.push(item);
+    localStorage.setItem('orders', JSON.stringify(allRows));
   }
 
   function deleteToOrder(item: IPurchase) {
-    setOrders(() =>  orders.filter((_, i) => i !== orders.indexOf(item)));
+    setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
+    let allRows = JSON.parse(localStorage.getItem('orders') || '{}');
+    let withDeleted = allRows.filter((el: IPurchase) => el.id !== item.id);
+    localStorage.setItem('orders', JSON.stringify(withDeleted));
   }
 
-   const openOrderForm = (item: boolean = false) => {
-      setProp(item)
-  }
+  const openOrderForm = (item: boolean = false) => {
+    setProp(item);
+  };
 
   async function fetchProducts() {
     try {
@@ -56,10 +64,8 @@ export const App = () => {
             <Purchases
               onAdd={addToOrder}
               onDelete={deleteToOrder}
-
               products={products}
               orders={orders}
-
               loading={loading}
               error={error}
             />
@@ -73,7 +79,7 @@ export const App = () => {
               onDelete={deleteToOrder}
               products={products}
               orders={orders}
-              openOrderForm = {openOrderForm}
+              openOrderForm={openOrderForm}
             />
           }
         />
@@ -84,8 +90,9 @@ export const App = () => {
               onAdd={addToOrder}
               onDelete={deleteToOrder}
               orders={orders}
-              openOrderForm = {openOrderForm}
-              prop={prop}/>
+              openOrderForm={openOrderForm}
+              prop={prop}
+            />
           }
         />
         <Route

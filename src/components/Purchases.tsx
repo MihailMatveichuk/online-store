@@ -52,6 +52,7 @@ const Purchases = ({
   const sortQuery = params.get('sort') || '';
 
   useEffect(() => {
+    //localStorage.setItem("name", JSON.stringify(name));
     if (window.location.search) {
       if (sortQuery.length !== 0 && categoryQuery.length === 0) {
         if (sortQuery === 'ratingAsc' || sortQuery === 'ratingDesc') {
@@ -127,7 +128,8 @@ const Purchases = ({
   }, [products]);
 
   function filterCategory(category: string) {
-    setParams({ category: category });
+    params.set('category',category)
+    setParams(params);
     if (category === 'all') {
       setFiltered(products);
     } else {

@@ -15,7 +15,9 @@ export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
   const [details, setDetails] = useState(false);
   const btnClassName = details ? 'add-red' : 'add-white';
   const btnClasses = ['btn-class', btnClassName];
-  let isItemInBasket = orders.some(order => order.id === product.id);
+  const ordersStorage = JSON.parse(localStorage.getItem('orders') || '[]');
+
+  let isItemInBasket:boolean = ordersStorage.some((order:IPurchase) => order.id === product.id);
 
   function addingItem(prod: IPurchase){
     isItemInBasket ? onDelete(prod): onAdd(prod)

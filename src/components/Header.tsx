@@ -3,7 +3,17 @@ import '../style.css';
 import {  IOrdersProps, IPurchase } from '../types';
 
 const Header = ({ orders }: IOrdersProps) => {
-  const totalPrice:number = orders.reduce((sum:number,el:IPurchase) => sum +=el.price,0)
+
+  const ordersStorage = JSON.parse(localStorage.getItem('orders') || '[]');
+  let totalPrice:number
+  if(ordersStorage) {
+
+    totalPrice = ordersStorage.reduce((sum:number,el:IPurchase) => sum +=el.price,0)
+  }
+  else {
+    totalPrice =     totalPrice = orders.reduce((sum:number,el:IPurchase) => sum +=el.price,0)
+
+  }
   return (
     <div className="header-container">
       <div className="header-h1">
@@ -36,7 +46,7 @@ const Header = ({ orders }: IOrdersProps) => {
               color: 'rgb(129, 49, 49)',
               fontWeight: 'bold',
               fontSize: '18px'
-            }}> {orders.length} </span>
+            }}> {ordersStorage.length} </span>
           </Link>
         </div>
       </div>
