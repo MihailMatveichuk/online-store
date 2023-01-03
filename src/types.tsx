@@ -35,7 +35,7 @@ export interface IAppProps {
   orders: IPurchase[];
   onAdd: (item: IPurchase) => void;
   onDelete: (item: IPurchase) => void;
-  
+
 }
 
 export interface IProductProps {
@@ -49,7 +49,7 @@ export interface IModalProps {
   orders: IPurchase[];
   onAdd: (item: IPurchase) => void | undefined;
   onDelete: (item: IPurchase) => void | undefined;
-  openOrderForm:(item: boolean) => void 
+  openOrderForm:(item: boolean) => void
 }
 export interface IOrdersProps {
   orders: IPurchase[];
@@ -57,11 +57,11 @@ export interface IOrdersProps {
 
 export interface INumberCard {
   filtered: IPurchase[];
-  value: IPurchase[];
+
 }
 
 export interface openOrderForm {
-  openOrderForm:(item: boolean) => boolean 
+  openOrderForm:(item: boolean) => boolean
 }
 
 export interface IBasketProps {
@@ -78,7 +78,7 @@ export interface ICartProps {
   onDelete: (item: IPurchase) => void | undefined;
 }
 export interface ICategoryProps {
-  onFilter: (category: string) => boolean;
+  onFilter: (category: string) => void;
 }
 
 export interface IPaginationProps {

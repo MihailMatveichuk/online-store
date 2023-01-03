@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styled from 'styled-components';
 import { INumberCard } from '../types';
 
@@ -9,14 +9,13 @@ const CardBox = styled.div`
     text-align: center;
 `
 
-
-const BoxNumberCards = ({filtered, value}: INumberCard) => {
+const BoxNumberCards = ({filtered}: INumberCard) => {
     return (
         <CardBox>
             Purchase: <b>{filtered.length}</b>
         </CardBox>
     );
-    
+
 };
 
 export default BoxNumberCards;

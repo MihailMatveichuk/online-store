@@ -9,7 +9,6 @@ import Categories from './Categories';
 import qs from 'qs';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import BoxNumberCards from './BoxNumberCards';
 
 import DropdownSortPrice from './DropdownPrice';
 import DropdownSortRating from './DropdownRating';

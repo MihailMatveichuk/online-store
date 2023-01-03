@@ -23,16 +23,14 @@ export const App = () => {
   }
 
   function deleteToOrder(item: IPurchase) {
-
     setOrders(() =>  orders.filter((_, i) => i !== orders.indexOf(item)));
   }
 
    const openOrderForm = (item: boolean = false) => {
       setProp(item)
-
     setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
-
   }
+
   async function fetchProducts() {
     try {
       setError('');
@@ -49,7 +47,6 @@ export const App = () => {
     fetchProducts();
   }, []);
 
-  console.log('pRODUCTS! IN APP ', products);
   return (
     <div className="main-page">
       <Header orders={orders} />
@@ -62,15 +59,11 @@ export const App = () => {
               onDelete={deleteToOrder}
 
               products={products}
-              orders={orders} 
-              openOrderForm = {openOrderForm}/>
-
               orders={orders}
-              products={products}
+
               loading={loading}
               error={error}
             />
-
           }
         />
         <Route
@@ -81,6 +74,7 @@ export const App = () => {
               onDelete={deleteToOrder}
               products={products}
               orders={orders}
+              openOrderForm = {openOrderForm}
             />
           }
         />
