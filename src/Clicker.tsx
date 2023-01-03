@@ -17,20 +17,3 @@ export const Clicker = () => {
   )
 }
 
-
- // const  = products.filter((el) => el.category === filtered[0]?.category)
-  //   useEffect(() => {
-  //     const queryString = qs.stringify({
-  //       category: filtered[0]?.category,
-  //     });
-  //     console.log(queryString);
-  //     navigate(`?${queryString}`);
-  //   }, []);
-
-  // useEffect(() => {
-  //   const queryString = qs.stringify({
-  //     category: 'cat',
-  //   });
-  //   console.log(queryString);
-  //   navigate(`?${queryString}`);
-  // }, []);
