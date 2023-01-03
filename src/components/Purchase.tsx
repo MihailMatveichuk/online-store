@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
-import {ButtonDiv} from './Modal'
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import '../style.css';
 import { IProductProps, IPurchase } from '../types';
+
+const ButtonContainer = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+`
 
 export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
   const [details, setDetails] = useState(false);
@@ -26,7 +32,7 @@ export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
         color: "rgb(129, 49, 49)"
       }}>{"Price: " + product.price + "$"}</span>
       <span ><b>{"Rating: " + product.rating.rate}</b></span>
-      <ButtonDiv style={{width: "50%"}}>
+      <ButtonContainer style={{width: "50%"}}>
         <button
           className={btnClasses.join(' ')}
           onClick={() => setDetails((prev) => !prev)}
@@ -39,7 +45,7 @@ export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
           onClick={() => addingItem(product)}
               > {isItemInBasket ? 'Delete' : 'Add'}
         </Button>
-      </ButtonDiv>
+      </ButtonContainer>
 
       {details && (
         <div>

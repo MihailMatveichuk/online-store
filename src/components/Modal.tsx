@@ -55,8 +55,8 @@ const DescriptionContent = styled.p`
 
 export const ButtonDiv = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: space-between;
 `;
 
 const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps) => {
@@ -110,17 +110,19 @@ const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps
           >
             {isItemInBasket ? 'Delete from basket' : 'Add to Basket'}
           </Button>
-          <Link to={'/basket'}>
-
-              <Button
-                variant="primary"
-                style={{
-                  marginTop: 30,
-                }}
-                onClick={()=> openOrder(products[id - 1], true)}>
-                Buy rapidly
-              </Button>
-
+          <Link to={'/basket'}
+          style={{
+            display: 'flex',
+            justifyContent:"space-between"
+          }}>
+            <Button
+              variant="primary"
+              style={{
+                marginTop: 30,
+              }}
+              onClick={()=> openOrder(products[id - 1], true)}>
+              Buy rapidly
+            </Button>
             <Button
               variant="primary"
               style={{
@@ -129,7 +131,6 @@ const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps
             >
               Move to Basket
             </Button>
-
           </Link>
         </ButtonDiv>
       </ImageValue>

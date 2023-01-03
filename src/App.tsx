@@ -28,7 +28,6 @@ export const App = () => {
 
    const openOrderForm = (item: boolean = false) => {
       setProp(item)
-    setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
   }
 
   async function fetchProducts() {

@@ -46,7 +46,7 @@ const CartsProduct = ({ onAdd, onDelete,  product, orders }: ICartProps) => {
   return (
     <CartStyledDiv>
       
-        <Link to={'/modal/' + product.title} >
+        <Link to={'/modal/' + product.id} >
           <div>
             <img src={product.image} className="card-image" alt={product.title} />
           </div>
