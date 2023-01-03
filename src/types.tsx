@@ -17,13 +17,12 @@ export interface ISortProductsPrice{
   onSortDown: (item: IPurchase[]) => void;
   onFilter: (category: string) => void;
 }
+
 export interface ISortProductsRating{
   filtered: IPurchase[];
   onSortUp: (item: IPurchase[]) => void;
   onSortDown: (item: IPurchase[]) => void;
 }
-
-
 
 export interface ISort{
   filtered: IPurchase;
@@ -38,6 +37,7 @@ export interface IAppProps {
   onDelete: (item: IPurchase) => void;
   
 }
+
 export interface IProductProps {
   orders: IPurchase[];
   product: IPurchase;
@@ -49,6 +49,7 @@ export interface IModalProps {
   orders: IPurchase[];
   onAdd: (item: IPurchase) => void | undefined;
   onDelete: (item: IPurchase) => void | undefined;
+  openOrderForm:(item: boolean) => void 
 }
 export interface IOrdersProps {
   orders: IPurchase[];
@@ -59,10 +60,16 @@ export interface INumberCard {
   value: IPurchase[];
 }
 
+export interface openOrderForm {
+  openOrderForm:(item: boolean) => boolean 
+}
+
 export interface IBasketProps {
   orders: IPurchase[];
   onAdd: (item: IPurchase) => void | undefined;
   onDelete: (item: IPurchase) => void | undefined;
+  prop: boolean;
+  openOrderForm: (item: boolean) => void;
 }
 export interface ICartProps {
   product: IPurchase;
@@ -71,7 +78,7 @@ export interface ICartProps {
   onDelete: (item: IPurchase) => void | undefined;
 }
 export interface ICategoryProps {
-  onFilter: (category: string) => void;
+  onFilter: (category: string) => boolean;
 }
 
 export interface IPaginationProps {
@@ -91,6 +98,7 @@ export interface ErrorForm{
   phone: string;
 }
 
-export interface IToggle{
-  toggle: (category:boolean) => void;
+export interface IOnToggle{
+ prop: boolean;
+ openOrderForm: (item: boolean) => void;
 }

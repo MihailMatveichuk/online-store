@@ -16,13 +16,22 @@ export const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [orders, setOrders] = useState<IPurchase[]>([]);
+  const [prop, setProp] = useState(false)
 
   function addToOrder(item: IPurchase) {
     setOrders([...orders, item]);
   }
 
   function deleteToOrder(item: IPurchase) {
+
+    setOrders(() =>  orders.filter((_, i) => i !== orders.indexOf(item)));
+  }
+
+   const openOrderForm = (item: boolean = false) => {
+      setProp(item)
+
     setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
+
   }
   async function fetchProducts() {
     try {
@@ -51,11 +60,17 @@ export const App = () => {
             <Purchases
               onAdd={addToOrder}
               onDelete={deleteToOrder}
+
+              products={products}
+              orders={orders} 
+              openOrderForm = {openOrderForm}/>
+
               orders={orders}
               products={products}
               loading={loading}
               error={error}
             />
+
           }
         />
         <Route
@@ -76,7 +91,8 @@ export const App = () => {
               onAdd={addToOrder}
               onDelete={deleteToOrder}
               orders={orders}
-            />
+              openOrderForm = {openOrderForm}
+              prop={prop}/>
           }
         />
         <Route

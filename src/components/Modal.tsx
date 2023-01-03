@@ -57,11 +57,23 @@ export const ButtonDiv = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-`;
 
-const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
+
+const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps) => {
+
   const params = useParams().title;
   const [detailedProduct, setdetailedProduct] = useState(products);
+
+
+  
+  function openOrder(prod: IPurchase, item: boolean){
+      if(isItemInBasket) openOrderForm(item);
+      else {
+        onAdd(prod) 
+        openOrderForm(item);
+      } 
+    }
+  
 
   useEffect(() => {
     let newProducts = [...products].filter((el) => +el.id == +params!);
@@ -75,6 +87,7 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
   function addingItem(prod: IPurchase) {
     isItemInBasket ? onDelete(prod) : onAdd(prod);
   }
+
   return (
     <PurchaseContainer>
       <ImageValue>
@@ -98,6 +111,16 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
             {isItemInBasket ? 'Delete from basket' : 'Add to Basket'}
           </Button>
           <Link to={'/basket'}>
+
+              <Button
+                variant="primary"
+                style={{
+                  marginTop: 30,
+                }}
+                onClick={()=> openOrder(products[id - 1], true)}>
+                Buy rapidly
+              </Button>
+
             <Button
               variant="primary"
               style={{
@@ -106,6 +129,7 @@ const Modal = ({ products, onAdd, onDelete, orders }: IModalProps) => {
             >
               Move to Basket
             </Button>
+
           </Link>
         </ButtonDiv>
       </ImageValue>
