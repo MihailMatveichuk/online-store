@@ -10,14 +10,14 @@ export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
   const btnClassName = details ? 'add-red' : 'add-white';
   const btnClasses = ['btn-class', btnClassName];
   let isItemInBasket = orders.some(order => order.id === product.id);
-  
+
   function addingItem(prod: IPurchase){
     isItemInBasket ? onDelete(prod): onAdd(prod)
   }
 
   return (
     <div className="card">
-      <Link to={'/modal/' + product.title} >
+      <Link to={'/modal/' + product.id} >
             <img src={product.image}  className='card-image'  alt={product.title}/>
       </Link>
       <p>{product.title}</p>
@@ -33,14 +33,14 @@ export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
         >
           {details ? 'Hide details' : 'Show details'}
         </button >
-        <Button 
+        <Button
         style={{padding: "5px 15px 5px 15px"}}
-          variant = {isItemInBasket ? "secondary": "primary"} 
+          variant = {isItemInBasket ? "secondary": "primary"}
           onClick={() => addingItem(product)}
               > {isItemInBasket ? 'Delete' : 'Add'}
         </Button>
       </ButtonDiv>
-      
+
       {details && (
         <div>
           <p>{product.description}</p>

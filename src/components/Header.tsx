@@ -7,9 +7,9 @@ const Header = ({ orders }: IOrdersProps) => {
   return (
     <div className="header-container">
       <div className="header-h1">
-        <a href="/" title="Logo">
+        <Link to="/" title="Logo">
           <h1>Online store</h1>
-        </a>
+        </Link>
       </div>
       <div style={{
               color: 'rgb(129, 49, 49)',

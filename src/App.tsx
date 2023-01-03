@@ -5,10 +5,11 @@ import { IPurchase } from './types';
 import './style.css';
 import Header from './components/Header';
 import { Basket } from './components/Basket';
-import OrderForm  from './components/OrderForm';
+import OrderForm from './components/OrderForm';
 import Purchases from './components/Purchases';
 import Modal from './components/Modal';
 import { data } from './data';
+import Error from './components/Error';
 
 export const App = () => {
   const [products, setProducts] = useState<IPurchase[]>([]);
@@ -22,13 +23,16 @@ export const App = () => {
   }
 
   function deleteToOrder(item: IPurchase) {
+
     setOrders(() =>  orders.filter((_, i) => i !== orders.indexOf(item)));
   }
 
    const openOrderForm = (item: boolean = false) => {
       setProp(item)
-  }
 
+    setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
+
+  }
   async function fetchProducts() {
     try {
       setError('');
@@ -45,36 +49,43 @@ export const App = () => {
     fetchProducts();
   }, []);
 
+  console.log('pRODUCTS! IN APP ', products);
   return (
     <div className="main-page">
       <Header orders={orders} />
       <Routes>
-        <Route
-          path="/modal/:title"
-          element={
-            <Modal
-              onAdd={addToOrder}
-              onDelete={deleteToOrder}
-              products={products}
-              orders={orders} 
-              openOrderForm = {openOrderForm}/>
-          }
-        />
         <Route
           path="/"
           element={
             <Purchases
               onAdd={addToOrder}
               onDelete={deleteToOrder}
+
+              products={products}
+              orders={orders} 
+              openOrderForm = {openOrderForm}/>
+
               orders={orders}
               products={products}
               loading={loading}
               error={error}
             />
+
           }
         />
         <Route
-          path="/basket"
+          path="modal/:title"
+          element={
+            <Modal
+              onAdd={addToOrder}
+              onDelete={deleteToOrder}
+              products={products}
+              orders={orders}
+            />
+          }
+        />
+        <Route
+          path="basket"
           element={
             <Basket
               onAdd={addToOrder}
@@ -85,11 +96,10 @@ export const App = () => {
           }
         />
         <Route
-          path="/orderForm"
-          element={
-            <OrderForm toggle={() => void {}} />
-          }
+          path="orderForm"
+          element={<OrderForm toggle={() => void {}} />}
         />
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );

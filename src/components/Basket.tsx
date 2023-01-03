@@ -2,11 +2,13 @@ import { IBasketProps } from '../types';
 import CartsProduct from './CartsProduct';
 import CartSummary from './CartSummary';
 import styled from 'styled-components';
+import qs from 'qs';
 
 import Breadcrumbs from './Breadcrumbs';
 
 import Pagination from './Pagination';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const BasketStyled = styled.div`
@@ -45,6 +47,18 @@ export const Basket = ({ onAdd, onDelete, orders, prop, openOrderForm }: IBasket
   const prevPage = () =>
     setCurrentPage((prev) => (prev === 1 ? prev : prev - 1));
   const paginate = (pageNum: number) => setCurrentPage(pageNum);
+
+
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   const queryString = qs.stringify({
+  //     category: 'cat',
+  //   });
+  //   console.log(queryString);
+  //   navigate(`?${queryString}`);
+  // }, [currentPage]);
+
+
   return (
     <>
     <Breadcrumbs />

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { IModalProps, IPurchase } from '../types';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const PurchaseContainer = styled.div`
   width: 50%;
@@ -56,15 +57,14 @@ export const ButtonDiv = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-`
-const Modal = ({ products, onAdd, onDelete, orders, openOrderForm}: IModalProps) => {
-  const params = useParams().title;
-  const id: number = products.find(param => param.title.trim() == params?.trim())?.id!;
-  let isItemInBasket = orders.some(order => order.id === products[id - 1].id);
 
-  function addingItem(prod: IPurchase){
-    isItemInBasket ? onDelete(prod): onAdd(prod)
-  }
+
+const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps) => {
+
+  const params = useParams().title;
+  const [detailedProduct, setdetailedProduct] = useState(products);
+
+
   
   function openOrder(prod: IPurchase, item: boolean){
       if(isItemInBasket) openOrderForm(item);
@@ -74,29 +74,44 @@ const Modal = ({ products, onAdd, onDelete, orders, openOrderForm}: IModalProps)
       } 
     }
   
+
+  useEffect(() => {
+    let newProducts = [...products].filter((el) => +el.id == +params!);
+    setdetailedProduct(newProducts)
+  }, [products]);
+
+  const id: number = +params!;
+
+  let isItemInBasket = orders.some((order) => order.id === products[id - 1].id);
+
+  function addingItem(prod: IPurchase) {
+    isItemInBasket ? onDelete(prod) : onAdd(prod);
+  }
+
   return (
     <PurchaseContainer>
       <ImageValue>
-        <Link to={'/modal/' + products[id - 1].title} >
+        <Link to={'/modal/' + detailedProduct[0]?.id}>
           <img
             style={{
               width: '300px',
             }}
-            src={products[id - 1].image}
+            src={detailedProduct[0]?.image}
             alt="Product"
           />
         </Link>
         <ButtonDiv>
           <Button
-          variant={isItemInBasket ? "secondary": "primary"}
+            variant={isItemInBasket ? 'secondary' : 'primary'}
             style={{
               marginTop: 30,
             }}
-            onClick={() => addingItem(products[id - 1])}
+            onClick={() => addingItem(detailedProduct[0])}
           >
-          {isItemInBasket ? 'Delete from basket' : 'Add to Basket'}
+            {isItemInBasket ? 'Delete from basket' : 'Add to Basket'}
           </Button>
           <Link to={'/basket'}>
+
               <Button
                 variant="primary"
                 style={{
@@ -105,30 +120,33 @@ const Modal = ({ products, onAdd, onDelete, orders, openOrderForm}: IModalProps)
                 onClick={()=> openOrder(products[id - 1], true)}>
                 Buy rapidly
               </Button>
+
+            <Button
+              variant="primary"
+              style={{
+                marginTop: 30,
+              }}
+            >
+              Move to Basket
+            </Button>
+
           </Link>
         </ButtonDiv>
       </ImageValue>
       <MainColumn>
-        <Category>
-          Category: {products[id - 1].category.toUpperCase()}
-        </Category>
-        <h2>{products[id - 1].title}</h2>
-        <Rating>Rating: {products[id - 1].rating.rate}</Rating>
-        <Count>Count: {products[id - 1].rating.count}</Count>
-        <Price>Price: {products[id - 1].price + ' $'}</Price>
+        <Category>Category: {detailedProduct[0]?.category.toUpperCase()}</Category>
+        <h2>{detailedProduct[0]?.title}</h2>
+        <Rating>Rating: {detailedProduct[0]?.rating.rate}</Rating>
+        <Count>Count: {detailedProduct[0]?.rating.count}</Count>
+        <Price>Price: {detailedProduct[0]?.price + ' $'}</Price>
         <Description>
           <DescriptionTitle>Description:</DescriptionTitle>
           <DescriptionContent>
-            {products[id - 1].description}
+            {detailedProduct[0]?.description}
           </DescriptionContent>
         </Description>
       </MainColumn>
     </PurchaseContainer>
   );
 };
-
 export default Modal;
-function onDelete(prod: IPurchase) {
-  throw new Error('Function not implemented.');
-}
-
