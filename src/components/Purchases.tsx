@@ -9,18 +9,16 @@ import Categories from './Categories';
 import qs from 'qs';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-
 import DropdownSortPrice from './DropdownPrice';
 import DropdownSortRating from './DropdownRating';
 import BoxNumberCards from './BoxNumberCards';
-
 
 let value: IPurchase[];
 
 const Greeting = styled.p`
   color: rgb(129, 49, 49);
   font-size: 26px;
-`
+`;
 
 const SearchAndGridRow = styled.div`
   width: 90%;
@@ -34,8 +32,14 @@ const GridIcon = styled.div`
   column-gap: 20px;
 `;
 
-const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppProps) => {
-
+const Purchases = ({
+  products,
+  onAdd,
+  onDelete,
+  loading,
+  error,
+  orders,
+}: IAppProps) => {
   const [inputValue, setInputValue] = useState('');
 
   const [widthValue, setWidthValue] = useState({ width: '420px' });
@@ -45,19 +49,87 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
   const [params, setParams] = useSearchParams();
   const [filtered, setFiltered] = useState(products);
   const categoryQuery = params.get('category') || '';
+  const sortQuery = params.get('sort') || '';
 
   useEffect(() => {
-    if (categoryQuery.length > 2 ) {
-      let newProducts = [...products].filter((el) => el.category === categoryQuery);
-      setFiltered(newProducts);
-    }else {
-      setFiltered(products)
+    if (window.location.search) {
+      if (sortQuery.length !== 0 && categoryQuery.length === 0) {
+        if (sortQuery === 'ratingAsc' || sortQuery === 'ratingDesc') {
+          const tempUp = JSON.parse(JSON.stringify(products));
+          const newTemp =
+            sortQuery === 'ratingAsc'
+              ? tempUp.sort(
+                  (
+                    a: {
+                      rating: any;
+                      rate: number;
+                    },
+                    b: {
+                      rating: any;
+                      rate: number;
+                    }
+                  ) => a.rating.rate - b.rating.rate
+                )
+              : tempUp.sort(
+                  (
+                    a: {
+                      rating: any;
+                      rate: number;
+                    },
+                    b: {
+                      rating: any;
+                      rate: number;
+                    }
+                  ) => b.rating.rate - a.rating.rate
+                );
+          setFiltered(newTemp);
+        } else {
+          const newTemp =
+            sortQuery == 'asc'
+              ? products.sort(
+                  (a: { price: number }, b: { price: number }) =>
+                    a.price - b.price
+                )
+              : products.sort(
+                  (a: { price: number }, b: { price: number }) =>
+                    b.price - a.price
+                );
+
+          setFiltered(newTemp);
+        }
+      } else if (categoryQuery.length !== 0 && sortQuery.length === 0) {
+        let newProducts = [...products].filter(
+          (el) => el.category === categoryQuery
+        );
+
+        setFiltered(newProducts);
+      } else if (categoryQuery.length !== 0 && sortQuery.length !== 0) {
+        let newProducts = [...products].filter(
+          (el) => el.category === categoryQuery
+        );
+
+        const newTemp =
+          sortQuery == 'asc'
+            ? newProducts.sort(
+                (a: { price: number }, b: { price: number }) =>
+                  a.price - b.price
+              )
+            : newProducts.sort(
+                (a: { price: number }, b: { price: number }) =>
+                  b.price - a.price
+              );
+
+        setFiltered(newTemp);
+      }
+    } else {
+      setFiltered(products);
     }
   }, [products]);
+
   function filterCategory(category: string) {
     setParams({ category: category });
     if (category === 'all') {
-      setFiltered(products)
+      setFiltered(products);
     } else {
       let newProducts = [...products].filter((el) => el.category === category);
       setFiltered(newProducts);
@@ -65,6 +137,8 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
   }
 
   function sortPriceUp() {
+    params.set('sort', 'asc');
+    setParams(params);
     const tempUp = JSON.parse(JSON.stringify(filtered));
     const newTempUp = tempUp.sort(
       (a: { price: number }, b: { price: number }) => a.price - b.price
@@ -73,6 +147,8 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
   }
 
   function sortPriceDown(item: IPurchase[]) {
+    params.set('sort', 'desc');
+    setParams(params);
     const tempDown = JSON.parse(JSON.stringify(filtered));
     const newTempDown = tempDown.sort(
       (a: { price: number }, b: { price: number }) => b.price - a.price
@@ -81,6 +157,8 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
   }
 
   function sortRatingUp(item: IPurchase[]) {
+    params.set('sort', 'ratingAsc');
+    setParams(params);
     const tempDown = JSON.parse(JSON.stringify(filtered));
     const newTempDown = tempDown.sort(
       (
@@ -98,6 +176,8 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
   }
 
   function sortRatingDown(item: IPurchase[]) {
+    params.set('sort', 'ratingDesc');
+    setParams(params);
     const tempDown = JSON.parse(JSON.stringify(filtered));
     const newTempDown = tempDown.sort(
       (
@@ -114,7 +194,7 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
     setFiltered(newTempDown);
   }
   function search() {
-    value =  filtered.filter((el) => {
+    value = filtered.filter((el) => {
       return (
         el.title.toLowerCase().includes(inputValue.toLowerCase()) ||
         el.description.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -179,19 +259,21 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
 
-        {loading === false
-          ? search().map((product) => (
-              <StyleCard>
-                <Purchase
-                  onAdd={onAdd}
-                  onDelete={onDelete}
-                  product={product}
-                  orders={orders}
-                  key={product.id}
-                />
-              </StyleCard>
-            ))
-          : <h1>GG Internal Error</h1>}
+        {loading === false ? (
+          search().map((product) => (
+            <StyleCard>
+              <Purchase
+                onAdd={onAdd}
+                onDelete={onDelete}
+                product={product}
+                orders={orders}
+                key={product.id}
+              />
+            </StyleCard>
+          ))
+        ) : (
+          <h1>GG Internal Error</h1>
+        )}
         {/* {loading === false && filtered.length === 0 ? (
             <>Hello in our page!!! Choose category!!</>
 
@@ -205,7 +287,6 @@ const Purchases = ({ products, onAdd, onDelete, loading, error, orders }: IAppPr
               </StyleCard>
             ))
           )} */}
-
       </div>
     </div>
   );
