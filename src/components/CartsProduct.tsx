@@ -41,11 +41,7 @@ const InfoStyled = styled.div`
 const CartsProduct = ({ onAdd, onDelete,  product, orders }: ICartProps) => {
   const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
   const currProduct:IPurchase[] = ordersStorage.filter((el:IPurchase)=> el.id === product.id)
-  console.log('currProduct: ', currProduct);
   const countOfProduct:number = currProduct.length;
-
-  // const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
-  // const totalPrice:number = ordersStorage.reduce((sum:number,el:IPurchase) => sum +=el.price,0)
 
   return (
     <CartStyledDiv>
@@ -60,7 +56,7 @@ const CartsProduct = ({ onAdd, onDelete,  product, orders }: ICartProps) => {
               className='font-bold' >
                 {product.title}
             </h5>
-            {/* <span><b>Category: </b>{product.category.toUpperCase()}</span> */}
+            <span><b>Category: </b>{product.category.toUpperCase()}</span>
             <span><b>Count: </b>{product.rating.count}</span>
             <span><b>Rating: </b>{product.rating.rate}</span>
             <p><b>Price: </b>{product.price}$</p>

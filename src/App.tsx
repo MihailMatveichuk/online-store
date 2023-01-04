@@ -33,6 +33,7 @@ export const App = () => {
     let allRows = JSON.parse(localStorage?.getItem('orders') || '{}');
 
     let withDeleted = allRows.filter((el: IPurchase) => el.id !== item.id);
+
     localStorage.setItem('orders', JSON.stringify(withDeleted));
   }
 
