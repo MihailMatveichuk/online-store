@@ -98,7 +98,17 @@ export interface ErrorForm{
   phone: string;
 }
 
+export interface IToggle{
+  toggle: (category: boolean) => void;
+}
+
 export interface IOnToggle{
  prop: boolean;
  openOrderForm: (item: boolean) => void;
+}
+
+export interface ICardType{
+  4:string;
+  5: string;
+  6: string; 
 }
