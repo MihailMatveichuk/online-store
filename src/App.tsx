@@ -30,7 +30,10 @@ export const App = () => {
   function deleteToOrder(item: IPurchase) {
     setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
     let allRows = JSON.parse(localStorage.getItem('orders') || '{}');
-    let withDeleted = allRows.filter((el: IPurchase) => el.id !== item.id);
+     let withDeleted = allRows.filter((el: IPurchase) => el.id !== item.id);
+    // const withDeleted = allRows?.filter((el:IPurchase, ind:number) => ind === (allRows.indexOf(el.id -1)));
+    //const withDeleted = allRows?.filter((_, i) => i == allRows.indexOf(item.id - 1));
+
     localStorage.setItem('orders', JSON.stringify(withDeleted));
   }
 
