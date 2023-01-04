@@ -1,4 +1,4 @@
-import { IBasketProps } from '../types';
+import { IBasketProps, IPurchase } from '../types';
 import CartsProduct from './CartsProduct';
 import CartSummary from './CartSummary';
 import styled from 'styled-components';
@@ -30,13 +30,15 @@ const PaginationButton = styled.div`
 `
 
 export const Basket = ({ onAdd, onDelete, orders, prop, openOrderForm }: IBasketProps) => {
-  localStorage.setItem('orders', JSON.stringify(orders));
+  const ordersStorage:IPurchase[] = JSON.parse(localStorage.getItem('orders') || '{}');
+
   const [currentPage, setCurrentPage] = useState(1);
   const [ordersPerPage, setOrdersPerPage] = useState(3);
   const lastOrderIndex = currentPage * ordersPerPage;
   const firstOrderIndex = lastOrderIndex - ordersPerPage;
 
-  const uniqePurchases = orders?.filter((el, ind) => ind === orders.indexOf(el));
+   const uniqePurchases =Array.from(new Set(ordersStorage.map(item => JSON.stringify(item)))).map(item => JSON.parse(item));
+
   const currentOrders = uniqePurchases.slice(firstOrderIndex, lastOrderIndex);
   const nextPage = () =>
     setCurrentPage((prev) =>
@@ -48,26 +50,15 @@ export const Basket = ({ onAdd, onDelete, orders, prop, openOrderForm }: IBasket
     setCurrentPage((prev) => (prev === 1 ? prev : prev - 1));
   const paginate = (pageNum: number) => setCurrentPage(pageNum);
 
-
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   const queryString = qs.stringify({
-  //     category: 'cat',
-  //   });
-  //   console.log(queryString);
-  //   navigate(`?${queryString}`);
-  // }, [currentPage]);
-
-
   return (
     <>
     <Breadcrumbs />
     <BasketStyled>
       <CartsStyledDiv>
-        {orders.length === 0 ? (
+        {ordersStorage.length === 0 ? (
           <h2>Cart is Empty</h2>
         ) : (
-          currentOrders?.map((product) => (
+          currentOrders?.map((product:IPurchase) => (
             <CartsProduct
               onAdd={onAdd}
               onDelete={onDelete}

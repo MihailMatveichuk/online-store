@@ -45,14 +45,14 @@ const CartsProduct = ({ onAdd, onDelete,  product, orders }: ICartProps) => {
 
   return (
     <CartStyledDiv>
-      
+
         <Link to={'/modal/' + product.id} >
           <div>
             <img src={product.image} className="card-image" alt={product.title} />
           </div>
         </Link>
         <InfoStyled>
-            <h5 
+            <h5
               className='font-bold' >
                 {product.title}
             </h5>
