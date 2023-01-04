@@ -19,21 +19,20 @@ export const App = () => {
   const [prop, setProp] = useState(false);
 
   function addToOrder(item: IPurchase) {
-    setOrders([...orders, item]);
+    //setOrders([...orders, item]);
     let allRows = [];
     if (localStorage.getItem('orders'))
       allRows = JSON.parse(localStorage.getItem('orders') || '{}');
     allRows.push(item);
     localStorage.setItem('orders', JSON.stringify(allRows));
+    setOrders([...orders, item]);
   }
 
   function deleteToOrder(item: IPurchase) {
     setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
-    let allRows = JSON.parse(localStorage.getItem('orders') || '{}');
-     let withDeleted = allRows.filter((el: IPurchase) => el.id !== item.id);
-    // const withDeleted = allRows?.filter((el:IPurchase, ind:number) => ind === (allRows.indexOf(el.id -1)));
-    //const withDeleted = allRows?.filter((_, i) => i == allRows.indexOf(item.id - 1));
+    let allRows = JSON.parse(localStorage?.getItem('orders') || '{}');
 
+    let withDeleted = allRows.filter((el: IPurchase) => el.id !== item.id);
     localStorage.setItem('orders', JSON.stringify(withDeleted));
   }
 

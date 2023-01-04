@@ -31,15 +31,34 @@ const PaginationButton = styled.div`
 
 export const Basket = ({ onAdd, onDelete, orders, prop, openOrderForm }: IBasketProps) => {
   // localStorage.setItem('orders', JSON.stringify(orders));
-  const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
+  const ordersStorage:IPurchase[] = JSON.parse(localStorage.getItem('orders') || '{}');
   console.log('ordersStorage: in BASKET ', ordersStorage);
   //const totalPrice:number = ordersStorage.reduce((sum:number,el:IPurchase) => sum +=el.price,0)
   const [currentPage, setCurrentPage] = useState(1);
   const [ordersPerPage, setOrdersPerPage] = useState(3);
   const lastOrderIndex = currentPage * ordersPerPage;
   const firstOrderIndex = lastOrderIndex - ordersPerPage;
+  //const uniqePurchases = orders?.filter((el, ind) => ind === orders.indexOf(el));
+  // function unique(arr) {
+  //   // let result = [];
+  //   // console.log('result: ', result);
 
-  const uniqePurchases = ordersStorage.filter((el:IPurchase, ind:number) => ind === ordersStorage.indexOf(el));
+  //   // for (let str of arr) {
+  //   //   console.log('str: ', str);
+  //   //   if (!result.includes(str)) {
+  //   //     result.push(str);
+  //   //   }
+  //   // }
+
+  //   // return result;
+  //   return Array.from(new Set(arr))
+  // }
+   //const uniqePurchases = ordersStorage?.filter((el, ind) => ind !== ordersStorage.indexOf(el.id));
+   //let uniqePurchases = ordersStorage.filter((v, i, s) => s.indexOf(v) === s.lastIndexOf(v));
+   const uniqePurchases =Array.from(new Set(ordersStorage.map(item => JSON.stringify(item)))).map(item => JSON.parse(item));
+   //setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
+
+  //const uniqePurchases = unique(ordersStorage)
   console.log('uniqePurchases: ', uniqePurchases);
   const currentOrders = uniqePurchases.slice(firstOrderIndex, lastOrderIndex);
   const nextPage = () =>
