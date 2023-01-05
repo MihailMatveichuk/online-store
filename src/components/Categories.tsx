@@ -41,7 +41,7 @@ const Categories= ({onFilter}:ICategoryProps) => {
       <StyledUlCategories>
         {categories.map((categoryName, i) => (
           <StyledLiCategory
-            onClick={() => onFilter(categoryName)}
+            onClick={() => {onFilter(categoryName) }}
             key={i}
           >
             {categoryName}

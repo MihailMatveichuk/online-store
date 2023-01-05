@@ -10,7 +10,6 @@ display: flex;
 justify-content: space-between;
 align-items: flex-start;
 `
-
 export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
   const [details, setDetails] = useState(false);
   const btnClassName = details ? 'add-red' : 'add-white';
@@ -26,7 +25,7 @@ export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
   return (
     <div className="card">
       <Link to={'/modal/' + product.id} >
-            <img src={product.image}  className='card-image'  alt={product.title}/>
+            <img src={product.images[0]}  className='card-image'  alt={product.title}/>
       </Link>
       <p>{product.title}</p>
       <span style={{

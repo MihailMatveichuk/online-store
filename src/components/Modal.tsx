@@ -64,8 +64,6 @@ const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps
   const params = useParams().title;
   const [detailedProduct, setdetailedProduct] = useState(products);
 
-
-
   function openOrder(prod: IPurchase, item: boolean){
       if(isItemInBasket) openOrderForm(item);
       else {
@@ -73,7 +71,6 @@ const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps
         openOrderForm(item);
       }
     }
-
 
   useEffect(() => {
     let newProducts = [...products].filter((el) => +el.id == +params!);
@@ -96,7 +93,7 @@ const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps
             style={{
               width: '300px',
             }}
-            src={detailedProduct[0]?.image}
+            src={detailedProduct[0]?.images}
             alt="Product"
           />
         </Link>

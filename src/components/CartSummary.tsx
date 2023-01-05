@@ -10,8 +10,6 @@ import {
 } from 'reactstrap';
 import { useState } from 'react';
 
-
-
 const SummaryStyledDiv = styled.div`
   display: flex;
   flex-direction: column;
