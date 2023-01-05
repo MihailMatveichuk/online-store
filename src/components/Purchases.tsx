@@ -185,14 +185,13 @@ const Purchases = ({
     const newTempDown = tempDown.sort(
       (
         a: {
-          rating: any;
-          rate: number;
+          rating: number;
         },
         b: {
-          rating: any;
-          rate: number;
+          rating: number;
+
         }
-      ) => a.rating.rate - b.rating.rate
+      ) => a.rating - b.rating
     );
     setFiltered(newTempDown);
   }
@@ -204,14 +203,14 @@ const Purchases = ({
     const newTempDown = tempDown.sort(
       (
         a: {
-          rating: any;
-          rate: number;
+          rating:number;
+
         },
         b: {
-          rating: any;
-          rate: number;
+          rating:number;
+
         }
-      ) => b.rating.rate - a.rating.rate
+      ) => b.rating - a.rating
     );
     setFiltered(newTempDown);
   }
@@ -222,8 +221,8 @@ const Purchases = ({
         el.description.toLowerCase().includes(inputValue.toLowerCase()) ||
         el.price == +inputValue ||
         el.category.toLowerCase().includes(inputValue.toLowerCase()) ||
-        el.rating.rate == +inputValue ||
-        el.rating.count == +inputValue
+        el.rating == +inputValue ||
+        el.stock == +inputValue
       );
     });
     return value;

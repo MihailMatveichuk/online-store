@@ -42,7 +42,7 @@ const CartsProduct = ({ onAdd, onDelete,  product, orders }: ICartProps) => {
 
         <Link to={'/modal/' + product.id} >
           <div>
-            <img src={product.images} className="card-image" alt={product.title} />
+            <img src={product.images[0]} className="card-image" alt={product.title} />
           </div>
         </Link>
         <InfoStyled>
@@ -51,13 +51,13 @@ const CartsProduct = ({ onAdd, onDelete,  product, orders }: ICartProps) => {
                 {product.title}
             </h5>
             <span><b>Category: </b>{product.category.toUpperCase()}</span>
-            <span><b>Count: </b>{product.rating.count}</span>
-            <span><b>Rating: </b>{product.rating.rate}</span>
+            <span><b>Count: </b>{product.rating}</span>
+            <span><b>Rating: </b>{product.stock}</span>
             <p><b>Price: </b>{product.price}$</p>
         </InfoStyled>
         <ButtonDiv>
           <Button
-            onClick = {() => countOfProduct < product.rating.count ? onAdd(product) : null}
+            onClick = {() => countOfProduct < product.stock ? onAdd(product) : null}
             variant="outline-dark"
             style={{
               marginTop: 30,
