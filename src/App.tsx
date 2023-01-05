@@ -29,7 +29,7 @@ export const App = () => {
 
   function deleteToOrder(item: IPurchase) {
     setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
-    let allRows = JSON.parse(localStorage?.getItem('orders') || '{}');
+    let allRows = JSON.parse(localStorage.getItem('orders') || '{}');
     let withDeleted = allRows.filter((el: IPurchase) => el.id !== item.id);
     localStorage.setItem('orders', JSON.stringify(withDeleted));
   }

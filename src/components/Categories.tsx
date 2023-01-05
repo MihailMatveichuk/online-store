@@ -31,10 +31,20 @@ const StyledLiCategory = styled.li`
 const Categories= ({onFilter}:ICategoryProps) => {
   const categories = [
     'all',
-    "men's clothing",
-    'jewelery',
-    'electronics',
-    "women's clothing",
+    "laptops",
+    'smartphones',
+    'fragrances',
+    "groceries",
+    'home-decoration',
+    'womens-dresses',
+    'mens-shirts',
+    'skincare',
+    'tops',
+    // 'mens-shoes',
+    // 'womens-shoes',
+    // 'lighting',
+    // 'automotive',
+
   ];
 
   return (

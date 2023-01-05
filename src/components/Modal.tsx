@@ -93,7 +93,7 @@ const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps
             style={{
               width: '300px',
             }}
-            src={detailedProduct[0]?.images}
+            src={detailedProduct[0]?.images[0]}
             alt="Product"
           />
         </Link>
@@ -134,8 +134,8 @@ const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps
       <MainColumn>
         <Category>Category: {detailedProduct[0]?.category.toUpperCase()}</Category>
         <h2>{detailedProduct[0]?.title}</h2>
-        <Rating>Rating: {detailedProduct[0]?.rating.rate}</Rating>
-        <Count>Count: {detailedProduct[0]?.rating.count}</Count>
+        <Rating>Rating: {detailedProduct[0]?.rating}</Rating>
+        <Count>Count: {detailedProduct[0]?.stock}</Count>
         <Price>Price: {detailedProduct[0]?.price + ' $'}</Price>
         <Description>
           <DescriptionTitle>Description:</DescriptionTitle>

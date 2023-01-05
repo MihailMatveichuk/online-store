@@ -32,7 +32,7 @@ export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
         fontWeight: "bold",
         color: "rgb(129, 49, 49)"
       }}>{"Price: " + product.price + "$"}</span>
-      <span ><b>{"Rating: " + product.rating.rate}</b></span>
+      <span ><b>{"Rating: " + product.rating}</b></span>
       <ButtonContainer style={{width: "50%"}}>
         <button
           className={btnClasses.join(' ')}
@@ -53,7 +53,7 @@ export function Purchase({ product, onAdd, onDelete, orders }: IProductProps) {
           <p>{product.description}</p>
           <p>
             Rate:{' '}
-            <span style={{ fontWeight: 'bold' }}>{product.rating.rate}</span>
+            <span style={{ fontWeight: 'bold' }}>{product.rating}</span>
           </p>
         </div>
       )}
