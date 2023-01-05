@@ -5,9 +5,7 @@ import '../style.css';
 import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
 import Categories from './Categories';
-
-import qs from 'qs';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import DropdownSortPrice from './DropdownPrice';
 import DropdownSortRating from './DropdownRating';
@@ -15,21 +13,12 @@ import BoxNumberCards from './BoxNumberCards';
 
 let value: IPurchase[];
 
-const Greeting = styled.p`
-  color: rgb(129, 49, 49);
-  font-size: 26px;
-`;
-
 const SearchAndGridRow = styled.div`
   width: 90%;
   margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
-const GridIcon = styled.div`
-  display: flex;
-  column-gap: 20px;
 `;
 
 const Purchases = ({
@@ -50,9 +39,29 @@ const Purchases = ({
   const [filtered, setFiltered] = useState(products);
   const categoryQuery = params.get('category') || '';
   const sortQuery = params.get('sort') || '';
+  const layoutQuery = params.get('layout') || '';
+
+  const [color, setColor] = useState('black');
+
+  const GridIcon = styled.div`
+    display: flex;
+    column-gap: 20px;
+    svg {
+      fill: ${color};
+    }
+  `;
 
   useEffect(() => {
-    //localStorage.setItem("name", JSON.stringify(name));
+    if (window.location.search) {
+      if (layoutQuery.length !== 0)
+        layoutQuery === 'small' ? changeLayoutSmall() : changeLayoutBig();
+      setFiltered(products);
+    } else {
+      setFiltered(filtered);
+    }
+  }, [products]);
+
+  useEffect(() => {
     if (window.location.search) {
       if (sortQuery.length !== 0 && categoryQuery.length === 0) {
         if (sortQuery === 'ratingAsc' || sortQuery === 'ratingDesc') {
@@ -128,7 +137,7 @@ const Purchases = ({
   }, [products]);
 
   function filterCategory(category: string) {
-    params.set('category',category)
+    params.set('category', category);
     setParams(params);
     if (category === 'all') {
       setFiltered(products);
@@ -156,6 +165,17 @@ const Purchases = ({
       (a: { price: number }, b: { price: number }) => b.price - a.price
     );
     setFiltered(newTempDown);
+  }
+
+  function changeLayoutSmall() {
+    setColor('red');
+    params.set('layout', 'small');
+    setParams(params);
+  }
+  function changeLayoutBig() {
+    setColor('peru');
+    params.set('layout', 'big');
+    setParams(params);
   }
 
   function sortRatingUp(item: IPurchase[]) {
@@ -239,7 +259,10 @@ const Purchases = ({
             fill="currentColor"
             className="grid"
             viewBox="0 0 16 16"
-            onClick={() => setWidthValue({ width: '340px' })}
+            onClick={() => {
+              setWidthValue({ width: '340px' });
+              changeLayoutSmall();
+            }}
           >
             <path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z" />
           </svg>
@@ -250,7 +273,10 @@ const Purchases = ({
             fill="currentColor"
             className="grid"
             viewBox="0 0 16 16"
-            onClick={() => setWidthValue({ width: '420px' })}
+            onClick={() => {
+              setWidthValue({ width: '420px' });
+              changeLayoutBig();
+            }}
           >
             <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z" />
           </svg>
@@ -260,7 +286,6 @@ const Purchases = ({
       <div className="cards_container">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
-
         {loading === false ? (
           search().map((product) => (
             <StyleCard>
@@ -274,21 +299,8 @@ const Purchases = ({
             </StyleCard>
           ))
         ) : (
-          <h1>GG Internal Error</h1>
+          <h1> Internal Error</h1>
         )}
-        {/* {loading === false && filtered.length === 0 ? (
-            <>Hello in our page!!! Choose category!!</>
-
-        {loading === false && filtered.length === 0 ? (
-            <Greeting>Hello in our page!!! Choose category!!</Greeting>
-
-        ) : (
-            search().map((product) => (
-              <StyleCard>
-                <Purchase onAdd={onAdd} onDelete ={onDelete} product={product} orders={orders} key={product.id} />
-              </StyleCard>
-            ))
-          )} */}
       </div>
     </div>
   );

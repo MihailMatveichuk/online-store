@@ -2,14 +2,11 @@ import { IBasketProps, IPurchase } from '../types';
 import CartsProduct from './CartsProduct';
 import CartSummary from './CartSummary';
 import styled from 'styled-components';
-import qs from 'qs';
 
 import Breadcrumbs from './Breadcrumbs';
 
 import Pagination from './Pagination';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
 
 const BasketStyled = styled.div`
   display: flex;

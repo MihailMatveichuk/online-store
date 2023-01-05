@@ -4,10 +4,6 @@ import { IPurchase } from '../types';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-
-import { useState } from 'react';
-import Pagination from './Pagination';
-
 const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,8 +32,6 @@ const InfoStyled = styled.div`
   width: 80%;
 `;
 
-
-
 const CartsProduct = ({ onAdd, onDelete,  product, orders }: ICartProps) => {
   const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
   const currProduct:IPurchase[] = ordersStorage.filter((el:IPurchase)=> el.id === product.id)
@@ -48,7 +42,7 @@ const CartsProduct = ({ onAdd, onDelete,  product, orders }: ICartProps) => {
 
         <Link to={'/modal/' + product.id} >
           <div>
-            <img src={product.image} className="card-image" alt={product.title} />
+            <img src={product.images} className="card-image" alt={product.title} />
           </div>
         </Link>
         <InfoStyled>

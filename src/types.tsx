@@ -4,7 +4,7 @@ export interface IPurchase {
   price: number;
   description: string;
   category: string;
-  image: string;
+  images: string;
   rating: {
     rate: number;
     count: number;
@@ -110,5 +110,5 @@ export interface IOnToggle{
 export interface ICardType{
   4:string;
   5: string;
-  6: string; 
+  6: string;
 }
