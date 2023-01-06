@@ -22,6 +22,15 @@ export interface IPurchase {
   images: string[];
 }
 
+export interface ISaleObject {
+  rs: {
+    value: string;
+  },
+  epm: {
+    value: string;
+  },
+}
+
 export interface ISortProductsPrice{
   filtered: IPurchase[];
   onSortUp: (item: IPurchase[]) => void;
