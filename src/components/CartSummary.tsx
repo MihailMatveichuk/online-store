@@ -13,7 +13,7 @@ const SummaryStyledDiv = styled.div`
   color: black;
   border-radius: 8px;
   font-size: 20px;
-  max-height: 300px;
+  max-height: 350px;
 `;
 
 const PromoItems = styled.p`
