@@ -55,7 +55,7 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
     (sum: number, el: IPurchase) => (sum += el.price),
     0
   );
-  const [price, setPrice] = useState(totalPrice);
+
   const [newPrice, setNewPrice] = useState<number>(totalPrice);
   const [inputValue, setInputValue] = useState('');
   const [modal, setModal] = useState(prop);
@@ -72,7 +72,6 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
         setSaleValue(`${promoArray}`);
       }
     } else {
-      setPrice(totalPrice);
       setSaleValue(`${promoArray}`);
     }
   }, [inputValue]);
@@ -86,9 +85,9 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
     <SummaryStyledDiv>
       <div>Products: {ordersStorage.length}</div>
       {saleValue ? (
-        <div className="crossValue">Total: $ {price.toFixed(2)} </div>
+        <div className="crossValue">Total: $ {totalPrice.toFixed(2)} </div>
       ) : (
-        <div>Total: $ {price.toFixed(2)} </div>
+        <div>Total: $ {totalPrice.toFixed(2)} </div>
       )}
       {saleValue ? <div>Total with promo: $ {newPrice.toFixed(2)} </div> : ''}
       <DiscountValue>
