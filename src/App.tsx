@@ -10,6 +10,7 @@ import Purchases from './components/Purchases';
 import Modal from './components/Modal';
 import { data } from './data';
 import Error from './components/Error';
+import { Footer } from './components/Footer';
 
 export const App = () => {
   const [products, setProducts] = useState<IPurchase[]>([]);
@@ -101,6 +102,7 @@ export const App = () => {
         />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </div>
   );
 };
