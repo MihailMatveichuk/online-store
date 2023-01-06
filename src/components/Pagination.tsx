@@ -41,7 +41,12 @@ const Pagination = ({
 
       <ul className="pagination">
         {numOfPages.map((num) => (
-          <li className="page-item" key={num} onClick={() => paginate(num)}>
+          <li
+            className="page-item"
+            key={num}
+            onClick={() => paginate(num)}
+            aria-hidden="true"
+          >
             <a href="#" className="page-link">
               {num}
             </a>

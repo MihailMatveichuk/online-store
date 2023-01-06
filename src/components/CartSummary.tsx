@@ -89,7 +89,7 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
           }}
         />
         <>{saleValue}</>
-        <PromoItems>Promo for test: 'RS', 'EPM'</PromoItems>
+        <PromoItems>Promo for test: `RS`, `EPM`</PromoItems>
         <Button
           style={{
             width: '18em',

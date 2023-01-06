@@ -71,6 +71,7 @@ export const Basket = ({
                 onDelete={onDelete}
                 product={product}
                 orders={orders}
+                key={1}
               />
             ))
           )}

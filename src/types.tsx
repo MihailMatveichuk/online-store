@@ -25,26 +25,26 @@ export interface IPurchase {
 export interface ISaleObject {
   rs: {
     value: string;
-  },
+  };
   epm: {
     value: string;
-  },
+  };
 }
 
-export interface ISortProductsPrice{
+export interface ISortProductsPrice {
   filtered: IPurchase[];
   onSortUp: (item: IPurchase[]) => void;
   onSortDown: (item: IPurchase[]) => void;
   onFilter: (category: string) => void;
 }
 
-export interface ISortProductsRating{
+export interface ISortProductsRating {
   filtered: IPurchase[];
   onSortUp: (item: IPurchase[]) => void;
   onSortDown: (item: IPurchase[]) => void;
 }
 
-export interface ISort{
+export interface ISort {
   filtered: IPurchase;
 }
 
@@ -55,7 +55,6 @@ export interface IAppProps {
   orders: IPurchase[];
   onAdd: (item: IPurchase) => void;
   onDelete: (item: IPurchase) => void;
-
 }
 
 export interface IProductProps {
@@ -69,7 +68,7 @@ export interface IModalProps {
   orders: IPurchase[];
   onAdd: (item: IPurchase) => void | undefined;
   onDelete: (item: IPurchase) => void | undefined;
-  openOrderForm:(item: boolean) => void
+  openOrderForm: (item: boolean) => void;
 }
 export interface IOrdersProps {
   orders: IPurchase[];
@@ -77,11 +76,10 @@ export interface IOrdersProps {
 
 export interface INumberCard {
   filtered: IPurchase[];
-
 }
 
 export interface openOrderForm {
-  openOrderForm:(item: boolean) => boolean
+  openOrderForm: (item: boolean) => boolean;
 }
 
 export interface IBasketProps {
@@ -103,32 +101,32 @@ export interface ICategoryProps {
 
 export interface IPaginationProps {
   ordersPerPage: number;
-  setOrdersPerPage: React.Dispatch<React.SetStateAction<number>>
+  setOrdersPerPage: React.Dispatch<React.SetStateAction<number>>;
   uniqePurchases: IPurchase[];
   paginate: (num: number) => void;
 }
 
-export interface ICartSummary{
+export interface ICartSummary {
   orders: IPurchase[];
 }
 
-export interface ErrorForm{
+export interface ErrorForm {
   name: string;
   email: string;
   phone: string;
 }
 
-export interface IToggle{
+export interface IToggle {
   toggle: (category: boolean) => void;
 }
 
-export interface IOnToggle{
- prop: boolean;
- openOrderForm: (item: boolean) => void;
+export interface IOnToggle {
+  prop: boolean;
+  openOrderForm: (item: boolean) => void;
 }
 
-export interface ICardType{
-  4:string;
+export interface ICardType {
+  4: string;
   5: string;
   6: string;
 }
@@ -139,7 +137,7 @@ export interface ILinks {
   img: string;
 }
 
- export interface IFooterLogos {
+export interface IFooterLogos {
   altClass: string;
   logos: ILinks[];
 }
