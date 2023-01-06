@@ -123,3 +123,14 @@ export interface ICardType{
   5: string;
   6: string;
 }
+
+export interface ILinks {
+  name: string;
+  link: string;
+  img: string;
+}
+
+ export interface IFooterLogos {
+  altClass: string;
+  logos: ILinks[];
+}
