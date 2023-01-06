@@ -3,6 +3,7 @@ import { IPurchase, IOnToggle, ISaleObject } from '../types';
 import OrderForm from './OrderForm';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useEffect, useState } from 'react';
+import '../style.css';
 
 const SummaryStyledDiv = styled.div`
   display: flex;
@@ -46,6 +47,7 @@ const saleItems: ISaleObject = {
     value: 'Rolling Scopes School',
   },
 };
+const promoArray: (string | ISaleObject)[] = [];
 
 const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
   const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
@@ -54,6 +56,7 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
     0
   );
   const [price, setPrice] = useState(totalPrice);
+  const [newPrice, setNewPrice] = useState<number>(totalPrice);
   const [inputValue, setInputValue] = useState('');
   const [modal, setModal] = useState(prop);
   const [saleValue, setSaleValue] = useState<ISaleObject | string>('');
@@ -62,14 +65,15 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
   useEffect(() => {
     const keys = Object.keys(saleItems);
     if (keys.includes(inputValue)) {
-      setPrice((totalPrice / 100) * 90);
-      setSaleValue(
-        `${saleItems[inputValue as keyof typeof saleItems].value} - 10%`
-      );
-      console.log(true);
+      const objectValue = saleItems[inputValue as keyof typeof saleItems].value;
+      if (!promoArray.includes(`${objectValue} - 10%`)) {
+        promoArray.push(`${objectValue} - 10%`);
+        setNewPrice((newPrice / 100) * 90);
+        setSaleValue(`${promoArray}`);
+      }
     } else {
       setPrice(totalPrice);
-      setSaleValue('');
+      setSaleValue(`${promoArray}`);
     }
   }, [inputValue]);
 
@@ -77,10 +81,16 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
     openOrderForm(false);
     setModal(!modal);
   };
+
   return (
     <SummaryStyledDiv>
       <div>Products: {ordersStorage.length}</div>
-      <div>Total: $ {price.toFixed(2)} </div>
+      {saleValue ? (
+        <div className="crossValue">Total: $ {price.toFixed(2)} </div>
+      ) : (
+        <div>Total: $ {price.toFixed(2)} </div>
+      )}
+      {saleValue ? <div>Total with promo: $ {newPrice.toFixed(2)} </div> : ''}
       <DiscountValue>
         <InputStyled
           placeholder="Enter promo-code"
@@ -88,7 +98,7 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
             setInputValue(e.target.value);
           }}
         />
-        <>{saleValue}</>
+        <>{saleValue ? <>{saleValue}</> : ''}</>
         <PromoItems>Promo for test: `RS`, `EPM`</PromoItems>
         <Button
           style={{

@@ -275,3 +275,7 @@ h1:hover{
 .logos__item:focus {
   opacity: 0.7;
 }
+
+.crossValue{
+  text-decoration: line-through;
+}

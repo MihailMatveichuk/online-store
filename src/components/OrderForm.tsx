@@ -131,7 +131,7 @@ const OrderForm = ({ toggle }: IToggle) => {
 
   return (
     <FormStyle onSubmit={formik.handleSubmit}>
-      <h2>`${"Customer's information"}`</h2>
+      <h2>Customer information</h2>
       <label htmlFor="name">Your first and second name</label>
       <input
         id="name"
