@@ -3,7 +3,8 @@ const Error = () => {
     <div>
       <h1>
         ERROR 404 <hr />
-        Not Found </h1>
+        Not Found{' '}
+      </h1>
     </div>
   );
 };

@@ -108,13 +108,13 @@ const Purchases = ({
           setFiltered(newTemp);
         }
       } else if (categoryQuery.length !== 0 && sortQuery.length === 0) {
-        let newProducts = [...products].filter(
+        const newProducts = [...products].filter(
           (el) => el.category === categoryQuery
         );
 
         setFiltered(newProducts);
       } else if (categoryQuery.length !== 0 && sortQuery.length !== 0) {
-        let newProducts = [...products].filter(
+        const newProducts = [...products].filter(
           (el) => el.category === categoryQuery
         );
 
@@ -142,7 +142,9 @@ const Purchases = ({
     if (category === 'all') {
       setFiltered(products);
     } else {
-      let newProducts = [...products].filter((el) => el.category === category);
+      const newProducts = [...products].filter(
+        (el) => el.category === category
+      );
       setFiltered(newProducts);
     }
   }
@@ -157,7 +159,7 @@ const Purchases = ({
     setFiltered(newTempUp);
   }
 
-  function sortPriceDown(item: IPurchase[]) {
+  function sortPriceDown() {
     params.set('sort', 'desc');
     setParams(params);
     const tempDown = JSON.parse(JSON.stringify(filtered));
@@ -178,7 +180,7 @@ const Purchases = ({
     setParams(params);
   }
 
-  function sortRatingUp(item: IPurchase[]) {
+  function sortRatingUp() {
     params.set('sort', 'ratingAsc');
     setParams(params);
     const tempDown = JSON.parse(JSON.stringify(filtered));
@@ -189,26 +191,23 @@ const Purchases = ({
         },
         b: {
           rating: number;
-
         }
       ) => a.rating - b.rating
     );
     setFiltered(newTempDown);
   }
 
-  function sortRatingDown(item: IPurchase[]) {
+  function sortRatingDown() {
     params.set('sort', 'ratingDesc');
     setParams(params);
     const tempDown = JSON.parse(JSON.stringify(filtered));
     const newTempDown = tempDown.sort(
       (
         a: {
-          rating:number;
-
+          rating: number;
         },
         b: {
-          rating:number;
-
+          rating: number;
         }
       ) => b.rating - a.rating
     );

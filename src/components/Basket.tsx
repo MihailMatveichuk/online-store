@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Breadcrumbs from './Breadcrumbs';
 
 import Pagination from './Pagination';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const BasketStyled = styled.div`
   display: flex;
@@ -24,17 +24,27 @@ const PaginationButton = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 5px;
-`
+`;
 
-export const Basket = ({ onAdd, onDelete, orders, prop, openOrderForm }: IBasketProps) => {
-  const ordersStorage:IPurchase[] = JSON.parse(localStorage.getItem('orders') || '{}');
+export const Basket = ({
+  onAdd,
+  onDelete,
+  orders,
+  prop,
+  openOrderForm,
+}: IBasketProps) => {
+  const ordersStorage: IPurchase[] = JSON.parse(
+    localStorage.getItem('orders') || '{}'
+  );
 
   const [currentPage, setCurrentPage] = useState(1);
   const [ordersPerPage, setOrdersPerPage] = useState(3);
   const lastOrderIndex = currentPage * ordersPerPage;
   const firstOrderIndex = lastOrderIndex - ordersPerPage;
 
-   const uniqePurchases =Array.from(new Set(ordersStorage.map(item => JSON.stringify(item)))).map(item => JSON.parse(item));
+  const uniqePurchases = Array.from(
+    new Set(ordersStorage.map((item) => JSON.stringify(item)))
+  ).map((item) => JSON.parse(item));
 
   const currentOrders = uniqePurchases.slice(firstOrderIndex, lastOrderIndex);
   const nextPage = () =>
@@ -49,43 +59,43 @@ export const Basket = ({ onAdd, onDelete, orders, prop, openOrderForm }: IBasket
 
   return (
     <>
-    <Breadcrumbs />
-    <BasketStyled>
-      <CartsStyledDiv>
-        {ordersStorage.length === 0 ? (
-          <h2>Cart is Empty</h2>
-        ) : (
-          currentOrders?.map((product:IPurchase) => (
-            <CartsProduct
-              onAdd={onAdd}
-              onDelete={onDelete}
-              product={product}
-              orders={orders}
-            />
-          ))
-        )}
+      <Breadcrumbs />
+      <BasketStyled>
+        <CartsStyledDiv>
+          {ordersStorage.length === 0 ? (
+            <h2>Cart is Empty</h2>
+          ) : (
+            currentOrders?.map((product: IPurchase) => (
+              <CartsProduct
+                onAdd={onAdd}
+                onDelete={onDelete}
+                product={product}
+                orders={orders}
+              />
+            ))
+          )}
 
-        {orders && (
-          <>
-            <Pagination
-              paginate={paginate}
-              ordersPerPage={ordersPerPage}
-              setOrdersPerPage = {setOrdersPerPage}
-              uniqePurchases={uniqePurchases}
-            />
-            <PaginationButton>
-              <button className="btn btn-primary mt-3" onClick={prevPage}>
-                Prev Page
-              </button>
-              <button className="btn btn-primary mt-3" onClick={nextPage}>
-                Next Page
-              </button>
-            </PaginationButton>
-          </>
-        )}
-      </CartsStyledDiv>
-      <CartSummary prop = {prop} openOrderForm ={openOrderForm}/>
-    </BasketStyled>
+          {orders && (
+            <>
+              <Pagination
+                paginate={paginate}
+                ordersPerPage={ordersPerPage}
+                setOrdersPerPage={setOrdersPerPage}
+                uniqePurchases={uniqePurchases}
+              />
+              <PaginationButton>
+                <button className="btn btn-primary mt-3" onClick={prevPage}>
+                  Prev Page
+                </button>
+                <button className="btn btn-primary mt-3" onClick={nextPage}>
+                  Next Page
+                </button>
+              </PaginationButton>
+            </>
+          )}
+        </CartsStyledDiv>
+        <CartSummary prop={prop} openOrderForm={openOrderForm} />
+      </BasketStyled>
     </>
   );
 };

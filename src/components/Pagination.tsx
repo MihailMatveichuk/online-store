@@ -18,10 +18,10 @@ const Pagination = ({
     font-size: 14px;
     display: flex;
     justify-content: space-between;
-  `
+  `;
   const NumberInput = styled.input`
     width: 100px;
-  `
+  `;
   function changeOrdersPerPage(e: React.KeyboardEvent<HTMLInputElement>) {
     const target = e.key;
     if (target == '' || target == '0' || isNaN(+target)) {
@@ -38,7 +38,7 @@ const Pagination = ({
         Enter number of products per page in cart
         <NumberInput value={ordersPerPage} onKeyDown={changeOrdersPerPage} />
       </EnterNumber>
-      
+
       <ul className="pagination">
         {numOfPages.map((num) => (
           <li className="page-item" key={num} onClick={() => paginate(num)}>

@@ -1,13 +1,7 @@
 import styled from 'styled-components';
-import { IPurchase, IOnToggle, ISaleObject} from '../types'
-import OrderForm  from './OrderForm';
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from 'reactstrap';
+import { IPurchase, IOnToggle, ISaleObject } from '../types';
+import OrderForm from './OrderForm';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useEffect, useState } from 'react';
 
 const SummaryStyledDiv = styled.div`
@@ -24,8 +18,7 @@ const SummaryStyledDiv = styled.div`
 const PromoItems = styled.p`
   color: rgb(129, 49, 49);
   opacity: 0.6;
-  
-`
+`;
 
 export const InputStyled = styled.input.attrs((props) => ({
   type: 'text',
@@ -44,74 +37,75 @@ const DiscountValue = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 const saleItems: ISaleObject = {
   epm: {
-    value: "EPAM Systems",
+    value: 'EPAM Systems',
   },
   rs: {
-    value: "Rolling Scopes School",
+    value: 'Rolling Scopes School',
   },
-}
+};
 
-const CartSummary = ({prop, openOrderForm}: IOnToggle ) => {
+const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
   const ordersStorage = JSON.parse(localStorage.getItem('orders') || '{}');
-  let totalPrice:number = ordersStorage.reduce((sum:number,el:IPurchase) => sum +=el.price,0)
+  const totalPrice: number = ordersStorage.reduce(
+    (sum: number, el: IPurchase) => (sum += el.price),
+    0
+  );
   const [price, setPrice] = useState(totalPrice);
   const [inputValue, setInputValue] = useState('');
   const [modal, setModal] = useState(prop);
   const [saleValue, setSaleValue] = useState<ISaleObject | string>('');
-  const [unmountOnClose, setUnmountOnClose] = useState(false);
-  
+  const [unmountOnClose] = useState(false);
 
   useEffect(() => {
     const keys = Object.keys(saleItems);
-    if(keys.includes(inputValue)){
-        setPrice(totalPrice / 100 * 90);
-        setSaleValue(`${saleItems[inputValue as keyof typeof saleItems].value} - 10%`)
-        console.log(true)
-      }
-        else {
-          setPrice(totalPrice);
-          setSaleValue('') 
+    if (keys.includes(inputValue)) {
+      setPrice((totalPrice / 100) * 90);
+      setSaleValue(
+        `${saleItems[inputValue as keyof typeof saleItems].value} - 10%`
+      );
+      console.log(true);
+    } else {
+      setPrice(totalPrice);
+      setSaleValue('');
     }
-  }, [inputValue])
+  }, [inputValue]);
 
   const toggle = () => {
     openOrderForm(false);
     setModal(!modal);
-  }
+  };
   return (
     <SummaryStyledDiv>
       <div>Products: {ordersStorage.length}</div>
       <div>Total: $ {price.toFixed(2)} </div>
       <DiscountValue>
-        <InputStyled 
-          placeholder="Enter promo-code" 
-          onChange = {(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setInputValue(e.target.value);
-          }}/>
-          <>
-            {saleValue}
-          </>  
-        <PromoItems>
-          Promo for test: 'RS', 'EPM'
-        </PromoItems>
+        <InputStyled
+          placeholder="Enter promo-code"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setInputValue(e.target.value);
+          }}
+        />
+        <>{saleValue}</>
+        <PromoItems>Promo for test: 'RS', 'EPM'</PromoItems>
         <Button
-        style={{
-          width: "18em",
-        }}color="secondary" onClick={toggle}>
+          style={{
+            width: '18em',
+          }}
+          color="secondary"
+          onClick={toggle}
+        >
           BUY NOW
         </Button>
       </DiscountValue>
-      <Modal isOpen={(modal)} toggle={toggle} unmountOnClose={unmountOnClose} >
-          <ModalHeader toggle={toggle}>
-          </ModalHeader>
-          <ModalBody>
-            <OrderForm toggle={toggle}/>
-          </ModalBody>
-          <ModalFooter>
-          </ModalFooter>
+      <Modal isOpen={modal} toggle={toggle} unmountOnClose={unmountOnClose}>
+        <ModalHeader toggle={toggle}></ModalHeader>
+        <ModalBody>
+          <OrderForm toggle={toggle} />
+        </ModalBody>
+        <ModalFooter></ModalFooter>
       </Modal>
     </SummaryStyledDiv>
   );

@@ -1,8 +1,7 @@
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { IModalProps, IPurchase } from '../types';
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const PurchaseContainer = styled.div`
@@ -59,27 +58,34 @@ export const ButtonDiv = styled.div`
   align-items: space-between;
 `;
 
-const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps) => {
-
+const Modal = ({
+  products,
+  onAdd,
+  onDelete,
+  orders,
+  openOrderForm,
+}: IModalProps) => {
   const params = useParams().title;
   const [detailedProduct, setdetailedProduct] = useState(products);
 
-  function openOrder(prod: IPurchase, item: boolean){
-      if(isItemInBasket) openOrderForm(item);
-      else {
-        onAdd(prod)
-        openOrderForm(item);
-      }
+  function openOrder(prod: IPurchase, item: boolean) {
+    if (isItemInBasket) openOrderForm(item);
+    else {
+      onAdd(prod);
+      openOrderForm(item);
     }
+  }
 
   useEffect(() => {
-    let newProducts = [...products].filter((el) => +el.id == +params!);
-    setdetailedProduct(newProducts)
+    const newProducts = [...products].filter((el) => +el.id == +params!);
+    setdetailedProduct(newProducts);
   }, [products]);
 
   const id: number = +params!;
 
-  let isItemInBasket = orders.some((order) => order.id === products[id - 1].id);
+  const isItemInBasket = orders.some(
+    (order) => order.id === products[id - 1].id
+  );
 
   function addingItem(prod: IPurchase) {
     isItemInBasket ? onDelete(prod) : onAdd(prod);
@@ -107,17 +113,20 @@ const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps
           >
             {isItemInBasket ? 'Delete from basket' : 'Add to Basket'}
           </Button>
-          <Link to={'/basket'}
-          style={{
-            display: 'flex',
-            justifyContent:"space-between"
-          }}>
+          <Link
+            to={'/basket'}
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
             <Button
               variant="primary"
               style={{
                 marginTop: 30,
               }}
-              onClick={()=> openOrder(products[id - 1], true)}>
+              onClick={() => openOrder(products[id - 1], true)}
+            >
               Buy rapidly
             </Button>
             <Button
@@ -132,7 +141,9 @@ const Modal = ({ products, onAdd, onDelete, orders, openOrderForm }: IModalProps
         </ButtonDiv>
       </ImageValue>
       <MainColumn>
-        <Category>Category: {detailedProduct[0]?.category.toUpperCase()}</Category>
+        <Category>
+          Category: {detailedProduct[0]?.category.toUpperCase()}
+        </Category>
         <h2>{detailedProduct[0]?.title}</h2>
         <Rating>Rating: {detailedProduct[0]?.rating}</Rating>
         <Count>Count: {detailedProduct[0]?.stock}</Count>

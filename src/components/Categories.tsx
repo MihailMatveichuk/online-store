@@ -28,13 +28,13 @@ const StyledLiCategory = styled.li`
   }
 `;
 
-const Categories= ({onFilter}:ICategoryProps) => {
+const Categories = ({ onFilter }: ICategoryProps) => {
   const categories = [
     'all',
-    "laptops",
+    'laptops',
     'smartphones',
     'fragrances',
-    "groceries",
+    'groceries',
     'home-decoration',
     'womens-dresses',
     'mens-shirts',
@@ -44,20 +44,21 @@ const Categories= ({onFilter}:ICategoryProps) => {
     // 'womens-shoes',
     // 'lighting',
     // 'automotive',
-
   ];
 
   return (
-      <StyledUlCategories>
-        {categories.map((categoryName, i) => (
-          <StyledLiCategory
-            onClick={() => {onFilter(categoryName) }}
-            key={i}
-          >
-            {categoryName}
-          </StyledLiCategory>
-        ))}
-      </StyledUlCategories>
+    <StyledUlCategories>
+      {categories.map((categoryName, i) => (
+        <StyledLiCategory
+          onClick={() => {
+            onFilter(categoryName);
+          }}
+          key={i}
+        >
+          {categoryName}
+        </StyledLiCategory>
+      ))}
+    </StyledUlCategories>
   );
 };
 

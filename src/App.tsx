@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { IPurchase } from './types';
 import './style.css';
@@ -29,16 +29,20 @@ export const App = () => {
   }
 
   function deleteToOrder(item: IPurchase) {
-    const stringifyedItem:string = JSON.stringify(item);
+    const stringifyedItem: string = JSON.stringify(item);
     setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
-    let allRows = JSON.parse(localStorage.getItem('orders') || '{}');
-    let arrStringifyedItems = allRows.map((el:IPurchase)=> JSON.stringify(el));
-    let withDeleted = arrStringifyedItems.filter((_, i:number, arr:string[]) => i !== arr.indexOf(stringifyedItem))
-    let parseForStorage= withDeleted.map((el:string) => JSON.parse(el))
+    const allRows = JSON.parse(localStorage.getItem('orders') || '{}');
+    const arrStringifyedItems = allRows.map((el: IPurchase) =>
+      JSON.stringify(el)
+    );
+    const withDeleted = arrStringifyedItems.filter(
+      (_, i: number, arr: string[]) => i !== arr.indexOf(stringifyedItem)
+    );
+    const parseForStorage = withDeleted.map((el: string) => JSON.parse(el));
     localStorage.setItem('orders', JSON.stringify(parseForStorage));
   }
 
-  const openOrderForm = (item: boolean = false) => {
+  const openOrderForm = (item = false) => {
     setProp(item);
   };
 
