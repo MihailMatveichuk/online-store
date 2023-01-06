@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import * as Yup from 'yup';
 import { IToggle } from '../types';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Visa from '../assets/visa.png';
 import MasterCard from '../assets/mastercard.png';
 import World from '../assets/world.png';
@@ -70,12 +70,12 @@ const OrderForm = ({ toggle }: IToggle) => {
       setLogo(PayPal);
   };
 
-  const onChange = (): void => {
+  useEffect(() => {
     if (+formik.values.numberOfCard[0] == 4) setLogo(Visa);
     else if (+formik.values.numberOfCard[0] == 5) setLogo(MasterCard);
     else if (+formik.values.numberOfCard[0] == 6) setLogo(World);
     else setLogo(PayPal);
-  };
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -198,7 +198,7 @@ const OrderForm = ({ toggle }: IToggle) => {
           value={formik.values.numberOfCard}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          onInput={() => onChange()}
+          onInput={() => setLogo}
           onBlurCapture={() => onSetLogoBlur()}
         />
         {formik.errors.numberOfCard && formik.touched.numberOfCard ? (
