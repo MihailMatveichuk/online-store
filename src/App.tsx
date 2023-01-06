@@ -29,10 +29,13 @@ export const App = () => {
   }
 
   function deleteToOrder(item: IPurchase) {
+    const stringifyedItem:string = JSON.stringify(item);
     setOrders(() => orders.filter((_, i) => i !== orders.indexOf(item)));
     let allRows = JSON.parse(localStorage.getItem('orders') || '{}');
-    let withDeleted = allRows.filter((el: IPurchase) => el.id !== item.id);
-    localStorage.setItem('orders', JSON.stringify(withDeleted));
+    let arrStringifyedItems = allRows.map((el:IPurchase)=> JSON.stringify(el));
+    let withDeleted = arrStringifyedItems.filter((_, i:number, arr:string[]) => i !== arr.indexOf(stringifyedItem))
+    let parseForStorage= withDeleted.map((el:string) => JSON.parse(el))
+    localStorage.setItem('orders', JSON.stringify(parseForStorage));
   }
 
   const openOrderForm = (item: boolean = false) => {
