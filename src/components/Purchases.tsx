@@ -286,7 +286,7 @@ const Purchases = ({
         {error && <p className="text-center text-red-600">404</p>}
         {loading === false ? (
           search().map((product) => (
-            <StyleCard>
+            <StyleCard key={product.id + 1}>
               <Purchase
                 onAdd={onAdd}
                 onDelete={onDelete}

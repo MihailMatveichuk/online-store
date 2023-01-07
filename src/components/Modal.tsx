@@ -58,6 +58,16 @@ export const ButtonDiv = styled.div`
   align-items: space-between;
 `;
 
+const Images = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+`;
+const ImagesContainer = styled.div`
+  display: flex;
+  column-gap: 10px;
+`;
+
 const Modal = ({
   products,
   onAdd,
@@ -67,6 +77,7 @@ const Modal = ({
 }: IModalProps) => {
   const params = useParams().title;
   const [detailedProduct, setdetailedProduct] = useState(products);
+  const [imageValue, setImageValue] = useState('');
 
   function openOrder(prod: IPurchase, item: boolean) {
     if (isItemInBasket) openOrderForm(item);
@@ -79,7 +90,7 @@ const Modal = ({
   useEffect(() => {
     const newProducts = [...products].filter((el) => +el.id == +params!);
     setdetailedProduct(newProducts);
-  }, [products]);
+  }, [detailedProduct, params, products]);
 
   const id: number = +params!;
 
@@ -95,13 +106,48 @@ const Modal = ({
     <PurchaseContainer>
       <ImageValue>
         <Link to={'/modal/' + detailedProduct[0]?.id}>
-          <img
-            style={{
-              width: '300px',
-            }}
-            src={detailedProduct[0]?.images[0]}
-            alt="Product"
-          />
+          <ImagesContainer
+            onClick={(e) => setImageValue((e.target as HTMLImageElement).src)}
+          >
+            <Images>
+              {detailedProduct[0].images[1] ? (
+                <img
+                  style={{
+                    width: '100px',
+                  }}
+                  src={detailedProduct[0].images[1]}
+                  alt="Product"
+                />
+              ) : null}
+              {detailedProduct[0].images[2] ? (
+                <img
+                  style={{
+                    width: '100px',
+                  }}
+                  src={detailedProduct[0].images[2]}
+                  alt="Product"
+                />
+              ) : null}
+              <img
+                style={{
+                  width: '100px',
+                }}
+                src={detailedProduct[0].images[0]}
+                alt="Product"
+              />
+            </Images>
+            <img
+              style={{
+                width: '300px',
+              }}
+              src={
+                `${imageValue}`
+                  ? `${imageValue}`
+                  : detailedProduct[0]?.images[0]
+              }
+              alt="Product"
+            />
+          </ImagesContainer>
         </Link>
         <ButtonDiv>
           <Button

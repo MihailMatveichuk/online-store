@@ -85,7 +85,7 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
     <SummaryStyledDiv>
       <div>Products: {ordersStorage.length}</div>
       {saleValue ? (
-        <div className="crossValue">Total: $ {totalPrice.toFixed(2)} </div>
+        <div className="cross-value">Total: $ {totalPrice.toFixed(2)} </div>
       ) : (
         <div>Total: $ {totalPrice.toFixed(2)} </div>
       )}
