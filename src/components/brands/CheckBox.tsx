@@ -1,13 +1,16 @@
 import { Checkbox, Collapse } from 'antd';
 import React, { useState } from 'react';
-import { brands } from './data';
+import { data } from '../../data';
+import { IPurchase } from '../../types';
 
 const { Panel } = Collapse;
 
-const CheckBox = (props) => {
-  const [Checked, setChecked] = useState([]);
+const CheckBox = (props: { handleFilters: (arg0: IPurchase[]) => void }) => {
+  // const allBrands = data.map((el) => el.brand)
 
-  const handleToggle = (value) => {
+  const [Checked, setChecked] = useState<IPurchase[]>([]);
+
+  const handleToggle = (value: IPurchase) => {
     const currentIndex = Checked.indexOf(value);
     const newChecked = [...Checked];
     if (currentIndex === -1) {
@@ -22,15 +25,15 @@ const CheckBox = (props) => {
   return (
     <>
       <Collapse defaultActiveKey={['0']}>
-        <Panel header key="1">
-          {brands.map((value, index) => (
-            <React.Fragment key={index}>
+        <Panel header="choose a brands:" key="1">
+          {data.map((value) => (
+            <React.Fragment key={value.id}>
               <Checkbox
-                onChange={() => handleToggle(value._id)}
+                onChange={() => handleToggle(value)}
                 type="checkbox"
-                checked={Checked.indexOf(value._id) === -1 ? false : true}
+                checked={Checked.indexOf(value) === -1 ? false : true}
               />
-              <span>{value.name}</span>
+              <span>{value.brand}</span>
             </React.Fragment>
           ))}
         </Panel>

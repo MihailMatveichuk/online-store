@@ -41,7 +41,7 @@ const Purchases = ({
   const categoryQuery = params.get('category') || '';
   const sortQuery = params.get('sort') || '';
   const layoutQuery = params.get('layout') || '';
-  const [filters, setfilters] = useState({ brands: [] });
+  const [Filters, setFilters] = useState([]);
 
   const [color, setColor] = useState('black');
 
@@ -216,6 +216,8 @@ const Purchases = ({
     setFiltered(newTempDown);
   }
   function search() {
+    console.log('filtered: ', filtered);
+
     value = filtered.filter((el) => {
       return (
         el.title.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -229,10 +231,16 @@ const Purchases = ({
     return value;
   }
 
-  const handleFilters = (filters, brand) => {
-    console.log(filters, '=====', brand);
-    const newFilters = { ...filters };
-    newFilters[brand] = filters;
+  // const showFilteredResults = (filters: IPurchase[]) => {
+  //   setFiltered(filters);
+  // };
+
+  const handleFilters = (filters: IPurchase[]) => {
+    const newFilters = { ...Filters };
+    setFilters(newFilters);
+    // newFilters[category] = filters;
+    setFiltered(filters);
+    //showFilteredResults(newFilters);
   };
 
   return (
@@ -289,7 +297,9 @@ const Purchases = ({
         </GridIcon>
       </SearchAndGridRow>
       <Categories onFilter={filterCategory} />
-      <CheckBox handleFilters={(filters) => handleFilters(filters, 'brands')} />
+      <CheckBox
+        handleFilters={(filters: IPurchase[]) => handleFilters(filters)}
+      />
       <div className="cards_container">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-600">404</p>}
