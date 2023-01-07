@@ -110,21 +110,21 @@ const Modal = ({
             onClick={(e) => setImageValue((e.target as HTMLImageElement).src)}
           >
             <Images>
-              {detailedProduct[0].images[1] ? (
+              {detailedProduct[0]?.images[1] ? (
                 <img
                   style={{
                     width: '100px',
                   }}
-                  src={detailedProduct[0].images[1]}
+                  src={detailedProduct[0]?.images[1]}
                   alt="Product"
                 />
               ) : null}
-              {detailedProduct[0].images[2] ? (
+              {detailedProduct[0]?.images[2] ? (
                 <img
                   style={{
                     width: '100px',
                   }}
-                  src={detailedProduct[0].images[2]}
+                  src={detailedProduct[0]?.images[2]}
                   alt="Product"
                 />
               ) : null}
@@ -132,7 +132,7 @@ const Modal = ({
                 style={{
                   width: '100px',
                 }}
-                src={detailedProduct[0].images[0]}
+                src={detailedProduct[0]?.images[0]}
                 alt="Product"
               />
             </Images>

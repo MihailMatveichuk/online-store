@@ -20,9 +20,6 @@ export const Breadcrumbs = () => {
         <BreadcrumbItem active></BreadcrumbItem>
       </Breadcrumb>
       <Breadcrumb>
-        <BreadcrumbItem>
-          <a href="/">Home</a>
-        </BreadcrumbItem>
         <BreadcrumbItem active>Basket</BreadcrumbItem>
       </Breadcrumb>
     </BreadcrumbStyle>
