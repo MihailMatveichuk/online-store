@@ -73,26 +73,22 @@ const Purchases = ({
               ? tempUp.sort(
                   (
                     a: {
-                      rating: any;
-                      rate: number;
+                      rating: number;
                     },
                     b: {
-                      rating: any;
-                      rate: number;
+                      rating: number;
                     }
-                  ) => a.rating.rate - b.rating.rate
+                  ) => a.rating - b.rating
                 )
               : tempUp.sort(
                   (
                     a: {
-                      rating: any;
-                      rate: number;
+                      rating: number;
                     },
                     b: {
-                      rating: any;
-                      rate: number;
+                      rating: number;
                     }
-                  ) => b.rating.rate - a.rating.rate
+                  ) => b.rating - a.rating
                 );
           setFiltered(newTemp);
         } else {
@@ -136,7 +132,7 @@ const Purchases = ({
     } else {
       setFiltered(products);
     }
-  }, [products]);
+  }, [categoryQuery, products, sortQuery]);
 
   function filterCategory(category: string) {
     params.set('category', category);

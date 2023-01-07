@@ -11,7 +11,7 @@ const ButtonContainer = styled.div`
   align-items: flex-start;
 `;
 export function Purchase({ product, onAdd, onDelete }: IProductProps) {
-  const [details, setDetails] = useState(false);
+  const [details] = useState(false);
   const btnClassName = details ? 'add-red' : 'add-white';
   const btnClasses = ['btn-class', btnClassName];
   const ordersStorage = JSON.parse(localStorage.getItem('orders') || '[]');
@@ -46,12 +46,14 @@ export function Purchase({ product, onAdd, onDelete }: IProductProps) {
         <b>{'Rating: ' + product.rating}</b>
       </span>
       <ButtonContainer style={{ width: '50%' }}>
-        <button
-          className={btnClasses.join(' ')}
-          onClick={() => setDetails((prev) => !prev)}
-        >
-          {details ? 'Hide details' : 'Show details'}
-        </button>
+        <Link to={'/modal/' + product.id}>
+          <button
+            className={btnClasses.join(' ')}
+            // onClick={() => setDetails((prev) => !prev)}
+          >
+            Show details
+          </button>
+        </Link>
         <Button
           style={{ padding: '5px 15px 5px 15px' }}
           variant={isItemInBasket ? 'secondary' : 'primary'}
@@ -62,14 +64,14 @@ export function Purchase({ product, onAdd, onDelete }: IProductProps) {
         </Button>
       </ButtonContainer>
 
-      {details && (
+      {/* {details && (
         <div>
           <p>{product.description}</p>
           <p>
             Rate: <span style={{ fontWeight: 'bold' }}>{product.rating}</span>
           </p>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
