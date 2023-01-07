@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ICategoryProps } from '../types';
 
 const StyledUlCategories = styled.ul`
-  width: 60%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
 `;
@@ -10,9 +10,10 @@ const StyledLiCategory = styled.li`
   flex-direction: row;
   list-style-type: none;
   background-color: #f9f9f98d;
-  padding: 13px 30px;
-  border-radius: 30px;
+  padding: 5px 20px;
+  border-radius: 17px;
   color: #230e70;
+  margin-top: 5px;
   margin-right: 10px;
   font-weight: bold;
   cursor: pointer;

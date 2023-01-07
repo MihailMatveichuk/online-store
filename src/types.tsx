@@ -141,3 +141,7 @@ export interface IFooterLogos {
   altClass: string;
   logos: ILinks[];
 }
+
+export interface IImage {
+  image: string;
+}
