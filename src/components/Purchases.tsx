@@ -231,16 +231,10 @@ const Purchases = ({
     return value;
   }
 
-  // const showFilteredResults = (filters: IPurchase[]) => {
-  //   setFiltered(filters);
-  // };
-
   const handleFilters = (filters: IPurchase[]) => {
     const newFilters = { ...Filters };
     setFilters(newFilters);
-    // newFilters[category] = filters;
     setFiltered(filters);
-    //showFilteredResults(newFilters);
   };
 
   return (

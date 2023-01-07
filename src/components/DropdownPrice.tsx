@@ -9,7 +9,6 @@ import { ISortProductsPrice } from '../types';
 const DropdownSortPrice = ({
   onSortUp,
   onSortDown,
-  onFilter,
   filtered,
 }: ISortProductsPrice) => {
   return (
@@ -21,7 +20,6 @@ const DropdownSortPrice = ({
         <DropdownItem header>
           <b>Sort by:</b>
         </DropdownItem>
-        <DropdownItem onClick={() => onFilter('all')}>Popularity:</DropdownItem>
         <DropdownItem onClick={() => onSortUp(filtered)}>
           Ascending price
         </DropdownItem>
