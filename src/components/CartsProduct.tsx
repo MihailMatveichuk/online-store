@@ -53,11 +53,11 @@ const CartsProduct = ({ onAdd, onDelete, product }: ICartProps) => {
         </span>
         <span>
           <b>Count: </b>
-          {product.rating}
+          {product.stock}
         </span>
         <span>
           <b>Rating: </b>
-          {product.stock}
+          {product.rating}
         </span>
         <p>
           <b>Price: </b>
