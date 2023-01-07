@@ -61,7 +61,7 @@ const Purchases = ({
     } else {
       setFiltered(filtered);
     }
-  }, [changeLayoutBig, changeLayoutSmall, filtered, layoutQuery, products]);
+  }, [products]);
 
   useEffect(() => {
     if (window.location.search) {
@@ -136,7 +136,7 @@ const Purchases = ({
     } else {
       setFiltered(products);
     }
-  }, [categoryQuery, products, sortQuery]);
+  }, [products]);
 
   function filterCategory(category: string) {
     params.set('category', category);
