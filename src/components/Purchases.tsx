@@ -210,8 +210,6 @@ const Purchases = ({
     setFiltered(newTempDown);
   }
   function search() {
-    console.log('filtered: ', filtered);
-
     value = filtered.filter((el) => {
       return (
         el.title.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -240,7 +238,9 @@ const Purchases = ({
           }}
         />
         <Link to="/">
-          <Button color="secondary">Reset filters</Button>
+          <Button onClick={() => setFiltered(products)} color="secondary">
+            Reset filters
+          </Button>
         </Link>
 
         <BoxNumberCards filtered={filtered} />
