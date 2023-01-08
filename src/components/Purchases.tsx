@@ -227,6 +227,7 @@ const Purchases = ({
     const newFilters = { ...Filters };
     setFilters(newFilters);
     setFiltered(filters);
+    if (filters.length === 0) setFiltered(products);
   };
 
   return (
