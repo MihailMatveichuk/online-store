@@ -53,18 +53,22 @@ const Purchases = ({
     }
   `;
 
+  // useEffect(() => {
+  //   if (window.location.search) {
+  //     if (layoutQuery.length !== 0)
+  //       layoutQuery === 'small' ? changeLayoutSmall() : changeLayoutBig();
+  //     setFiltered(products);
+  //   } else {
+  //     setFiltered(filtered);
+  //   }
+  // }, [products]);
+
   useEffect(() => {
     if (window.location.search) {
       if (layoutQuery.length !== 0)
         layoutQuery === 'small' ? changeLayoutSmall() : changeLayoutBig();
       setFiltered(products);
-    } else {
-      setFiltered(filtered);
-    }
-  }, [products]);
 
-  useEffect(() => {
-    if (window.location.search) {
       if (sortQuery.length !== 0 && categoryQuery.length === 0) {
         if (sortQuery === 'ratingAsc' || sortQuery === 'ratingDesc') {
           const tempUp = JSON.parse(JSON.stringify(products));
@@ -168,11 +172,13 @@ const Purchases = ({
   }
 
   function changeLayoutSmall() {
+    setWidthValue({ width: '340px' });
     setColor('red');
     params.set('layout', 'small');
     setParams(params);
   }
   function changeLayoutBig() {
+    setWidthValue({ width: '420px' });
     setColor('peru');
     params.set('layout', 'big');
     setParams(params);
@@ -264,7 +270,7 @@ const Purchases = ({
             className="grid"
             viewBox="0 0 16 16"
             onClick={() => {
-              setWidthValue({ width: '340px' });
+
               changeLayoutSmall();
             }}
           >
@@ -278,7 +284,7 @@ const Purchases = ({
             className="grid"
             viewBox="0 0 16 16"
             onClick={() => {
-              setWidthValue({ width: '420px' });
+
               changeLayoutBig();
             }}
           >

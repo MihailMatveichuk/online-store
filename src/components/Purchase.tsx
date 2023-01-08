@@ -63,15 +63,6 @@ export function Purchase({ product, onAdd, onDelete }: IProductProps) {
           {isItemInBasket ? 'Delete' : 'Add'}
         </Button>
       </ButtonContainer>
-
-      {/* {details && (
-        <div>
-          <p>{product.description}</p>
-          <p>
-            Rate: <span style={{ fontWeight: 'bold' }}>{product.rating}</span>
-          </p>
-        </div>
-      )} */}
     </div>
   );
 }

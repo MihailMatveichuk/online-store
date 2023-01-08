@@ -6,8 +6,6 @@ import { IPurchase } from '../../types';
 const { Panel } = Collapse;
 
 const CheckBox = (props: { handleFilters: (arg0: IPurchase[]) => void }) => {
-  // const allBrands = data.map((el) => el.brand)
-
   const [Checked, setChecked] = useState<IPurchase[]>([]);
 
   const handleToggle = (value: IPurchase) => {
