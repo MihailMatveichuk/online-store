@@ -88,7 +88,7 @@ const Modal = ({
   }
 
   useEffect(() => {
-    const newProducts = [...products].filter((el) => +el.id == +params!);
+    const newProducts = [...products]?.filter((el) => +el.id == +params!);
     setdetailedProduct(newProducts);
   }, [detailedProduct, params, products]);
 
