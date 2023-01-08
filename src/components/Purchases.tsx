@@ -5,18 +5,20 @@ import '../style.css';
 import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
 import Categories from './Categories';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 
 import DropdownSortPrice from './DropdownPrice';
 import DropdownSortRating from './DropdownRating';
 import BoxNumberCards from './BoxNumberCards';
 import CheckBox from './brands/CheckBox';
+import { Button } from 'reactstrap';
 
 let value: IPurchase[];
 
 const SearchAndGridRow = styled.div`
   width: 90%;
   margin-top: 10px;
+  margin-bottom: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -52,16 +54,6 @@ const Purchases = ({
       fill: ${color};
     }
   `;
-
-  // useEffect(() => {
-  //   if (window.location.search) {
-  //     if (layoutQuery.length !== 0)
-  //       layoutQuery === 'small' ? changeLayoutSmall() : changeLayoutBig();
-  //     setFiltered(products);
-  //   } else {
-  //     setFiltered(filtered);
-  //   }
-  // }, [products]);
 
   useEffect(() => {
     if (window.location.search) {
@@ -247,6 +239,9 @@ const Purchases = ({
             setInputValue(e.target.value);
           }}
         />
+        <Link to="/">
+          <Button color="secondary">Reset filters</Button>
+        </Link>
 
         <BoxNumberCards filtered={filtered} />
         <DropdownSortPrice
@@ -270,7 +265,6 @@ const Purchases = ({
             className="grid"
             viewBox="0 0 16 16"
             onClick={() => {
-
               changeLayoutSmall();
             }}
           >
@@ -284,7 +278,6 @@ const Purchases = ({
             className="grid"
             viewBox="0 0 16 16"
             onClick={() => {
-
               changeLayoutBig();
             }}
           >
