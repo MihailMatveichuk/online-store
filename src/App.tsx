@@ -36,7 +36,8 @@ export const App = () => {
       JSON.stringify(el)
     );
     const withDeleted = arrStringifyedItems.filter(
-      (_, i: number, arr: string[]) => i !== arr.indexOf(stringifyedItem)
+      (_: boolean, i: number, arr: string[]) =>
+        i !== arr.indexOf(stringifyedItem)
     );
     const parseForStorage = withDeleted.map((el: string) => JSON.parse(el));
     localStorage.setItem('orders', JSON.stringify(parseForStorage));

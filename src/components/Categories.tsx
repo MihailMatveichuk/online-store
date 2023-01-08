@@ -32,9 +32,11 @@ const StyledLiCategory = styled.li`
 `;
 
 const Categories = ({ onFilter }: ICategoryProps) => {
+
   const allCategories = data.map((el) => el.category);
   const uniqueCategories = new Set(allCategories);
   const categories = ['all', ...uniqueCategories];
+
 
   return (
     <StyledUlCategories>

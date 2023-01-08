@@ -47,12 +47,7 @@ export function Purchase({ product, onAdd, onDelete }: IProductProps) {
       </span>
       <ButtonContainer style={{ width: '50%' }}>
         <Link to={'/modal/' + product.id}>
-          <button
-            className={btnClasses.join(' ')}
-            // onClick={() => setDetails((prev) => !prev)}
-          >
-            Show details
-          </button>
+          <Button className={btnClasses.join(' ')}>Product card</Button>
         </Link>
         <Button
           style={{ padding: '5px 15px 5px 15px' }}
