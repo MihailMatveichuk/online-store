@@ -105,13 +105,13 @@ const Purchases = ({
 
           setFiltered(newTemp);
         }
-      } else if (categoryQuery.length !== 0 && sortQuery.length === 0) {
+      } else if (categoryQuery.length > 3 && sortQuery.length === 0) {
         const newProducts = [...products].filter(
           (el) => el.category === categoryQuery
         );
 
         setFiltered(newProducts);
-      } else if (categoryQuery.length !== 0 && sortQuery.length !== 0) {
+      } else if (categoryQuery.length > 3 && sortQuery.length !== 0) {
         const newProducts = [...products].filter(
           (el) => el.category === categoryQuery
         );

@@ -80,7 +80,7 @@ export const App = () => {
           }
         />
         <Route
-          path="modal/:title"
+          path="/modal/:title"
           element={
             <Modal
               onAdd={addToOrder}
@@ -92,7 +92,7 @@ export const App = () => {
           }
         />
         <Route
-          path="basket"
+          path="/basket"
           element={
             <Basket
               onAdd={addToOrder}
@@ -104,7 +104,7 @@ export const App = () => {
           }
         />
         <Route
-          path="orderForm"
+          path="/orderForm"
           element={<OrderForm toggle={() => void {}} />}
         />
         <Route path="*" element={<Error />} />
