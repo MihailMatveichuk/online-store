@@ -41,10 +41,6 @@ const Categories = ({ onFilter }: ICategoryProps) => {
     'mens-shirts',
     'skincare',
     'tops',
-    // 'mens-shoes',
-    // 'womens-shoes',
-    // 'lighting',
-    // 'automotive',
   ];
 
   return (
