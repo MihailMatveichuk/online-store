@@ -6,8 +6,6 @@ import { IPurchase } from '../../types';
 const { Panel } = Collapse;
 
 const CheckBox = (props: { handleFilters: (arg0: IPurchase[]) => void }) => {
-  // const allBrands = data.map((el) => el.brand)
-
   const [Checked, setChecked] = useState<IPurchase[]>([]);
 
   const handleToggle = (value: IPurchase) => {
@@ -24,8 +22,13 @@ const CheckBox = (props: { handleFilters: (arg0: IPurchase[]) => void }) => {
 
   return (
     <>
-      <Collapse defaultActiveKey={['0']}>
-        <Panel header="choose a brands:" key="1">
+      <Collapse
+        defaultActiveKey={['0']}
+        style={{
+          maxWidth: '90%',
+        }}
+      >
+        <Panel header=<b>Choose a brands:</b> key="1">
           {data.map((value) => (
             <React.Fragment key={value.id}>
               <Checkbox
