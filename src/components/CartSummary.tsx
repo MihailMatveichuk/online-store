@@ -74,7 +74,7 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
     } else {
       setSaleValue(`${promoArray}`);
     }
-  }, [inputValue]);
+  }, [inputValue, newPrice]);
 
   const toggle = () => {
     openOrderForm(false);
@@ -97,7 +97,7 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
             setInputValue(e.target.value);
           }}
         />
-        <>{saleValue ? <>{saleValue}</> : ''}</>
+        <>{saleValue ? `${saleValue}` : ''}</>
         <PromoItems>Promo for test: `RS`, `EPM`</PromoItems>
         <Button
           style={{
