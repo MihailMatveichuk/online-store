@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { IModalProps, IPurchase } from '../types';
 import { useEffect, useState } from 'react';
 
@@ -76,9 +76,11 @@ const Modal = ({
   openOrderForm,
 }: IModalProps) => {
   const params = useParams().title;
+
   const [detailedProduct, setdetailedProduct] = useState(products);
   const [imageValue, setImageValue] = useState('');
 
+  console.log('products: ', products);
   function openOrder(prod: IPurchase, item: boolean) {
     if (isItemInBasket) openOrderForm(item);
     else {
@@ -87,10 +89,10 @@ const Modal = ({
     }
   }
 
+  const newProducts = [...products]?.filter((el) => +el.id == +params!);
   useEffect(() => {
-    const newProducts = [...products]?.filter((el) => +el.id == +params!);
     setdetailedProduct(newProducts);
-  }, [detailedProduct, params, products]);
+  }, [products]);
 
   const id: number = +params!;
 

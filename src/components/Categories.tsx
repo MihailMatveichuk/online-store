@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { data } from '../data';
 import { ICategoryProps } from '../types';
 
 const StyledUlCategories = styled.ul`
   width: 90%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 const StyledLiCategory = styled.li`
   flex-direction: row;
@@ -30,18 +32,11 @@ const StyledLiCategory = styled.li`
 `;
 
 const Categories = ({ onFilter }: ICategoryProps) => {
-  const categories = [
-    'all',
-    'laptops',
-    'smartphones',
-    'fragrances',
-    'groceries',
-    'home-decoration',
-    'womens-dresses',
-    'mens-shirts',
-    'skincare',
-    'tops',
-  ];
+
+  const allCategories = data.map((el) => el.category);
+  const uniqueCategories = new Set(allCategories);
+  const categories = ['all', ...uniqueCategories];
+
 
   return (
     <StyledUlCategories>

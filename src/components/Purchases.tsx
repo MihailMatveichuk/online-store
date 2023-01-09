@@ -5,18 +5,20 @@ import '../style.css';
 import { SearchElement } from './Search';
 import { Purchase } from './Purchase';
 import Categories from './Categories';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 
 import DropdownSortPrice from './DropdownPrice';
 import DropdownSortRating from './DropdownRating';
 import BoxNumberCards from './BoxNumberCards';
 import CheckBox from './brands/CheckBox';
+import { Button } from 'reactstrap';
 
 let value: IPurchase[];
 
 const SearchAndGridRow = styled.div`
   width: 90%;
   margin-top: 10px;
+  margin-bottom: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -58,13 +60,7 @@ const Purchases = ({
       if (layoutQuery.length !== 0)
         layoutQuery === 'small' ? changeLayoutSmall() : changeLayoutBig();
       setFiltered(products);
-    } else {
-      setFiltered(filtered);
-    }
-  }, [products]);
 
-  useEffect(() => {
-    if (window.location.search) {
       if (sortQuery.length !== 0 && categoryQuery.length === 0) {
         if (sortQuery === 'ratingAsc' || sortQuery === 'ratingDesc') {
           const tempUp = JSON.parse(JSON.stringify(products));
@@ -105,13 +101,13 @@ const Purchases = ({
 
           setFiltered(newTemp);
         }
-      } else if (categoryQuery.length !== 0 && sortQuery.length === 0) {
+      } else if (categoryQuery.length > 3 && sortQuery.length === 0) {
         const newProducts = [...products].filter(
           (el) => el.category === categoryQuery
         );
 
         setFiltered(newProducts);
-      } else if (categoryQuery.length !== 0 && sortQuery.length !== 0) {
+      } else if (categoryQuery.length > 3 && sortQuery.length !== 0) {
         const newProducts = [...products].filter(
           (el) => el.category === categoryQuery
         );
@@ -168,11 +164,13 @@ const Purchases = ({
   }
 
   function changeLayoutSmall() {
+    setWidthValue({ width: '340px' });
     setColor('red');
     params.set('layout', 'small');
     setParams(params);
   }
   function changeLayoutBig() {
+    setWidthValue({ width: '420px' });
     setColor('peru');
     params.set('layout', 'big');
     setParams(params);
@@ -212,8 +210,6 @@ const Purchases = ({
     setFiltered(newTempDown);
   }
   function search() {
-    console.log('filtered: ', filtered);
-
     value = filtered.filter((el) => {
       return (
         el.title.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -231,6 +227,7 @@ const Purchases = ({
     const newFilters = { ...Filters };
     setFilters(newFilters);
     setFiltered(filters);
+    if (filters.length === 0) setFiltered(products);
   };
 
   return (
@@ -241,6 +238,11 @@ const Purchases = ({
             setInputValue(e.target.value);
           }}
         />
+        <Link to="/">
+          <Button onClick={() => setFiltered(products)} color="secondary">
+            Reset filters
+          </Button>
+        </Link>
 
         <BoxNumberCards filtered={filtered} />
         <DropdownSortPrice
@@ -264,7 +266,6 @@ const Purchases = ({
             className="grid"
             viewBox="0 0 16 16"
             onClick={() => {
-              setWidthValue({ width: '340px' });
               changeLayoutSmall();
             }}
           >
@@ -278,7 +279,6 @@ const Purchases = ({
             className="grid"
             viewBox="0 0 16 16"
             onClick={() => {
-              setWidthValue({ width: '420px' });
               changeLayoutBig();
             }}
           >
