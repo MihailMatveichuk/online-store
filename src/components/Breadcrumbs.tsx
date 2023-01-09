@@ -8,7 +8,7 @@ const BreadcrumbStyle = styled.div`
   display: flex;
 `;
 
-export const Breadcrumbs = (products: IProducts) => {
+export const Breadcrumbs = ({ products }: IProducts) => {
   return (
     <BreadcrumbStyle>
       <Breadcrumb>
@@ -16,14 +16,10 @@ export const Breadcrumbs = (products: IProducts) => {
           <Link to={'/'}>STORE</Link>
         </Breadcrumb.Item>
         <BreadcrumbItem active>
-          {products.products.category.toUpperCase()}
+          {products?.category.toUpperCase()}
         </BreadcrumbItem>
-        <BreadcrumbItem active>
-          {products.products.brand.toUpperCase()}
-        </BreadcrumbItem>
-        <BreadcrumbItem active>
-          {products.products.title.toUpperCase()}
-        </BreadcrumbItem>
+        <BreadcrumbItem active>{products?.brand.toUpperCase()}</BreadcrumbItem>
+        <BreadcrumbItem active>{products?.title.toUpperCase()}</BreadcrumbItem>
       </Breadcrumb>
     </BreadcrumbStyle>
   );
