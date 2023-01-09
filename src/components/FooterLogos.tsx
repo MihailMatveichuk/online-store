@@ -6,7 +6,7 @@ export function FooterLogos({ logos, altClass }: IFooterLogos) {
     <div className={`logos ${altClass}`}>
       {logos?.map((user, id) => (
         <a className="logos__item" href={user.link} title={user.name} key={id}>
-          <img src={user.img} title={user.name} />
+          <img src={user.img} title={user.name} alt={user.name} />
         </a>
       ))}
     </div>

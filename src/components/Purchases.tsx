@@ -38,6 +38,7 @@ const Purchases = ({
   const StyleCard = styled.div`
     ${widthValue}
   `;
+
   const [params, setParams] = useSearchParams();
   const [filtered, setFiltered] = useState(products);
   const categoryQuery = params.get('category') || '';
@@ -209,6 +210,7 @@ const Purchases = ({
     );
     setFiltered(newTempDown);
   }
+
   function search() {
     value = filtered.filter((el) => {
       return (
@@ -230,6 +232,10 @@ const Purchases = ({
     if (filters.length === 0) setFiltered(products);
   };
 
+  function reset() {
+    setInputValue('');
+    setFiltered(products);
+  }
   return (
     <div className="main-page">
       <SearchAndGridRow>
@@ -239,7 +245,7 @@ const Purchases = ({
           }}
         />
         <Link to="/">
-          <Button onClick={() => setFiltered(products)} color="secondary">
+          <Button onClick={() => reset()} color="secondary">
             Reset filters
           </Button>
         </Link>
