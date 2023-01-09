@@ -13,11 +13,17 @@ export const Breadcrumbs = (products: IProducts) => {
     <BreadcrumbStyle>
       <Breadcrumb>
         <Breadcrumb.Item>
-          <Link to={'/'}>Store</Link>
+          <Link to={'/'}>STORE</Link>
         </Breadcrumb.Item>
-        <BreadcrumbItem active>{products.products.category}</BreadcrumbItem>
-        <BreadcrumbItem active>{products.products.brand}</BreadcrumbItem>
-        <BreadcrumbItem active>{products.products.title}</BreadcrumbItem>
+        <BreadcrumbItem active>
+          {products.products.category.toUpperCase()}
+        </BreadcrumbItem>
+        <BreadcrumbItem active>
+          {products.products.brand.toUpperCase()}
+        </BreadcrumbItem>
+        <BreadcrumbItem active>
+          {products.products.title.toUpperCase()}
+        </BreadcrumbItem>
       </Breadcrumb>
     </BreadcrumbStyle>
   );
