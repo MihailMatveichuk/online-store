@@ -1,8 +1,9 @@
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { useParams, Link, useSearchParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { IModalProps, IPurchase } from '../types';
 import { useEffect, useState } from 'react';
+import Breadcrumbs from './Breadcrumbs';
 
 const PurchaseContainer = styled.div`
   width: 50%;
@@ -79,8 +80,6 @@ const Modal = ({
 
   const [detailedProduct, setdetailedProduct] = useState(products);
   const [imageValue, setImageValue] = useState('');
-
-  console.log('products: ', products);
   function openOrder(prod: IPurchase, item: boolean) {
     if (isItemInBasket) openOrderForm(item);
     else {
@@ -105,105 +104,108 @@ const Modal = ({
   }
 
   return (
-    <PurchaseContainer>
-      <ImageValue>
-        <Link to={'/modal/' + detailedProduct[0]?.id}>
-          <ImagesContainer
-            onClick={(e) => setImageValue((e.target as HTMLImageElement).src)}
-          >
-            <Images>
-              {detailedProduct[0]?.images[1] ? (
+    <>
+      <Breadcrumbs products={detailedProduct[0]} />
+      <PurchaseContainer>
+        <ImageValue>
+          <Link to={'/modal/' + detailedProduct[0]?.id}>
+            <ImagesContainer
+              onClick={(e) => setImageValue((e.target as HTMLImageElement).src)}
+            >
+              <Images>
+                {detailedProduct[0]?.images[1] ? (
+                  <img
+                    style={{
+                      width: '100px',
+                    }}
+                    src={detailedProduct[0]?.images[1]}
+                    alt="Product"
+                  />
+                ) : null}
+                {detailedProduct[0]?.images[2] ? (
+                  <img
+                    style={{
+                      width: '100px',
+                    }}
+                    src={detailedProduct[0]?.images[2]}
+                    alt="Product"
+                  />
+                ) : null}
                 <img
                   style={{
                     width: '100px',
                   }}
-                  src={detailedProduct[0]?.images[1]}
+                  src={detailedProduct[0]?.images[0]}
                   alt="Product"
                 />
-              ) : null}
-              {detailedProduct[0]?.images[2] ? (
-                <img
-                  style={{
-                    width: '100px',
-                  }}
-                  src={detailedProduct[0]?.images[2]}
-                  alt="Product"
-                />
-              ) : null}
+              </Images>
               <img
                 style={{
-                  width: '100px',
+                  width: '300px',
                 }}
-                src={detailedProduct[0]?.images[0]}
+                src={
+                  `${imageValue}`
+                    ? `${imageValue}`
+                    : detailedProduct[0]?.images[0]
+                }
                 alt="Product"
               />
-            </Images>
-            <img
-              style={{
-                width: '300px',
-              }}
-              src={
-                `${imageValue}`
-                  ? `${imageValue}`
-                  : detailedProduct[0]?.images[0]
-              }
-              alt="Product"
-            />
-          </ImagesContainer>
-        </Link>
-        <ButtonDiv>
-          <Button
-            variant={isItemInBasket ? 'secondary' : 'primary'}
-            style={{
-              marginTop: 30,
-            }}
-            onClick={() => addingItem(detailedProduct[0])}
-          >
-            {isItemInBasket ? 'Delete from basket' : 'Add to Basket'}
-          </Button>
-          <Link
-            to={'/basket'}
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Button
-              variant="primary"
-              style={{
-                marginTop: 30,
-              }}
-              onClick={() => openOrder(products[id - 1], true)}
-            >
-              Buy rapidly
-            </Button>
-            <Button
-              variant="primary"
-              style={{
-                marginTop: 30,
-              }}
-            >
-              Move to Basket
-            </Button>
+            </ImagesContainer>
           </Link>
-        </ButtonDiv>
-      </ImageValue>
-      <MainColumn>
-        <Category>
-          Category: {detailedProduct[0]?.category.toUpperCase()}
-        </Category>
-        <h2>{detailedProduct[0]?.title}</h2>
-        <Rating>Rating: {detailedProduct[0]?.rating}</Rating>
-        <Count>Count: {detailedProduct[0]?.stock}</Count>
-        <Price>Price: {detailedProduct[0]?.price + ' $'}</Price>
-        <Description>
-          <DescriptionTitle>Description:</DescriptionTitle>
-          <DescriptionContent>
-            {detailedProduct[0]?.description}
-          </DescriptionContent>
-        </Description>
-      </MainColumn>
-    </PurchaseContainer>
+          <ButtonDiv>
+            <Button
+              variant={isItemInBasket ? 'secondary' : 'primary'}
+              style={{
+                marginTop: 30,
+              }}
+              onClick={() => addingItem(detailedProduct[0])}
+            >
+              {isItemInBasket ? 'Delete from basket' : 'Add to Basket'}
+            </Button>
+            <Link
+              to={'/basket'}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Button
+                variant="primary"
+                style={{
+                  marginTop: 30,
+                }}
+                onClick={() => openOrder(products[id - 1], true)}
+              >
+                Buy rapidly
+              </Button>
+              <Button
+                variant="primary"
+                style={{
+                  marginTop: 30,
+                }}
+              >
+                Move to Basket
+              </Button>
+            </Link>
+          </ButtonDiv>
+        </ImageValue>
+        <MainColumn>
+          <Category>
+            Category: {detailedProduct[0]?.category.toUpperCase()}
+          </Category>
+          <h2>{detailedProduct[0]?.title}</h2>
+          <Rating>Rating: {detailedProduct[0]?.rating}</Rating>
+          <Count>Count: {detailedProduct[0]?.stock}</Count>
+          <Price>Price: {detailedProduct[0]?.price + ' $'}</Price>
+          <Description>
+            <DescriptionTitle>Description:</DescriptionTitle>
+            <DescriptionContent>
+              {detailedProduct[0]?.description}
+            </DescriptionContent>
+          </Description>
+        </MainColumn>
+      </PurchaseContainer>
+    </>
   );
 };
 export default Modal;

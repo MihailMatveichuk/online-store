@@ -1,14 +1,4 @@
 export interface IPurchase {
-  // id: number;
-  // title: string;
-  // price: number;
-  // description: string;
-  // category: string;
-  // images: string;
-  // rating: {
-  //   rate: number;
-  //   count: number;
-  // };
   id: number;
   title: string;
   description: string;
@@ -55,6 +45,9 @@ export interface IAppProps {
   orders: IPurchase[];
   onAdd: (item: IPurchase) => void;
   onDelete: (item: IPurchase) => void;
+}
+export interface IProducts {
+  products: IPurchase;
 }
 
 export interface IProductProps {

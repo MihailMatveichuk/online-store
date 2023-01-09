@@ -3,8 +3,6 @@ import CartsProduct from './CartsProduct';
 import CartSummary from './CartSummary';
 import styled from 'styled-components';
 
-import Breadcrumbs from './Breadcrumbs';
-
 import Pagination from './Pagination';
 import { useState } from 'react';
 
@@ -59,7 +57,6 @@ export const Basket = ({
 
   return (
     <>
-      <Breadcrumbs />
       <BasketStyled>
         <CartsStyledDiv>
           {ordersStorage.length === 0 ? (
