@@ -14,7 +14,7 @@ export const LINKS_FOOTER = [
   },
   {
     name: 'RSS School',
-    link: 'https://github.com/rolling-scopes-school',
+    link: 'https://rs.school/js/',
     img: `${Logo}`,
   },
 ];
