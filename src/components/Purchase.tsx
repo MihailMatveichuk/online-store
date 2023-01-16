@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -10,8 +9,9 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
 `;
+
 export function Purchase({ product, onAdd, onDelete }: IProductProps) {
-  const [details] = useState(false);
+  const details = '';
   const btnClassName = details ? 'add-red' : 'add-white';
   const btnClasses = ['btn-class', btnClassName];
   const ordersStorage = JSON.parse(localStorage.getItem('orders') || '[]');

@@ -59,7 +59,7 @@ const CartSummary = ({ prop, openOrderForm }: IOnToggle) => {
   const [newPrice, setNewPrice] = useState<number>(totalPrice);
   const [inputValue, setInputValue] = useState('');
   const [modal, setModal] = useState(prop);
-  const [saleValue, setSaleValue] = useState<ISaleObject | string>('');
+  const [saleValue, setSaleValue] = useState<ISaleObject | string>();
   const [unmountOnClose] = useState(false);
 
   useEffect(() => {
