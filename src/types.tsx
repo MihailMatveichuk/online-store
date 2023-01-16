@@ -127,6 +127,7 @@ export interface ILinks {
   name: string;
   link: string;
   img: string;
+  id: number;
 }
 
 export interface IFooterLogos {
