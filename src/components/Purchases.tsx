@@ -295,7 +295,7 @@ const Purchases = ({
       />
       <div className="cards_container">
         {loading && <p className="text-center">Loading...</p>}
-        {loading === false ? (
+        {!loading ? (
           search().map((product) => (
             <StyleCard key={product.id + 1}>
               <Purchase
