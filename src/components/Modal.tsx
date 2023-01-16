@@ -77,7 +77,6 @@ const Modal = ({
   openOrderForm,
 }: IModalProps) => {
   const params = useParams().title;
-
   const [detailedProduct, setdetailedProduct] = useState(products);
   const [imageValue, setImageValue] = useState('');
   function openOrder(prod: IPurchase, item: boolean) {
@@ -87,9 +86,8 @@ const Modal = ({
       openOrderForm(item);
     }
   }
-
-  const newProducts = [...products]?.filter((el) => +el.id == +params!);
   useEffect(() => {
+    const newProducts = [...products]?.filter((el) => +el.id == +params!);
     setdetailedProduct(newProducts);
   }, [products]);
 

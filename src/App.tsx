@@ -45,7 +45,7 @@ export const App = () => {
     setProp(item);
   };
 
-  async function fetchProducts() {
+  function fetchProducts() {
     setLoading(true);
     setProducts(data);
     setLoading(false);
