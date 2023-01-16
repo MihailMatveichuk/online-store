@@ -46,22 +46,11 @@ export const App = () => {
   };
 
   function fetchProducts() {
-<<<<<<< HEAD
-    setLoading(true);
-    setProducts(data);
-    setLoading(false);
-=======
-    try {
-      setError('');
+    if (data) {
       setLoading(true);
       setProducts(data);
-      setLoading(false);
-    } catch (e: unknown) {
-      const error = e as AxiosError;
-      setLoading(false);
-      setError(error.message);
     }
->>>>>>> 5322d41f93a846e702425ea164e4b7bce0a95482
+    setLoading(false);
   }
 
   useEffect(() => {
