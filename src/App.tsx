@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { IPurchase } from './types';
 import './style.css';
@@ -15,7 +14,6 @@ import { Footer } from './components/Footer';
 export const App = () => {
   const [products, setProducts] = useState<IPurchase[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
   const [orders, setOrders] = useState<IPurchase[]>([]);
   const [prop, setProp] = useState(false);
 
@@ -48,17 +46,11 @@ export const App = () => {
   };
 
   async function fetchProducts() {
-    try {
-      setError('');
-      setLoading(true);
-      setProducts(data);
-      setLoading(false);
-    } catch (e: unknown) {
-      const error = e as AxiosError;
-      setLoading(false);
-      setError(error.message);
-    }
+    setLoading(true);
+    setProducts(data);
+    setLoading(false);
   }
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -76,7 +68,6 @@ export const App = () => {
               products={products}
               orders={orders}
               loading={loading}
-              error={error}
             />
           }
         />

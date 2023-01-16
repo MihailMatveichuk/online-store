@@ -40,7 +40,6 @@ export interface ISort {
 
 export interface IAppProps {
   products: IPurchase[];
-  error: string;
   loading: boolean;
   orders: IPurchase[];
   onAdd: (item: IPurchase) => void;

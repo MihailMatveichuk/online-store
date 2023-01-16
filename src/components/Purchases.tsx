@@ -29,7 +29,6 @@ const Purchases = ({
   onAdd,
   onDelete,
   loading,
-  error,
   orders,
 }: IAppProps) => {
   const [inputValue, setInputValue] = useState('');
@@ -298,7 +297,6 @@ const Purchases = ({
       />
       <div className="cards_container">
         {loading && <p className="text-center">Loading...</p>}
-        {error && <p className="text-center text-red-600">404</p>}
         {loading === false ? (
           search().map((product) => (
             <StyleCard key={product.id + 1}>
